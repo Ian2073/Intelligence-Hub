@@ -28,4 +28,4 @@ def run_ai_research_brief(
         topic=topic,
         source_records=source_records or [],
     )
-    return WorkflowResult(title=f"Hermes AI Research Brief: {topic}", body=body)
+    return WorkflowResult(title=f"Intelligence Hub AI Research Brief: {topic}", body=body)

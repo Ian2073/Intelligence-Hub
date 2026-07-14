@@ -16,7 +16,7 @@ from core.operational_status import build_operational_status, render_operational
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Show Hermes Intelligence OS operational status.")
+    parser = argparse.ArgumentParser(description="Legacy Hermes entrypoint for Intelligence Hub operational status.")
     parser.add_argument("--as-of", default=date.today().isoformat(), help="Only consider briefs at or before this date.")
     parser.add_argument("--include-future", action="store_true", help="Include briefs dated after --as-of.")
     return parser.parse_args()

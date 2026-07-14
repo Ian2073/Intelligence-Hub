@@ -19,7 +19,10 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 def main(argv: list[str] | None = None) -> int:
     _configure_stdout()
-    parser = argparse.ArgumentParser(prog="python -m hermes", description="Hermes Intelligence Platform CLI.")
+    parser = argparse.ArgumentParser(
+        prog="python -m hermes",
+        description="Legacy Hermes compatibility CLI for Intelligence Hub.",
+    )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     doctor_parser = subparsers.add_parser("doctor", help="Check local readiness.")

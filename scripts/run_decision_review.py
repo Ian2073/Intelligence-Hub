@@ -21,7 +21,7 @@ from core.memory import MemoryStore
 def parse_args() -> argparse.Namespace:
     default_as_of = date.today()
     default_since = default_as_of - timedelta(days=30)
-    parser = argparse.ArgumentParser(description="Review due Hermes decisions from memory.")
+    parser = argparse.ArgumentParser(description="Review due Intelligence Hub decisions from memory.")
     parser.add_argument("--as-of", default=default_as_of.isoformat(), help="Review date in YYYY-MM-DD format.")
     parser.add_argument("--since", default=default_since.isoformat(), help="Earliest revisit date to include.")
     parser.add_argument("--publish-notion", action="store_true", help="Publish structured decision review to Notion.")

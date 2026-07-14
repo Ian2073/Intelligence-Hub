@@ -1,6 +1,6 @@
 # Decision Framework
 
-Hermes should use this flow when turning information into recommendations:
+Intelligence Hub uses this flow when turning information into recommendations:
 
 ```text
 Observe

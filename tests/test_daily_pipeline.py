@@ -357,7 +357,7 @@ def test_run_daily_pipeline_enqueues_outbox_when_telegram_requested_but_missing(
         assert result.notion.status == "published"
         assert result.telegram.status == "skipped"
         assert len(pending) == 1
-        assert pending[0].title == "Intelligence Hub Daily Intelligence - 2026-07-02"
+        assert pending[0].title == "Intelligence Hub Daily Brief - 2026-07-02"
         assert pending[0].notion_url == "https://notion.so/hermes-daily"
     finally:
         store.close()

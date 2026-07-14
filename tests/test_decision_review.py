@@ -37,7 +37,7 @@ def test_build_decision_review_report_returns_due_and_overdue_decisions(tmp_path
 
         report = build_decision_review_report(store, as_of="2026-07-07", since="2026-07-01")
 
-        assert report.title == "Hermes Decision Review - 2026-07-07"
+        assert report.title == "Intelligence Hub Decision Review - 2026-07-07"
         assert "2 個決策需要處理" in report.executive_summary
         assert "最高優先" in report.executive_summary
         assert [item.decision_id for item in report.items] == [prototype.id, watch.id]

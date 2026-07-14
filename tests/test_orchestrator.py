@@ -39,7 +39,7 @@ def test_run_hermes_orchestration_runs_selected_stages_in_order(tmp_path: Path) 
             run_dashboard=True,
         )
 
-        assert result.daily.run.title == "Intelligence Hub Daily Intelligence - 2026-07-10"
+        assert result.daily.run.title == "Intelligence Hub Daily Brief - 2026-07-10"
         assert result.weekly is not None
         assert result.monthly is not None
         assert result.dashboard is not None

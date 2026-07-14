@@ -23,7 +23,7 @@ ENV_PRO_MODEL = "HERMES_SETUP_PRO_MODEL"
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Configure Hermes go-live credentials in .env without printing secrets.")
+    parser = argparse.ArgumentParser(description="Configure Intelligence Hub credentials in .env without printing secrets.")
     parser.add_argument("--from-env", action="store_true", help="Read credentials from HERMES_SETUP_* environment variables.")
     parser.add_argument("--env-file", default=".env", help="Environment file to update. Defaults to .env.")
     return parser.parse_args()
@@ -57,7 +57,7 @@ def main() -> int:
         return 1
 
     update_env_values(env_path, updates)
-    print(f"Hermes credentials updated in {env_path}.")
+    print(f"Intelligence Hub credentials updated in {env_path}.")
     for key in mask_written_keys(updates):
         print(f"- {key}=<configured>")
     print("Next checks:")

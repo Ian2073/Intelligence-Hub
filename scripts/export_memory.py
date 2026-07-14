@@ -16,7 +16,7 @@ from core.memory_export import export_memory
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Export Hermes runtime memory to JSONL and Markdown.")
+    parser = argparse.ArgumentParser(description="Export Intelligence Hub runtime memory to JSONL and Markdown.")
     parser.add_argument("--as-of", default=date.today().isoformat(), help="Export date in YYYY-MM-DD format.")
     parser.add_argument("--output-dir", help="Output directory. Defaults to exports/memory-<as-of>.")
     return parser.parse_args()
@@ -41,7 +41,7 @@ def main() -> int:
     finally:
         store.close()
 
-    print(f"Hermes memory exported: {result.output_dir}")
+    print(f"Intelligence Hub memory exported: {result.output_dir}")
     print(f"Entities: {result.entity_count}")
     print(f"Observations: {result.observation_count}")
     print(f"Relationships: {result.relationship_count}")

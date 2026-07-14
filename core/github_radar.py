@@ -328,9 +328,9 @@ def _action_guidance(action: str, subject: str) -> str:
     if action == "Prototype":
         return f"建議行動：Prototype，抽取這個 {subject} 的架構或 workflow 做小實驗。"
     if action == "Read":
-        return f"建議行動：Read，先讀 release/issue/README 判斷是否值得 prototype。"
+        return "建議行動：Read，先讀 release/issue/README 判斷是否值得 prototype。"
     if action == "Watch":
-        return f"建議行動：Watch，保持在 radar 中等待更強工程證據。"
+        return "建議行動：Watch，保持在 radar 中等待更強工程證據。"
     return "建議行動：Ignore，暫時不要投入注意力。"
 
 
@@ -372,7 +372,7 @@ def _is_major_release(value: str) -> bool:
 
 def _expected_payoff(action: str) -> str:
     if action == "Prototype":
-        return "Validate whether the repository contains implementation patterns Hermes should adopt or track closely."
+        return "Validate whether the repository contains implementation patterns Intelligence Hub should adopt or track closely."
     if action == "Read":
         return "Understand the repository direction before deciding whether to prototype."
     if action == "Watch":

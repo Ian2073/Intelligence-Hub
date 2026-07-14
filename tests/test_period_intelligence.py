@@ -27,7 +27,7 @@ def _seed_month_memory(store: MemoryStore) -> None:
             domain="AI Intelligence",
             period_start=day,
             period_end=day,
-            title=f"Hermes Weekly Intelligence - {day}",
+            title=f"Intelligence Hub Weekly Brief - {day}",
             executive_summary="Research-to-implementation moved.",
             top_actions=("Prototype: OpenHands has strong momentum.", "Watch: MCP remains active."),
             notion_status="dry-run",
@@ -49,7 +49,7 @@ def test_build_monthly_report_from_memory_uses_weekly_and_daily_memory(tmp_path)
         )
 
         assert report.brief_type == "monthly"
-        assert report.title == "Hermes Monthly Intelligence - 2026-07-01 to 2026-07-31"
+        assert report.title == "Intelligence Hub Monthly Brief - 2026-07-01 to 2026-07-31"
         assert "本月" in report.executive_summary
         assert "最高優先行動" in report.executive_summary
         assert "weekly briefs" not in report.executive_summary

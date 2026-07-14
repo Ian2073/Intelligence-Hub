@@ -37,7 +37,7 @@ def _seed_memory(store: MemoryStore) -> None:
         domain="AI Intelligence",
         period_start="2026-07-01",
         period_end="2026-07-07",
-        title="Hermes Weekly Intelligence - 2026-07-01 to 2026-07-07",
+        title="Intelligence Hub Weekly Brief - 2026-07-01 to 2026-07-07",
         executive_summary="Weekly movement.",
         top_actions=("Prototype: Paper connects to implementation.",),
         notion_status="dry-run",

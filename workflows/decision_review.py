@@ -41,7 +41,7 @@ def build_decision_review_report(
     items = tuple(_review_item(decision, as_of) for decision in ranked)
     top_actions = unique_actions(tuple(item.recommended_action for item in items), limit=7)
     return DecisionReviewReport(
-        title=f"Hermes Decision Review - {as_of}",
+        title=f"Intelligence Hub Decision Review - {as_of}",
         executive_summary=_summary(items, as_of),
         items=items,
         top_actions=top_actions,

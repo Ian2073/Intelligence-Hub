@@ -32,7 +32,7 @@ Completed scope:
 - FastAPI app with health/readiness, knowledge, proposal, runtime, and review endpoints
 - local static dashboard for overview, insights, knowledge, proposals, briefs, and operations
 - idempotent zero-secret demo seed and Obsidian export
-- platform-neutral `scripts/intelligence_hub.py` CLI
+- installable platform-neutral `intelligence-hub` CLI
 - GitHub CI smoke coverage for demo seed and API health
 - public README and release docs aligned around Intelligence Hub as the platform
 
@@ -198,13 +198,13 @@ Out of scope:
 
 - PostgreSQL
 - FastAPI or web dashboard
-- complete Hermes migration
+- complete optional Hermes proposal-producer migration
 - WorldState as a parallel model
 - multi-agent debate or automated high-risk conflict acceptance
 
 ## Completed: Phase 3 Release Readiness
 
-Goal: make Hermes ready for a public GitHub repository without adding large new product scope.
+Goal: make Intelligence Hub ready for a public GitHub repository without adding large new product scope.
 
 Completed scope:
 
@@ -218,7 +218,7 @@ Completed scope:
 
 ## Deferred: Semantic Interest Filtering
 
-PRD section 2.8 describes natural-language interest profiling and relevance thresholds. The config keys are reserved, but the pipeline is not wired to perform semantic interest filtering yet.
+Natural-language interest profiling and relevance thresholds remain deferred. The config keys are reserved, but the pipeline is not wired to perform semantic interest filtering yet.
 
 Post-release work should define tests, storage, scoring behavior, and user-facing semantics before enabling `HERMES_INTEREST_PROFILE` or `HERMES_RELEVANCE_THRESHOLD`.
 
@@ -254,7 +254,7 @@ Current status:
 - `--model-synthesis` exists for daily, weekly, monthly, and dashboard pipelines.
 - Production schedule validation requires model synthesis for daily, weekly, monthly, and dashboard tasks.
 - Deterministic fallback remains available for CI, fixtures, and cloud-model failures.
-- Decision rationales expose the PRD-facing rationale sections.
+- Decision rationales expose why now, what changed, connections, action, and confidence.
 
 Next work by ROI:
 
@@ -271,11 +271,11 @@ Success criteria:
 - model failure degrades gracefully to deterministic output
 - notification status is fully auditable
 
-## Future: v5 Native HIP Dashboard
+## Completed: Local Intelligence Hub Dashboard
 
-Goal: build a native product surface only after the intelligence workflow is proven.
+The local FastAPI Dashboard now provides the release-candidate review surface.
 
-Candidate scope:
+Implemented scope:
 
 - Today Signals
 - Intelligence Scores
@@ -285,11 +285,11 @@ Candidate scope:
 - memory and entity drill-down
 - operational status and delivery health
 
-Success criteria:
+Current boundaries:
 
-- the dashboard is more useful than Notion for daily review
-- Notion can remain an archive and workspace
-- the dashboard does not become a raw feed
+- local-first single-user operation
+- Notion remains an optional configured workspace
+- authentication and multi-user hosting are deferred
 
 ## Current High-ROI Backlog
 

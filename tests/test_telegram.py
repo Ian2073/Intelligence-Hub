@@ -7,7 +7,7 @@ def test_build_telegram_payload_limits_daily_notification_to_three_decisions() -
     payload = build_telegram_payload(
         "12345",
         TelegramNotification(
-            title="Hermes Daily Intelligence",
+            title="Intelligence Hub Daily Brief",
             decisions=(
                 "[Prototype] OpenHands momentum surged",
                 "[Read] vLLM release affects inference",
@@ -31,7 +31,7 @@ def test_build_telegram_payload_includes_compact_executive_summary() -> None:
     payload = build_telegram_payload(
         "12345",
         TelegramNotification(
-            title="Hermes Weekly Intelligence",
+            title="Intelligence Hub Weekly Brief",
             decisions=("Prototype: RAG-Anything",),
             top_action="Prototype",
             notion_url="local://notion/weekly",

@@ -261,6 +261,6 @@ def _signal_from_top_action(action: str, *, index: int) -> IntelligenceSignal:
         rationale=clean,
         why_now=_fallback_field("Why now", clean),
         what_changed=_fallback_field("What changed", clean),
-        connects_to="Accumulated Hermes memory for the reporting period.",
+        connects_to="Accumulated Intelligence Hub memory for the reporting period.",
         what_to_do=clean,
     )

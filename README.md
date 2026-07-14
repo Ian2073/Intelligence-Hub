@@ -1,206 +1,200 @@
 # Intelligence Hub
 
-Local-first decision intelligence: Intelligence Hub turns information into evidence-backed knowledge, insights, decisions, briefs, and an Obsidian knowledge workspace.
+[![CI](https://github.com/Ian2073/Intelligence-Hub/actions/workflows/ci.yml/badge.svg)](https://github.com/Ian2073/Intelligence-Hub/actions/workflows/ci.yml)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/Ian2073/Intelligence-Hub?include_prereleases)](https://github.com/Ian2073/Intelligence-Hub/releases)
 
-It is not a news summarizer, a generic RAG demo, or an autonomous agent loop. The core workflow is:
+**Local-first decision intelligence for turning fragmented technical signals into evidence-backed knowledge, insights, and actions.**
+
+If you track dozens of repositories, papers, and RSS feeds, the hard problem is not collecting more links. It is deciding what changed, what evidence supports it, what connects across sources, and whether the signal deserves a `Watch`, `Read`, `Prototype`, or `Implement` decision.
+
+Intelligence Hub preserves source evidence first. Model, agent, and extraction output becomes a proposal and must pass validation before it can enter canonical knowledge.
 
 ```text
 Information → Evidence → Proposal → Validated Knowledge → Insight → Decision → Actionable Brief
 ```
 
-Hermes is an optional research-agent integration and legacy compatibility entrypoint. The core platform owns canonical persistence, proposal validation, the Insight Engine, API, Dashboard, and Obsidian projection.
+It is not a news summarizer, a generic RAG demo, or an autonomous agent loop.
 
-## What It Solves
+![Intelligence Hub Dashboard overview](docs/assets/dashboard-overview.png)
 
-Technical teams and individual builders often track repositories, papers, articles, and ecosystem shifts as disconnected links. Intelligence Hub converts those signals into a durable SQLite-backed knowledge repository with explicit evidence, confidence, provenance, decisions, and human-readable projections.
+_Zero-secret Dashboard overview generated from the deterministic fixture repository._
 
-## What Makes It Different
+## Why It Is Different
 
-- **Proposal Trust Layer**: model, agent, and extraction output becomes a proposal before it can become canonical knowledge.
-- **Canonical repository**: SQLite is the default system of record for entities, observations, relationships, events, insights, decisions, briefs, and proposal review.
-- **Decision-first output**: important signals are ranked into actions such as `Watch`, `Read`, `Prototype`, `Implement`, or `Review later`.
-- **Obsidian Knowledge Workspace**: generated notes use stable IDs and semantic WikiLinks, not plugin-dependent Dataview queries.
-- **Zero-secret demo**: fixture data runs without OpenAI, Notion, Telegram, GitHub credentials, PostgreSQL, or Hermes installation.
+- **Proposal Trust Layer** prevents unvalidated AI output from directly contaminating canonical knowledge.
+- **Canonical SQLite repository** stores entities, observations, relationships, events, insights, decisions, briefs, proposals, and run metrics.
+- **Evidence-backed decisions** turn signals into explicit action postures instead of producing another unread summary.
+- **Obsidian Knowledge Workspace** uses stable note identities and semantic WikiLinks without requiring Dataview.
+- **Zero-secret demo** runs with deterministic fixtures, SQLite, FastAPI, and no external service.
+- **Local-first review surfaces** include a Dashboard, API, proposal review, and a rebuildable Obsidian Vault.
+
+See the reproducible [Proposal Trust Layer walkthrough](docs/proposal-trust-layer.md).
 
 ## Five-Minute Quickstart
 
-Supported Python version: **Python 3.11**. This is the version exercised by CI.
+Supported version: **Python 3.11**.
 
 Windows PowerShell:
 
 ```powershell
+git clone https://github.com/Ian2073/Intelligence-Hub.git
+cd Intelligence-Hub
 python -m venv hub_env
-.\hub_env\Scripts\python.exe -m pip install -r requirements.txt
+.\hub_env\Scripts\python.exe -m pip install -e .
 Copy-Item .env.example .env
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py seed-demo
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py serve --seed-demo
+.\hub_env\Scripts\intelligence-hub.exe seed-demo
+.\hub_env\Scripts\intelligence-hub.exe serve --seed-demo
 ```
-
-Then open:
-
-- Dashboard: <http://127.0.0.1:8000/>
-- API docs: <http://127.0.0.1:8000/docs>
-- Obsidian vault: `data/demo/obsidian_vault/`
 
 Linux/macOS:
 
 ```bash
-python3 -m venv hub_env
+git clone https://github.com/Ian2073/Intelligence-Hub.git
+cd Intelligence-Hub
+python3.11 -m venv hub_env
 source hub_env/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install -e .
 cp .env.example .env
-python scripts/intelligence_hub.py seed-demo
-python scripts/intelligence_hub.py serve --seed-demo
+intelligence-hub seed-demo
+intelligence-hub serve --seed-demo
 ```
 
-## Demo Mode
+Open:
 
-The zero-secret demo uses:
+- Dashboard: <http://127.0.0.1:8000/>
+- OpenAPI: <http://127.0.0.1:8000/docs>
+- Obsidian Vault: `data/demo/obsidian_vault/`
 
-- fixture GitHub repository snapshots
-- fixture papers/articles and domain signals
-- SQLite at `data/demo/intelligence_hub_demo.sqlite`
-- generated Obsidian vault at `data/demo/obsidian_vault/`
-- FastAPI plus a static local dashboard
+The demo requires no API key, network collector, Notion workspace, Telegram bot, PostgreSQL, or Hermes installation.
 
-Useful commands:
+## Thirty-Second Scenario
 
-```powershell
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py demo
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py status
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py proposals --status rejected
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py export-obsidian
+1. Fixture collectors load related repository, paper, article, company, and technology signals.
+2. Deterministic normalization preserves source evidence in SQLite.
+3. Non-deterministic extraction and synthesis output enters the Proposal Store.
+4. Schema, evidence, confidence, provenance, and conflict validators classify proposals as `accepted`, `rejected`, or `needs_review`.
+5. Only accepted proposals become canonical entities, events, relationships, or insights.
+6. Decision policy produces explicit actions, and the daily brief links back to its evidence and accepted insights.
+
+## Main CLI
+
+```bash
+intelligence-hub --version
+intelligence-hub demo
+intelligence-hub seed-demo
+intelligence-hub serve --seed-demo
+intelligence-hub status
+intelligence-hub proposals --status rejected
+intelligence-hub export-obsidian
 ```
 
-The seed is repeatable and does not create duplicate demo records on repeated runs.
-
-## Configured Mode
-
-Configured mode can add live collectors, model providers, Notion, Telegram, and optional Hermes integration. Missing external settings degrade to fixture or dry-run behavior where supported; demo mode does not need secrets.
-
-Copy `.env.example` to `.env`, then configure only the integrations you intend to use. Platform-neutral `INTELLIGENCE_HUB_*` names are preferred for new setups; existing `HERMES_*` names remain supported for compatibility.
+`scripts/intelligence_hub.py` remains a compatibility wrapper over the same CLI implementation.
 
 ## Dashboard
 
-The local dashboard includes:
+The local single-user Dashboard includes:
 
-- Overview: important insights, decisions, latest brief, events, proposal metrics, and runtime status
-- Insights: claim, confidence, evidence, related entities/events, possible action, and provenance
-- Knowledge: entities, relationships, observations, events, insights, and decisions
-- Proposal Review: accepted, rejected, and needs-review proposals with revalidate/accept/reject actions
-- Briefs: daily/weekly/monthly-friendly Markdown rendering
-- Operations: runs, delivery state, readiness warnings, and Obsidian export diagnostics
+- **Overview**: important insights, decisions, latest brief, events, proposal metrics, and runtime status.
+- **Insights**: claim, evidence, confidence, related entities/events, possible action, and provenance.
+- **Knowledge**: entities, relationships, observations, timelines, sources, insights, and decisions.
+- **Proposal Review**: accepted, rejected, and needs-review proposals with validation reasons and review actions.
+- **Briefs**: daily, weekly, and monthly intelligence records.
+- **Operations**: runtime runs, collector/delivery status, readiness warnings, and Obsidian export health.
 
-No CDN or authentication is required. This release candidate is local-first and single-user.
+![Evidence-backed insights in the Dashboard](docs/assets/dashboard-insights.png)
+
+_Accepted insights retain confidence, evidence references, related knowledge, possible actions, and provenance._
+
+![Proposal Review in the Dashboard](docs/assets/proposal-review.png)
+
+_Proposal Review exposes validation status, evidence, provenance, reasons, and explicit review actions._
+
+## Obsidian Knowledge Workspace
+
+SQLite remains the system of record. Obsidian is a human-readable projection that can be rebuilt from the canonical repository:
+
+```text
+Canonical Repository
+  → ObsidianReadModelBuilder
+  → ObsidianRenderer
+  → ObsidianPublisher
+```
+
+Generated notes use stable canonical IDs, collision-safe filenames, semantic WikiLinks, atomic writes, preserved User Notes, and stale-note manifests.
 
 ## API
 
-FastAPI serves the dashboard and API:
+FastAPI serves typed platform-neutral routes, including:
 
-- `GET /health`, `GET /ready`
-- `GET /api/briefs`, `GET /api/briefs/{id}`
-- `GET /api/insights`, `GET /api/insights/{id}`
-- `GET /api/entities`, `GET /api/entities/{id}`
-- `GET /api/events`
-- `GET /api/decisions`
-- `GET /api/proposals`, `GET /api/proposals/{id}`
-- `POST /api/proposals/{id}/revalidate`
-- `POST /api/proposals/{id}/accept`
-- `POST /api/proposals/{id}/reject`
-- `GET /api/runtime/runs`
-- `GET /api/runtime/status`
+- `/health`, `/ready`
+- `/api/briefs`, `/api/insights`, `/api/entities`, `/api/events`, `/api/decisions`
+- `/api/proposals` and proposal review actions
+- `/api/runtime/runs`, `/api/runtime/status`
 
-Routes use platform services and repository seams; route handlers do not operate directly on raw SQLite SQL.
+Proposal acceptance through the API cannot bypass schema, evidence, and provenance validation.
 
-## Obsidian
+## Intelligence Hub and Hermes
 
-The generated vault uses:
+Intelligence Hub owns canonical persistence, proposal validation, insight generation, decision policy, API, Dashboard, model routing, delivery, and Obsidian projection.
 
-```text
-00 Dashboard/
-01 Briefs/
-02 Insights/
-03 Events/
-04 Entities/
-05 Sources/
-06 Decisions/
-90 System/
-```
+Hermes is an optional research-agent integration and legacy compatibility layer. It may submit proposals through the trust boundary, but it does not own or directly write canonical knowledge.
 
-Notes use stable identity and WikiLinks such as `[[04 Entities/Repositories/entity--abc12345|owner/repo]]`. User-owned note sections are preserved on regeneration; stale generated notes are listed instead of deleted.
+Existing `python -m hermes` commands remain available for compatibility and are not the primary public interface.
 
-## Architecture
+## Configured Mode
 
-```mermaid
-flowchart LR
-  A[Sources and fixtures] --> B[Normalization]
-  B --> C[Proposal Store]
-  C --> D[Proposal Gate]
-  D -->|accepted| E[Canonical SQLite Repository]
-  D -->|rejected or needs review| F[Review Surface]
-  E --> G[Insight Engine]
-  E --> H[Decision Policy]
-  E --> I[Obsidian Projection]
-  E --> J[FastAPI]
-  J --> K[Dashboard]
-```
+Configured mode can enable live GitHub/RSS/paper collectors, model providers, Notion, Telegram, and optional Hermes integration. Missing external settings degrade clearly; they are not required by demo mode.
 
-Core platform modules do not import `hermes`. Hermes compatibility entrypoints may import platform modules.
+Use platform-neutral `INTELLIGENCE_HUB_*` variables for new configuration. Legacy `HERMES_*` aliases remain supported where documented.
 
 ## Repository Layout
 
-- `core/`: platform runtime, repository, proposal trust layer, insight engine, API, dashboard support, pipelines
-- `connectors/`: external adapters and parsers
-- `workflows/`: domain intelligence workflows
-- `scripts/`: platform and compatibility CLIs
-- `hermes/`: optional integration and legacy CLI compatibility
-- `dashboard/`: static local dashboard assets
-- `data/fixtures/`: zero-secret demo fixtures
-- `docs/`: architecture, configuration, roadmap, demo, and contributor docs
-- `tests/`: regression, boundary, projection, API, and smoke tests
+- `core/`: runtime, repository, proposal gate, insight engine, API, Dashboard services, and Obsidian projection.
+- `connectors/`: external source and delivery adapters.
+- `workflows/`: daily, weekly, monthly, dashboard, radar, and decision-review workflows.
+- `dashboard/`: dependency-free local Dashboard assets.
+- `data/fixtures/`: deterministic zero-secret demo inputs.
+- `tests/`: regression, boundary, repository, trust-layer, projection, CLI, and release tests.
+- `scripts/`: operational and legacy compatibility entrypoints; see `scripts/README.md`.
+- `docs/`: architecture, configuration, operations, roadmap, and design rationale.
 
-## Testing
+## Development
 
-```powershell
-.\hub_env\Scripts\python.exe -m pytest tests -q
-.\hub_env\Scripts\python.exe -m compileall contracts core connectors hermes workflows scripts main.py
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py seed-demo
+```bash
+python -m pip install -e ".[test]"
+ruff check .
+python -m pytest tests -q
+python -m compileall contracts core connectors hermes workflows scripts main.py
+python scripts/smoke_test.py
+python scripts/acceptance_check.py
+python scripts/first_run_check.py
+python scripts/pre_publish_audit.py
 ```
 
-CI runs pytest, compileall, compatibility smoke checks, fixture demo, release demo seed, API health smoke, and first-run validation.
-
-## Security And Privacy
-
-- `.env`, SQLite runtime data, generated demo state, logs, and generated Obsidian vaults are ignored.
-- Demo fixtures contain public/sample data only.
-- Reset commands only target the managed demo data directory and require explicit confirmation.
-- This release candidate is a local-first single-user app; authentication and multi-user deployment are not implemented.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Roadmap Boundaries
 
-Implemented:
+Implemented: local SQLite repository, Proposal Trust Layer, canonical events/insights, Dashboard/API, Obsidian projection, zero-secret demo, optional configured publishers, and Hermes compatibility.
 
-- PlatformRuntime
-- Repository / SQLiteRepository read seam
-- Obsidian Knowledge Workspace v1
-- Proposal Trust Layer
-- Canonical Insight Engine
-- FastAPI API and local dashboard
-- zero-secret demo seed
+Not implemented: PostgreSQL, authentication, multi-user SaaS, Kubernetes, causal graph reasoning, full WorldState, multi-agent debate, or a public writable hosted demo.
 
-Not yet implemented:
+See [docs/ROADMAP.md](docs/ROADMAP.md) and [docs/IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md).
 
-- PostgreSQL
-- authentication or multi-user SaaS
-- full Hermes proposal producer migration
-- full WorldState model
-- causal graph or multi-agent debate
-- Kubernetes or cloud deployment platform
+## Security and Privacy
 
-## Contributing
+- Demo data is synthetic and fixture-based.
+- Secrets belong in ignored `.env` files and are never required for demo mode.
+- SQLite demo paths and generated Vaults are ignored.
+- Reset only operates on the managed `data/demo/` path and requires explicit confirmation.
+- Proposal payloads are summarized in UI error surfaces rather than dumped into unhandled tracebacks.
 
-See `CONTRIBUTING.md` and `docs/CONTRIBUTING.md`. Keep changes local-first, fixture-testable, and explicit about whether a capability is demo-ready, configured-mode only, or planned.
+Report security concerns using [.github/SECURITY.md](.github/SECURITY.md).
 
 ## License
 
-MIT. See `LICENSE`.
+MIT License. See [LICENSE](LICENSE).
+
+[繁體中文](README.zh-TW.md)

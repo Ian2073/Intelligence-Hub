@@ -36,7 +36,7 @@ def test_build_brief_database_payload_uses_structured_properties() -> None:
     payload = build_brief_database_payload(
         "database-id",
         NotionBriefRecord(
-            title="Hermes Daily Intelligence - 2026-07-02",
+            title="Intelligence Hub Daily Brief - 2026-07-02",
             date="2026-07-02",
             executive_summary="Open-source AI engineering accelerated.",
             recommended_actions=("Prototype", "Watch"),
@@ -49,7 +49,7 @@ def test_build_brief_database_payload_uses_structured_properties() -> None:
     )
 
     assert payload["parent"] == {"database_id": "database-id"}
-    assert payload["properties"]["Name"]["title"][0]["text"]["content"] == "Hermes Daily Intelligence - 2026-07-02"
+    assert payload["properties"]["Name"]["title"][0]["text"]["content"] == "Intelligence Hub Daily Brief - 2026-07-02"
     assert payload["properties"]["Date"]["date"]["start"] == "2026-07-02"
     assert payload["properties"]["Intelligence Score"]["number"] == 84
     assert payload["properties"]["Confidence"]["select"]["name"] == "medium"
@@ -144,7 +144,7 @@ def test_build_radar_snapshot_database_payload_uses_snapshot_schema() -> None:
     payload = build_radar_snapshot_database_payload(
         "radar-db",
         NotionRadarSnapshotRecord(
-            title="Hermes Radar Snapshot - 2026-07-09",
+            title="Intelligence Hub Radar Snapshot - 2026-07-09",
             as_of="2026-07-09",
             executive_summary="Radar summary.",
             entity_count=12,

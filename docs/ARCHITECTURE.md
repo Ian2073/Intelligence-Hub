@@ -9,7 +9,7 @@ Intelligence Hub now exposes a local-first release-candidate surface:
 - `core.proposal_store`, `core.proposal_gate`, and `core.proposal_service` implement the proposal trust layer.
 - `core.canonical_knowledge` and `core.insight_engine` provide canonical Event/Insight persistence and deterministic insight generation.
 - `core.api.create_app()` exposes the FastAPI API and serves the static dashboard in `dashboard/`.
-- `scripts/intelligence_hub.py` is the platform-neutral local CLI for demo seed, daily fixture runs, API/dashboard serving, status, proposal review, Obsidian export, and safe demo reset.
+- `core.cli:main` powers the installable `intelligence-hub` command. `scripts/intelligence_hub.py` remains a thin compatibility wrapper.
 
 Hermes remains an optional research-agent integration and compatibility layer. Platform modules must not import `hermes`.
 
@@ -128,7 +128,7 @@ Platform Runtime
   BriefRenderer / BriefPublisher / BriefDeliveryCoordinator
 ```
 
-`IntelligenceBrief` is the canonical output contract for intelligence surfaces. Signals inside a brief carry action, confidence, rationale, and the PRD decision fields: why now, what changed, connects to, and what to do.
+`IntelligenceBrief` is the canonical output contract for intelligence surfaces. Signals inside a brief carry action, confidence, rationale, why now, what changed, connections, and what to do.
 
 Decision support is exposed through a `DecisionPolicy` abstraction. v1 keeps rule-based action selection as the default implementation, but the architecture allows `RuleBasedDecisionPolicy`, `ModelAssistedDecisionPolicy`, and `HybridDecisionPolicy` without changing pipeline callers.
 
@@ -213,7 +213,7 @@ When `-ModelSynthesis` / `--model-synthesis` is enabled, daily, weekly, monthly,
 
 Model-generated synthesis is a proposal source. Accepted synthesis can be persisted canonically only after validation. Rejected synthesis should retain a rejection reason outside the canonical world model.
 
-Decision rationales expose the PRD-facing contract: why now, what changed, what it connects to, what to do, and confidence. This area remains a high-value improvement target because the product promise is decision intelligence, not collection volume.
+Decision rationales expose the public contract: why now, what changed, what it connects to, what to do, and confidence. This area remains a high-value improvement target because the product promise is decision intelligence, not collection volume.
 
 ## Model Routing
 

@@ -1,13 +1,86 @@
 from __future__ import annotations
 
+import hashlib
+import struct
+import tomllib
 from pathlib import Path
 
+import pytest
 from fastapi.testclient import TestClient
 
 from core.api import create_app
+from core.cli import main as platform_cli
 from core.obsidian_publisher import diagnose_vault_wikilinks
-from core.release_runtime import export_obsidian, reset_demo_data, seed_demo
-from scripts.intelligence_hub import main as platform_cli
+from core.release_runtime import reset_demo_data, seed_demo
+from core.version import __version__
+
+
+def test_package_api_and_cli_versions_are_aligned(capsys) -> None:
+    metadata = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))
+
+    assert metadata["project"]["version"] == "0.1.0rc3"
+    assert metadata["project"]["scripts"]["intelligence-hub"] == "core.cli:main"
+    assert __version__ == metadata["project"]["version"]
+
+    with pytest.raises(SystemExit) as version_exit:
+        platform_cli(["--version"])
+    assert version_exit.value.code == 0
+    assert capsys.readouterr().out.strip() == "intelligence-hub 0.1.0rc3"
+
+    app = create_app()
+    assert app.version == __version__
+
+
+def test_platform_cli_help_uses_installable_command_name(capsys) -> None:
+    with pytest.raises(SystemExit) as help_exit:
+        platform_cli(["--help"])
+
+    assert help_exit.value.code == 0
+    help_text = capsys.readouterr().out
+    assert "usage: intelligence-hub" in help_text
+    assert "seed-demo" in help_text
+    assert "export-obsidian" in help_text
+
+
+def test_dashboard_supports_stable_documentation_views() -> None:
+    script = Path("dashboard/app.js").read_text(encoding="utf-8")
+
+    assert 'new URLSearchParams(window.location.search).get("view")' in script
+    assert 'documentablePages.has(requestedPage)' in script
+
+
+def test_dashboard_screenshots_are_verified_and_referenced() -> None:
+    screenshot_names = (
+        "dashboard-overview.png",
+        "dashboard-insights.png",
+        "proposal-review.png",
+    )
+    digests = set()
+
+    for name in screenshot_names:
+        path = Path("docs/assets") / name
+        content = path.read_bytes()
+        assert len(content) > 50_000
+        assert content[:8] == b"\x89PNG\r\n\x1a\n"
+        width, height = struct.unpack(">II", content[16:24])
+        assert (width, height) == (1440, 1100)
+        digests.add(hashlib.sha256(content).hexdigest())
+
+        assert f"docs/assets/{name}" in Path("README.md").read_text(encoding="utf-8")
+        assert f"docs/assets/{name}" in Path("README.zh-TW.md").read_text(encoding="utf-8")
+
+    assert len(digests) == len(screenshot_names)
+
+
+def test_proposal_trust_walkthrough_uses_real_demo_records() -> None:
+    walkthrough = Path("docs/proposal-trust-layer.md").read_text(encoding="utf-8")
+
+    assert "Unsupported demo claim should be rejected." in walkthrough
+    assert "Local-first AI operations" in walkthrough
+    assert "missing evidence_refs" in walkthrough
+    assert "intelligence-hub proposals --status rejected" in walkthrough
+    assert "POST /api/proposals/{id}/revalidate" in walkthrough
+    assert "not a universal fact-checking system" in walkthrough
 
 
 def test_zero_secret_demo_seed_is_idempotent_and_exports_obsidian(tmp_path: Path) -> None:

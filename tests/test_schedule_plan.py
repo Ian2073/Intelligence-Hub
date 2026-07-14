@@ -23,7 +23,7 @@ def test_build_schedule_plan_includes_full_production_tasks_and_flags() -> None:
     by_name = {task.name: task for task in plan.tasks}
 
     assert len(plan.tasks) == 6
-    assert by_name["Hermes Intelligence OS Daily"].flags == (
+    assert by_name["Intelligence Hub Daily"].flags == (
         "-LiveGitHub",
         "-LivePapersWithCode",
         "-LiveDomainRss",
@@ -32,9 +32,9 @@ def test_build_schedule_plan_includes_full_production_tasks_and_flags() -> None:
         "-ModelSynthesis",
         "-NoDashboard",
     )
-    assert by_name["Hermes Intelligence OS Weekly"].extra_args == ("/D", "MON")
-    assert by_name["Hermes Intelligence OS Monthly"].extra_args == ("/D", "1")
-    assert by_name["Hermes Intelligence OS Radar"].flags == ("-PublishNotion", "-SendTelegram")
+    assert by_name["Intelligence Hub Weekly"].extra_args == ("/D", "MON")
+    assert by_name["Intelligence Hub Monthly"].extra_args == ("/D", "1")
+    assert by_name["Intelligence Hub Radar"].flags == ("-PublishNotion", "-SendTelegram")
     assert validate_production_schedule(plan) == ()
 
 
@@ -43,7 +43,7 @@ def test_validate_production_schedule_reports_missing_coverage() -> None:
 
     failures = validate_production_schedule(plan)
 
-    assert "Missing task: Hermes Intelligence OS Weekly" in failures
+    assert "Missing task: Intelligence Hub Weekly" in failures
     assert "Daily task missing -LiveGitHub." in failures
     assert "Daily task missing -SendTelegram." in failures
 
@@ -56,4 +56,4 @@ def test_render_schedule_plan_uses_absolute_project_scripts() -> None:
 
     expected_daily_script = str(project_root / "scripts" / "run_hermes_orchestration.ps1")
     assert f'powershell.exe -NoProfile -ExecutionPolicy Bypass -File "{expected_daily_script}"' in rendered
-    assert "Hermes Intelligence OS Dashboard" in rendered
+    assert "Intelligence Hub Dashboard" in rendered

@@ -41,7 +41,7 @@ def build_monthly_report_from_memory(
     )
     return PeriodIntelligenceReport(
         brief_type="monthly",
-        title=f"Hermes Monthly Intelligence - {period_start} to {period_end}",
+        title=f"Intelligence Hub Monthly Brief - {period_start} to {period_end}",
         executive_summary=executive_summary,
         trends=trends,
         top_actions=top_actions,

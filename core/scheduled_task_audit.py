@@ -80,7 +80,7 @@ def audit_scheduled_tasks(
 
 
 def render_scheduled_task_audit(report: ScheduledTaskAuditReport) -> str:
-    lines = ["# Hermes Scheduled Task Audit", ""]
+    lines = ["# Intelligence Hub Scheduled Task Audit", ""]
     lines.append(f"Result: {'passed' if report.ok else 'failed'}")
     lines.append("")
     lines.append("## Tasks")

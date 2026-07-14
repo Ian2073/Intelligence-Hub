@@ -63,7 +63,7 @@ def _seed_memory(store: MemoryStore) -> None:
         domain="AI Intelligence",
         period_start="2026-07-02",
         period_end="2026-07-02",
-        title="Hermes Daily Intelligence - 2026-07-02",
+        title="Intelligence Hub Daily Brief - 2026-07-02",
         executive_summary="Open-source AI engineering moved.",
         top_actions=("Prototype: OpenHands has strong momentum.",),
         notion_status="dry-run",

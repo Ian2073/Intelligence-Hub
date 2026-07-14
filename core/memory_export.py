@@ -109,7 +109,7 @@ def _index_markdown(
 ) -> str:
     return "\n".join(
         [
-            "# Hermes Memory Export",
+            "# Intelligence Hub Memory Export",
             "",
             f"As of: {as_of}",
             "",
@@ -123,7 +123,7 @@ def _index_markdown(
             f"| runs.jsonl | {run_count} |",
             f"| notification_outbox.jsonl | {notification_outbox_count} |",
             "",
-            "This export is read-only evidence of Hermes runtime memory. SQLite remains the runtime store.",
+            "This export is read-only evidence of Intelligence Hub runtime memory. SQLite remains the runtime store.",
             "",
         ]
     )

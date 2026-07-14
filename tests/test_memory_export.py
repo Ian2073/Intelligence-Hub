@@ -41,7 +41,7 @@ def test_export_memory_writes_jsonl_and_markdown_index(tmp_path) -> None:
             domain="AI Intelligence",
             period_start="2026-07-02",
             period_end="2026-07-02",
-            title="Hermes Daily Intelligence - 2026-07-02",
+            title="Intelligence Hub Daily Brief - 2026-07-02",
             executive_summary="Daily summary.",
             top_actions=("Watch: AI agents are gaining momentum.",),
             notion_status="dry-run",
@@ -52,7 +52,7 @@ def test_export_memory_writes_jsonl_and_markdown_index(tmp_path) -> None:
         store.record_run(
             run_date="2026-07-02",
             stage="daily",
-            title="Hermes Daily Intelligence - 2026-07-02",
+            title="Intelligence Hub Daily Brief - 2026-07-02",
             period_start="2026-07-02",
             period_end="2026-07-02",
             status="completed",
@@ -63,7 +63,7 @@ def test_export_memory_writes_jsonl_and_markdown_index(tmp_path) -> None:
             created_at="2026-07-02T01:00:00+00:00",
         )
         store.enqueue_notification(
-            title="Hermes Daily Intelligence - 2026-07-02",
+            title="Intelligence Hub Daily Brief - 2026-07-02",
             decisions=("Watch: AI agents are gaining momentum.",),
             top_action="Watch",
             notion_url="https://notion.so/hermes-daily",

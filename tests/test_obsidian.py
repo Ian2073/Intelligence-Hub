@@ -33,8 +33,8 @@ def test_sanitize_filename(tmp_path: Path) -> None:
 
 def test_directory_creation(tmp_path: Path) -> None:
     vault = tmp_path / "obsidian_vault"
-    client = ObsidianClient(vault)
-    
+    ObsidianClient(vault)
+
     assert (vault / "DailyBriefs").is_dir()
     assert (vault / "Repositories").is_dir()
     assert (vault / "Papers").is_dir()
@@ -204,7 +204,7 @@ def test_create_daily_brief(tmp_path: Path) -> None:
     client = ObsidianClient(vault)
     
     brief_record = NotionBriefRecord(
-        title="Hermes Daily Intelligence - 2026-07-04",
+        title="Intelligence Hub Daily Brief - 2026-07-04",
         date="2026-07-04",
         executive_summary="Summary of the day's events.",
         recommended_actions=("Prototype", "Read"),
@@ -240,7 +240,7 @@ def test_create_daily_brief_formats_blockquote_rationale_and_summary(tmp_path: P
     client = ObsidianClient(vault)
 
     brief_record = NotionBriefRecord(
-        title="Hermes Daily Intelligence - 2026-07-04",
+        title="Intelligence Hub Daily Brief - 2026-07-04",
         date="2026-07-04",
         executive_summary="Summary.",
         recommended_actions=("Prototype",),

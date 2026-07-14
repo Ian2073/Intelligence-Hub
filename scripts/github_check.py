@@ -15,7 +15,7 @@ from core.watchlist import load_github_watchlist
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Check Hermes GitHub token setup.")
+    parser = argparse.ArgumentParser(description="Check Intelligence Hub GitHub token setup.")
     return parser.parse_args()
 
 

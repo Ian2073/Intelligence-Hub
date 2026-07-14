@@ -150,7 +150,7 @@ def test_record_and_list_briefs_preserves_delivery_status(tmp_path) -> None:
             domain="AI Intelligence",
             period_start="2026-07-02",
             period_end="2026-07-02",
-            title="Hermes Daily Intelligence - 2026-07-02",
+            title="Intelligence Hub Daily Brief - 2026-07-02",
             executive_summary="Prototype actions increased.",
             top_actions=("Prototype: Paper connects to radar entities.",),
             notion_status="published",
@@ -175,7 +175,7 @@ def test_record_and_list_runs_preserves_runtime_delivery_status(tmp_path) -> Non
         run = store.record_run(
             run_date="2026-07-03",
             stage="dashboard",
-            title="Hermes Executive Dashboard - 2026-07-03",
+            title="Intelligence Hub Executive Dashboard - 2026-07-03",
             period_start="2026-06-03",
             period_end="2026-07-03",
             status="completed",
@@ -190,7 +190,7 @@ def test_record_and_list_runs_preserves_runtime_delivery_status(tmp_path) -> Non
 
         assert len(runs) == 1
         assert runs[0].id == run.id
-        assert runs[0].title == "Hermes Executive Dashboard - 2026-07-03"
+        assert runs[0].title == "Intelligence Hub Executive Dashboard - 2026-07-03"
         assert runs[0].notion_url == "https://notion.so/hermes-dashboard"
         assert runs[0].created_at == "2026-07-03T01:00:00+00:00"
     finally:
@@ -201,7 +201,7 @@ def test_notification_outbox_tracks_pending_sent_and_failed_notifications(tmp_pa
     store = MemoryStore(tmp_path / "memory.sqlite")
     try:
         record = store.enqueue_notification(
-            title="Hermes Daily Intelligence",
+            title="Intelligence Hub Daily Brief",
             decisions=("Read: important paper",),
             top_action="Read",
             notion_url="https://notion.so/hermes",

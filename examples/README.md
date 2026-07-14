@@ -1,26 +1,19 @@
-# Hermes Fixture Demo
+# Intelligence Hub Demo Evidence
 
-This directory contains the zero-secret fixture demo entrypoint and a small set of committed sample outputs.
+The canonical demo output is generated from repository fixtures instead of committed as a partial or stale Vault.
 
-## Samples
+Run:
 
-`examples/samples/` contains static Markdown examples generated from the fixture-backed demo:
-
-- `samples/DailyBriefs/Daily Brief - 2026-07-10.md`
-- `samples/Repositories/openai-openai-agents-python.md`
-- `samples/Papers/Tool Learning with Foundation Agents.md`
-- `samples/Ecosystem/Agentic security evaluation.md`
-
-These files are committed so GitHub visitors can inspect Hermes output before running the project locally.
-
-## Regenerate Output
-
-Run from the repository root:
-
-```powershell
-.\hub_env\Scripts\python.exe -m hermes demo --date 2026-07-10 --output examples/output/obsidian
+```bash
+intelligence-hub seed-demo
+intelligence-hub serve --seed-demo
 ```
 
-The demo uses repository fixtures, paper fixtures, domain RSS fixtures, local SQLite memory, and Markdown/Obsidian output. It does not require Notion, Telegram, GitHub, or cloud model credentials.
+Then inspect:
 
-Generated files under `examples/output/` are runtime artifacts and are ignored by source control. To refresh committed samples, regenerate the demo and copy only representative Markdown files from `examples/output/obsidian/` into `examples/samples/`.
+- Dashboard: <http://127.0.0.1:8000/>
+- Proposal lifecycle: [`docs/proposal-trust-layer.md`](../docs/proposal-trust-layer.md)
+- Generated Obsidian Workspace: `data/demo/obsidian_vault/`
+- Public Dashboard screenshots: [`docs/assets/`](../docs/assets/)
+
+Generated SQLite databases and Vault files are intentionally ignored. This prevents a developer workspace snapshot from becoming a public fixture dependency.

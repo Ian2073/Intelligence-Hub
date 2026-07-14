@@ -1,6 +1,6 @@
 # Notion Workspace
 
-Notion is the v1 presentation layer for HIP.
+Notion is an optional configured-mode presentation layer for Intelligence Hub.
 
 It is the intelligence workspace, not the runtime control plane.
 
@@ -16,7 +16,7 @@ Notion should handle:
 - cross-domain browsing
 - long-term archive
 
-Hermes should handle:
+Intelligence Hub should handle:
 
 - source collection
 - model routing
@@ -52,7 +52,7 @@ Intelligence Hub
 
 The main page should contain entry points and short linked views. It should not expand every database in full.
 
-Current daily publishing writes the Daily Brief first. When the corresponding database ids are configured, Hermes also writes structured Paper, GitHub Repo, and AI Ecosystem records so radar databases accumulate independently from the daily brief text. These structured daily records use upsert semantics: Papers are matched by exact `URL`, while GitHub Repos and AI Ecosystem items are matched by exact `Name`. Radar publishing writes both a Radar Snapshot and durable Radar Entity records when their database ids are configured. Missing structured database ids are reported as skipped instead of failing the whole publish.
+Current daily publishing writes the Daily Brief first. When the corresponding database ids are configured, Intelligence Hub also writes structured Paper, GitHub Repo, and AI Ecosystem records so radar databases accumulate independently from the daily brief text. These structured daily records use upsert semantics: Papers are matched by exact `URL`, while GitHub Repos and AI Ecosystem items are matched by exact `Name`. Radar publishing writes both a Radar Snapshot and durable Radar Entity records when their database ids are configured. Missing structured database ids are reported as skipped instead of failing the whole publish.
 
 ## Dashboard
 
@@ -159,7 +159,7 @@ Suggested properties:
 - Signal ID: text
 - Status: select
 
-Hermes publishes Decisions with upsert semantics. It queries the Decisions database by exact `Signal ID`; if a page exists, Hermes updates its current action and review metadata, and if none exists, Hermes creates one. This lets a prior Watch, Read, or Prototype recommendation evolve without creating duplicate decision records.
+Intelligence Hub publishes Decisions with upsert semantics. It queries the Decisions database by exact `Signal ID`; if a page exists, Intelligence Hub updates its current action and review metadata, and if none exists, it creates one. This lets a prior Watch, Read, or Prototype recommendation evolve without creating duplicate decision records.
 
 ## Radar Entities
 
@@ -176,7 +176,7 @@ Suggested properties:
 
 Radar Entities are the durable long-term layer for Technology Radar, Company Radar, Repository Radar, Paper Radar, and future domain radar views. Radar Snapshot explains what changed in a period; Radar Entities preserve the evolving state of each tracked object.
 
-Hermes publishes Radar Entities with upsert semantics. It queries the Radar Entities database by exact `Name`; if a page exists, Hermes updates its properties, and if none exists, Hermes creates one. This prevents daily Radar runs from creating duplicate pages for the same technology, company, repository, or paper.
+Intelligence Hub publishes Radar Entities with upsert semantics. It queries the Radar Entities database by exact `Name`; if a page exists, Intelligence Hub updates its properties, and if none exists, it creates one. This prevents daily Radar runs from creating duplicate pages for the same technology, company, repository, or paper.
 
 ## Rules
 

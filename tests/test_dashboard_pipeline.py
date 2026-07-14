@@ -37,7 +37,7 @@ def _seed_memory(store: MemoryStore) -> None:
         domain="AI Intelligence",
         period_start="2026-07-08",
         period_end="2026-07-08",
-        title="Hermes Daily Intelligence - 2026-07-08",
+        title="Intelligence Hub Daily Brief - 2026-07-08",
         executive_summary="Daily summary.",
         top_actions=("Prototype: Paper connects to implementation.",),
         notion_status="dry-run",
@@ -95,7 +95,7 @@ def test_run_dashboard_pipeline_publishes_and_sends_telegram(tmp_path) -> None:
         assert result.telegram.status == "sent"
         assert result.brief.notion_url == "https://notion.so/hermes-dashboard"
         assert result.brief.telegram_status == "sent"
-        assert notion.pages[0][0] == "Hermes Executive Dashboard - 2026-07-08"
+        assert notion.pages[0][0] == "Intelligence Hub Executive Dashboard - 2026-07-08"
         assert "Latest intelligence:" in notion.pages[0][1]
         assert "Operational health:" in notion.pages[0][1]
         assert "Memory tables:" in notion.pages[0][1]

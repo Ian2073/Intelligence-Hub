@@ -1,165 +1,67 @@
 # Product Definition
 
-Intelligence Hub is a personal intelligence platform.
+Intelligence Hub is a local-first decision intelligence platform for converting fragmented information into validated knowledge, evidence-backed insights, and explicit actions.
 
-The Platform Runtime is the core execution layer. Hermes is an optional research-agent integration and compatibility entrypoint.
+## Product Boundary
 
-The Platform Runtime collects, analyzes, reasons, scores, remembers, and publishes. The product is the user's intelligence workspace: a small daily surface for understanding important changes and making better decisions.
+Intelligence Hub owns:
 
-Intelligence Hub must be automation-first. The user should not manually collect sources, manually paste summaries, or manually decide which raw items belong in a review workspace. The Platform Runtime performs the work; Markdown/Obsidian and optional production publishers display the result.
+- source normalization and evidence retention
+- canonical SQLite persistence
+- Proposal Store and Proposal Gate
+- Event and Insight generation
+- rule-owned decision policy
+- API and local Dashboard
+- delivery adapters and Obsidian projection
 
-## What HIP Is
+Hermes is an optional research-agent integration and legacy compatibility layer. It may investigate and submit proposals, but it does not own platform runtime or canonical knowledge.
 
-Intelligence Hub is:
+## What Intelligence Hub Is
 
-- an intelligence platform
+- a traceable evidence-to-decision pipeline
+- a canonical repository for durable intelligence records
+- a trust boundary for model and agent output
 - a decision-support system
-- a signal compression engine
-- a personal memory layer for technology and market evolution
-- a repeatable workflow for turning sources into judgment
+- a rebuildable human-readable knowledge workspace
 
-## What HIP Is Not
+## What It Is Not
 
-Intelligence Hub is not:
+- a generic chatbot or RAG demo
+- a news feed or link dump
+- an autonomous agent allowed to write facts without validation
+- a hosted multi-user SaaS
+- a complete fact-checking or causal-reasoning system
 
-- a generic AI chatbot
-- a Notion clone
-- a Telegram bot
-- a news aggregator
-- an LLM summary tool
-- a dump of links
-- a dashboard full of unread items
+## Primary Experience
 
-## Public Demo vs Production Deployment
+The user starts the zero-secret demo, opens the Dashboard, and can trace:
 
-The open-source public demo is Dashboard plus Markdown/Obsidian:
+```text
+Source evidence → Proposal → Validation → Canonical Insight → Decision → Brief
+```
 
-- no API keys
-- fixture-backed sources
-- generated Dashboard served by the platform-neutral FastAPI app
-- generated Obsidian vault under `data/demo/obsidian_vault/`
-- committed samples under `examples/samples/`
+The same canonical repository can regenerate the Obsidian Knowledge Workspace. Notion and Telegram remain optional configured-mode publishers.
 
-The author's production deployment can add:
+## Core Output
 
-- Notion as a structured review workspace
-- Telegram as a notification channel
-- cloud LLM synthesis
-- Windows scheduled tasks
+An actionable brief explains:
 
-Both paths share the same `IntelligenceBrief` contract, SQLite memory model, decision actions, and publisher boundaries.
+- what changed
+- why it matters
+- what evidence supports it
+- what it connects to
+- what action may follow
+- confidence and provenance
 
-## Release Candidate Experience
+## Local-First Release Candidate
 
-A new user should be able to clone the repository, install dependencies, run `scripts/intelligence_hub.py seed-demo`, start `scripts/intelligence_hub.py serve --seed-demo`, and inspect:
+The release candidate is designed for one local user:
 
-- Dashboard overview
-- Insights
-- Entity knowledge pages
-- Events
-- Decisions
-- Proposal review
-- Briefs
+- Python 3.11
+- SQLite
+- deterministic fixtures
+- FastAPI and a dependency-free Dashboard
 - generated Obsidian Vault
+- no required secrets or external services
 
-This is local-first single-user software, not a production multi-user SaaS.
-
-## Primary User Experience
-
-The user should open the selected review surface and quickly see:
-
-- today's most important signals
-- why they matter
-- what technologies and companies they connect to
-- what action the platform recommends
-- what the platform is uncertain about
-- how the signal relates to prior memory
-
-The user should not need to inspect raw source lists unless they choose to drill down.
-
-## Core Output Unit
-
-The core output unit is the Intelligence Brief.
-
-For the first agent, the output unit is:
-
-AI Intelligence Brief
-
-Required sections:
-
-- Executive Summary
-- Top Signals
-- Why It Matters
-- Technology Map
-- Ecosystem Impact
-- Evolution Context
-- Recommended Action
-- Intelligence Score
-- Confidence
-- Memory Links
-
-## Presentation Strategy
-
-The public path uses Markdown/Obsidian as the zero-secret intelligence workspace.
-
-Notion is an optional production publisher and review surface. It is not the control plane.
-
-The Platform Runtime is responsible for:
-
-- automated source collection
-- automated analysis
-- automated signal scoring
-- automated brief generation
-- automated publishing
-- scheduling
-- source configuration
-- prompts
-- model routing
-- logs
-- workflow execution
-
-Hermes is responsible only for optional research-agent capabilities when configured:
-
-- autonomous research
-- reflection
-- personalized memory
-- skill accumulation
-- tool-driven investigation
-
-Review surfaces are responsible for:
-
-- presentation
-- persistence
-- search
-- review
-- cross-domain browsing
-- manual annotation
-
-## Long-Term Product Boundary
-
-Intelligence Hub may later include a native dashboard. That dashboard should only be built after the intelligence model, publisher boundaries, scoring framework, and daily brief workflow are proven.
-
-The dashboard is a future product surface. It is not the v1 product dependency.
-
-## Automation Boundary
-
-The correct v1 flow is:
-
-```text
-Platform Runtime automated workflow
-  -> collect or receive inputs
-  -> analyze and compress signals
-  -> generate Intelligence Brief
-  -> publish to Markdown/Obsidian or optional production publishers
-  -> optionally notify the user
-```
-
-The incorrect v1 flow is:
-
-```text
-user manually gathers links
-  -> user asks for summary
-  -> user copies result into a review workspace
-```
-
-Manual runs are acceptable during development, but the product direction is automated processing by Hermes.
+PostgreSQL, authentication, multi-user hosting, Kubernetes, causal graphs, and public writable hosting remain outside the current product boundary.

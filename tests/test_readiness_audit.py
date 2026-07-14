@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from core.acceptance import AcceptanceReport, AcceptanceStage
 from core.doctor import DoctorCheck, DoctorReport
-from core.operational_status import CredentialGap, HermesOperationalStatus, LatestBriefStatus
+from core.operational_status import CredentialGap, LatestBriefStatus, OperationalStatus
 from core.readiness_audit import build_readiness_audit, render_readiness_audit
 from core.scheduled_task_audit import ScheduledTaskAuditItem, ScheduledTaskAuditReport
 
@@ -91,7 +91,7 @@ def test_readiness_audit_can_require_installed_scheduled_tasks() -> None:
         scheduled_task_report=ScheduledTaskAuditReport(
             (
                 ScheduledTaskAuditItem(
-                    "Hermes Intelligence OS Daily",
+                    "Intelligence Hub Daily",
                     "ok",
                     "Installed task matches expected command, schedule, and start time.",
                 ),
@@ -115,7 +115,7 @@ def test_readiness_audit_blocks_on_installed_scheduled_task_failures() -> None:
         schedule_failures=(),
         scheduled_task_report=ScheduledTaskAuditReport(
             (
-                ScheduledTaskAuditItem("Hermes Intelligence OS Daily", "failed", "Task is not installed."),
+                ScheduledTaskAuditItem("Intelligence Hub Daily", "failed", "Task is not installed."),
             )
         ),
     )
@@ -139,7 +139,7 @@ def test_readiness_audit_blocks_on_missing_runtime_surface_and_acceptance_skip()
         ),
         acceptance_report=None,
         go_live_report=DoctorReport((DoctorCheck("go_live", "ok", "ready"),)),
-        schedule_failures=("Missing task: Hermes Intelligence OS Weekly",),
+        schedule_failures=("Missing task: Intelligence Hub Weekly",),
     )
     rendered = render_readiness_audit(report)
 
@@ -186,8 +186,8 @@ def _operational_status(
     observation_count: int = 30,
     decision_count: int = 10,
     pending_notification_count: int = 0,
-) -> HermesOperationalStatus:
-    return HermesOperationalStatus(
+) -> OperationalStatus:
+    return OperationalStatus(
         go_live_ready=not credential_gaps,
         credential_gaps=credential_gaps,
         latest_briefs=latest_briefs if latest_briefs is not None else _briefs(),
