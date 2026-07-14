@@ -1,65 +1,37 @@
 # Principles
 
-These principles govern HIP product design, Hermes runtime behavior, and future agent work.
+## Evidence Before Confidence
 
-## Signal Over Noise
+Confidence reflects evidence quality, provenance, source diversity, and validation. It is not a writing style.
 
-HIP should reduce information volume.
+## Proposal Before Canonical Knowledge
 
-A successful output is not a longer report. A successful output makes the important few items obvious and explains why the rest can wait.
+Non-deterministic model or agent output must become a proposal before it can become formal knowledge.
 
 ## Decision Over Summary
 
-Every meaningful item should end in a decision-support recommendation.
+Useful intelligence explains significance, uncertainty, connections, and a possible action instead of stopping at summarization.
 
-Summary alone is not enough. HIP must explain significance, context, uncertainty, and action.
+## Signal Over Noise
 
-## Knowledge First
-
-New information should be connected to existing knowledge.
-
-Important signals should link to technologies, companies, papers, repositories, timelines, concepts, and prior observations whenever possible.
+The platform should reduce information volume and make the important few items obvious.
 
 ## Evolution Over Snapshot
 
-HIP should track how things change over time.
+Entities, observations, relationships, and events should preserve temporal change rather than repeatedly treating old subjects as new.
 
-The product should prefer patterns, inflection points, and trajectory over isolated daily events.
+## Native Navigation
 
-## Memory Over Repetition
-
-Hermes should not restart from zero every day.
-
-The platform should remember what it has seen before, when it first appeared, how it changed, and whether the user's prior decision was correct.
-
-## Evidence Before Confidence
-
-Hermes should state confidence only after considering evidence quality.
-
-Confidence must not be a tone. It must reflect source quality, source diversity, reasoning strength, and uncertainty.
-
-## Long-Term Over Hype
-
-HIP should resist short-term attention spikes.
-
-Trending items are not automatically important. Durable importance should be judged by engineering value, adoption, momentum, ecosystem impact, and longevity.
-
-## Notion as v1 Workspace
-
-For v1, Notion is the presentation and review workspace.
-
-Notion should not become the runtime control plane. Runtime configuration, credentials, scheduling, logs, and model routing belong in Hermes.
+Obsidian output must remain useful through WikiLinks, backlinks, folders, and MOCs without requiring Dataview.
 
 ## Local-First and Honest
 
-Hermes should remain runnable locally and honest about which tools and sources were actually used.
+The zero-secret path must run locally. Output must never imply that a live collector, model provider, or publisher ran when it did not.
 
-If live web, arXiv, GitHub, RSS, or Notion publishing did not run, Hermes must not imply that they did.
+## Clear Ownership
 
-## Five-Year Value
+Intelligence Hub owns canonical persistence and platform execution. Optional agents, including Hermes, can propose knowledge but cannot bypass validation.
 
-Before building a core feature, ask:
+## Durable Simplicity
 
-Will this still create value five years from now?
-
-If the answer is no, do not put it in the core product.
+Do not add infrastructure or abstractions that do not solve a demonstrated current need.

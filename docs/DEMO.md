@@ -1,29 +1,37 @@
-# Demo
+# Zero-Secret Demo
 
-The release-candidate demo is deterministic and zero-secret.
+The release demo uses deterministic, connected fixture data and requires no API key or external service.
 
 ## What It Seeds
 
-- GitHub repositories from `data/fixtures/github/`
-- papers/articles from `data/fixtures/papers/`
+- GitHub repository fixtures from `data/fixtures/github/`
+- papers and articles from `data/fixtures/papers/`
 - domain signals from `data/fixtures/domains/`
-- canonical entities, observations, relationships, events, insights, decisions, briefs, proposals, and runtime metrics
-- one rejected proposal and one needs-review proposal for review-surface demonstration
-- an Obsidian vault with broken-link diagnostics equal to zero
+- canonical entities, observations, relationships, events, insights, decisions, briefs, and runtime metrics
+- accepted, rejected, and needs-review proposals
+- an Obsidian Vault with stable IDs and zero broken WikiLinks
 
 ## Commands
 
-```powershell
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py demo
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py proposals --status needs_review
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py review-proposal <proposal-id> --action revalidate
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py export-obsidian
+```bash
+intelligence-hub demo
+intelligence-hub proposals --status needs_review
+intelligence-hub proposals --status rejected
+intelligence-hub export-obsidian
 ```
 
-Repeated `seed-demo` runs are idempotent for the managed demo database. To remove generated demo state:
+Run `intelligence-hub seed-demo` twice to verify idempotency. The second run reports `Seeded=False` and does not duplicate canonical records.
 
-```powershell
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py reset-demo-data --yes
+Proposal IDs are deterministic but should be read from the current CLI or Dashboard instead of copied from documentation:
+
+```bash
+intelligence-hub review-proposal <proposal-id> --action revalidate
 ```
 
-The reset command is intentionally limited to `data/demo/`.
+To remove generated demo state:
+
+```bash
+intelligence-hub reset-demo-data --yes
+```
+
+Reset is restricted to the managed `data/demo/` directory.

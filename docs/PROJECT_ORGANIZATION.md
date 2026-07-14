@@ -11,14 +11,14 @@ Intelligence Hub is the product and platform. The Platform Runtime owns collecti
 - `connectors/`: external system adapters and parsers for GitHub, papers, domain RSS, Notion, Telegram, Obsidian, model providers, and retries.
 - `workflows/`: domain-level intelligence workflows that combine connector output and core radar logic.
 - `hermes/`: compatibility CLI and optional research-agent context. It may import platform modules, but platform modules must not import it.
-- `scripts/`: CLI entrypoints for local operation, validation, scheduled runs, exports, and production checks.
+- `scripts/`: operational, validation, scheduled-run, export, and compatibility entrypoints. The primary CLI is `intelligence-hub`.
 - `dashboard/`: static local dashboard served by the platform-neutral FastAPI app.
 - `examples/`: zero-secret demo instructions and generated demo output location.
 - `tests/`: automated tests and short-lived isolated simulation outputs.
 
 ## Product Context
 
-- `docs/`: human-maintained product, architecture, operations, and planning documents.
+- `docs/`: human-maintained product, architecture, operations, roadmap, and design-rationale documents.
 - `hermes/soul/`: optional agent identity and behavioral context.
 - `knowledge/`: durable thinking framework and product knowledge intended for agent-readable context.
 - `prompts/`: workflow prompt contracts.
@@ -51,10 +51,11 @@ These directories are intentionally ignored. Keep a generated artifact only when
 Use these commands after structural or pipeline changes:
 
 ```powershell
-.\hub_env\Scripts\python.exe -m pytest
+.\hub_env\Scripts\python.exe -m pytest tests -q
+.\hub_env\Scripts\ruff.exe check .
 .\hub_env\Scripts\python.exe -m compileall contracts core connectors hermes workflows scripts main.py
 .\hub_env\Scripts\python.exe scripts\smoke_test.py
-.\hub_env\Scripts\python.exe -m hermes demo --date 2026-07-10
+.\hub_env\Scripts\intelligence-hub.exe seed-demo
 ```
 
 For live capability checks, use isolated state and dry-run delivery:

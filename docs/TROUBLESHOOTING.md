@@ -23,7 +23,7 @@ No. The fixture demo does not require Notion, Telegram, GitHub credentials, or c
 
 ## `main.py` vs `hermes demo`
 
-Use `python -m hermes demo` for the public first-run path. `main.py` remains the production orchestration entrypoint and may use production-oriented settings.
+Use `intelligence-hub seed-demo` for the public first-run path. `main.py` and `python -m hermes` remain compatibility entrypoints and may use production-oriented settings.
 
 ## Windows vs Linux Commands
 
@@ -36,7 +36,7 @@ Windows:
 Linux/macOS:
 
 ```bash
-python -m hermes demo --date 2026-07-10 --output examples/output/obsidian
+intelligence-hub seed-demo
 ```
 
 ## `HERMES_MEMORY_DB` And Production Memory

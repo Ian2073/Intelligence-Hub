@@ -1,172 +1,188 @@
-# Hermes Intelligence Platform
+# Intelligence Hub
 
-[English README](README.md)
+[![CI](https://github.com/Ian2073/Intelligence-Hub/actions/workflows/ci.yml/badge.svg)](https://github.com/Ian2073/Intelligence-Hub/actions/workflows/ci.yml)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
+[![授權：MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/Ian2073/Intelligence-Hub?include_prereleases)](https://github.com/Ian2073/Intelligence-Hub/releases)
 
-Hermes 是一個 local-first 的決策情報系統。它把 GitHub repositories、論文、RSS 訊號整理成可行動的 Daily Brief，並用本機 SQLite 記住看過的 entity、decision 和歷史變化。
+**一個 local-first 決策情報平台，將分散的技術訊號轉成有證據、可追溯、可採取行動的知識與決策。**
 
-它不是一般的 AI 新聞摘要器。Hermes 的核心目標是把訊號轉成明確決策，例如 `Watch`、`Read`、`Prototype`、`Implement`、`Review later`，並讓這些決策可以被追蹤、回顧、累積。
+當你同時追蹤數十個 GitHub repositories、論文與 RSS 來源時，真正困難的不是收集更多連結，而是判斷發生了什麼變化、有哪些證據、不同來源之間如何連接，以及這項訊號究竟值得 `Watch`、`Read`、`Prototype` 或 `Implement`。
 
-## 為什麼不是 News Bot
-
-- **決策優先**：重要訊號會被轉成 action，而不是只產生摘要。
-- **本機記憶**：SQLite 記錄 repository、paper、ecosystem entity 和 decision history。
-- **規則掌控 ranking**：`DecisionEngine` 與 deterministic scoring 負責排序與 action contract；LLM 可以輔助 rationale，但不默默覆蓋決策規則。
-- **零 secret demo**：第一次使用不需要 API key、Notion、Telegram、GitHub token 或 cloud model。
-
-## 30 秒 Demo
-
-Windows PowerShell：
-
-```powershell
-python -m venv hub_env
-.\hub_env\Scripts\python.exe -m pip install -r requirements.txt
-.\hub_env\Scripts\python.exe -m hermes demo --date 2026-07-10 --output examples/output/obsidian
-```
-
-預期輸出：
+Intelligence Hub 會先保存 evidence。模型、Agent 或 extraction 產生的結果必須先成為 proposal，通過驗證後才能進入 canonical knowledge。
 
 ```text
-Hermes Daily Intelligence - 2026-07-10
-Markdown demo: published - ...\examples\output\obsidian\DailyBriefs\Daily Brief - 2026-07-10.md
+Information → Evidence → Proposal → Validated Knowledge → Insight → Decision → Actionable Brief
 ```
 
-這個 demo 使用 repo 內建 fixtures，輸出 Markdown/Obsidian 檔案，不會呼叫外部 API。
+它不是新聞摘要器、一般 RAG demo，也不是讓 Agent 自行無限迴圈執行的框架。
 
-## 範例輸出
+## 核心差異
 
-可以先看已提交的範例：
+- **Proposal Trust Layer**：未驗證的 AI 輸出不得直接污染正式知識。
+- **Canonical SQLite Repository**：保存 Entity、Observation、Relationship、Event、Insight、Decision、Brief、Proposal 與執行指標。
+- **決策優先**：將訊號轉成明確 action posture，而不是再產生一份無人閱讀的摘要。
+- **Obsidian Knowledge Workspace**：使用穩定 identity 與具語意的 WikiLink，不強制依賴 Dataview。
+- **Zero-secret demo**：只使用 deterministic fixtures、SQLite 與 FastAPI，不需要任何外部服務。
+- **Local-first review surfaces**：提供 Dashboard、API、Proposal Review 與可重建的 Obsidian Vault。
 
-![Daily Brief preview](docs/assets/daily-brief-preview.png)
+請參閱可重現的 [Proposal Trust Layer walkthrough](docs/proposal-trust-layer.md)。
 
-- [Daily Brief](examples/samples/DailyBriefs/Daily%20Brief%20-%202026-07-10.md)
-- [Repository page](examples/samples/Repositories/openai-openai-agents-python.md)
-- [Paper page](examples/samples/Papers/Tool%20Learning%20with%20Foundation%20Agents.md)
-- [Ecosystem page](examples/samples/Ecosystem/Agentic%20security%20evaluation.md)
+## 五分鐘快速開始
 
-## 架構
-
-![Architecture overview](docs/assets/architecture-overview.svg)
-
-Hermes 的主線是：
-
-1. 從 GitHub、arXiv/papers、domain RSS 或 fixtures 收集訊號。
-2. Connectors 負責 fetch、parse、retry。
-3. Runtime core 執行 pipelines、更新 SQLite memory、產生 decision ranking。
-4. 最後輸出成 Markdown/Obsidian，也可以在 production 中接 Notion 或 Telegram。
-
-## 工作流程
-
-![Workflow overview](docs/assets/workflow-overview.svg)
-
-典型流程：
-
-1. 維護 watchlists。
-2. 收集技術訊號。
-3. 排序 decision candidates。
-4. 建立 Daily Brief。
-5. 發布到 review surface。
-6. 根據 review 結果回饋下一輪 watchlists 與 memory。
-
-## 系統需求
-
-- Python 3.11+
-- Fixture demo 不需要 API key
-- Production 或 live checks 才需要 GitHub、Notion、Telegram、cloud LLM 等 credentials
-
-## 安裝
+支援版本：**Python 3.11**。
 
 Windows PowerShell：
 
 ```powershell
+git clone https://github.com/Ian2073/Intelligence-Hub.git
+cd Intelligence-Hub
 python -m venv hub_env
-.\hub_env\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
+.\hub_env\Scripts\python.exe -m pip install -e .
 Copy-Item .env.example .env
+.\hub_env\Scripts\intelligence-hub.exe seed-demo
+.\hub_env\Scripts\intelligence-hub.exe serve --seed-demo
 ```
 
-Linux/macOS：
+Linux／macOS：
 
 ```bash
-python3 -m venv hub_env
+git clone https://github.com/Ian2073/Intelligence-Hub.git
+cd Intelligence-Hub
+python3.11 -m venv hub_env
 source hub_env/bin/activate
-pip install -r requirements.txt
+python -m pip install -e .
 cp .env.example .env
+intelligence-hub seed-demo
+intelligence-hub serve --seed-demo
 ```
 
-## 快速啟動
+開啟：
 
-Windows：
+- Dashboard：<http://127.0.0.1:8000/>
+- OpenAPI：<http://127.0.0.1:8000/docs>
+- Obsidian Vault：`data/demo/obsidian_vault/`
 
-```powershell
-.\hub_env\Scripts\python.exe -m hermes demo --date 2026-07-10 --output examples/output/obsidian
-.\hub_env\Scripts\python.exe scripts\first_run_check.py
-```
+Demo 不需要 API key、外部 collector、Notion、Telegram、PostgreSQL 或 Hermes。
 
-Linux/macOS：
+## 三十秒情境
+
+1. Fixture collectors 載入互相關聯的 repository、paper、article、company 與 technology 訊號。
+2. Deterministic normalization 將原始 evidence 保存到 SQLite。
+3. 非確定性的 extraction 與 synthesis 結果先進入 Proposal Store。
+4. Schema、evidence、confidence、provenance 與 conflict validators 將 proposal 分成 `accepted`、`rejected` 或 `needs_review`。
+5. 只有 accepted proposal 能成為 canonical Entity、Event、Relationship 或 Insight。
+6. Decision policy 產生明確行動，Daily Brief 再連回 evidence 與 accepted Insights。
+
+## 正式 CLI
 
 ```bash
-python -m hermes demo --date 2026-07-10 --output examples/output/obsidian
+intelligence-hub --version
+intelligence-hub demo
+intelligence-hub seed-demo
+intelligence-hub serve --seed-demo
+intelligence-hub status
+intelligence-hub proposals --status rejected
+intelligence-hub export-obsidian
+```
+
+`scripts/intelligence_hub.py` 保留為相容 wrapper，與正式 CLI 共用同一份實作。
+
+## Dashboard
+
+本機 single-user Dashboard 包含：
+
+- **Overview**：重要 Insights、Decisions、最新 Brief、Events、Proposal 指標與 runtime 狀態。
+- **Insights**：Claim、evidence、confidence、相關 Entities／Events、可能行動與 provenance。
+- **Knowledge**：Entities、Relationships、Observations、timeline、Sources、Insights 與 Decisions。
+- **Proposal Review**：accepted、rejected、needs-review proposal、驗證原因與 review actions。
+- **Briefs**：Daily、Weekly 與 Monthly intelligence records。
+- **Operations**：runtime runs、collector／delivery 狀態、readiness warning 與 Obsidian export 健康度。
+
+## Obsidian Knowledge Workspace
+
+SQLite 是 system of record；Obsidian 是可由 canonical repository 重新產生的人類可讀 projection：
+
+```text
+Canonical Repository
+  → ObsidianReadModelBuilder
+  → ObsidianRenderer
+  → ObsidianPublisher
+```
+
+Generated notes 使用 stable canonical ID、防碰撞檔名、semantic WikiLinks、atomic writes、User Notes 保留與 stale-note manifest。
+
+## API
+
+FastAPI 提供 typed、platform-neutral routes，包括：
+
+- `/health`、`/ready`
+- `/api/briefs`、`/api/insights`、`/api/entities`、`/api/events`、`/api/decisions`
+- `/api/proposals` 與 proposal review actions
+- `/api/runtime/runs`、`/api/runtime/status`
+
+透過 API 人工接受 proposal 時，仍不得繞過 schema、evidence 與 provenance 驗證。
+
+## Intelligence Hub 與 Hermes
+
+Intelligence Hub 擁有 canonical persistence、proposal validation、insight generation、decision policy、API、Dashboard、model routing、delivery 與 Obsidian projection。
+
+Hermes 是 optional research-agent integration 與 legacy compatibility layer。它可以透過 trust boundary 提交 proposal，但不擁有、也不能直接寫入 canonical knowledge。
+
+既有 `python -m hermes` 指令仍保留相容性，但不是公開專案的主要入口。
+
+## Configured Mode
+
+Configured mode 可啟用 live GitHub／RSS／paper collectors、model providers、Notion、Telegram 與 optional Hermes integration。外部設定缺失時會清楚降級，不影響 demo mode。
+
+新設定應優先使用 platform-neutral 的 `INTELLIGENCE_HUB_*`；文件中標示的 `HERMES_*` 僅作 legacy compatibility。
+
+## Repository 結構
+
+- `core/`：runtime、repository、proposal gate、insight engine、API、Dashboard services 與 Obsidian projection。
+- `connectors/`：外部來源與 delivery adapters。
+- `workflows/`：daily、weekly、monthly、dashboard、radar 與 decision-review workflows。
+- `dashboard/`：不依賴外部 CDN 的本機 Dashboard assets。
+- `data/fixtures/`：deterministic zero-secret demo inputs。
+- `tests/`：regression、boundary、repository、trust-layer、projection、CLI 與 release tests。
+- `scripts/`：operational 與 legacy compatibility entrypoints，詳見 `scripts/README.md`。
+- `docs/`：architecture、configuration、operations、roadmap 與 design rationale。
+
+## 開發驗證
+
+```bash
+python -m pip install -e ".[test]"
+ruff check .
+python -m pytest tests -q
+python -m compileall contracts core connectors hermes workflows scripts main.py
+python scripts/smoke_test.py
+python scripts/acceptance_check.py
 python scripts/first_run_check.py
+python scripts/pre_publish_audit.py
 ```
 
-進階驗證：
+請參閱 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
-```powershell
-.\hub_env\Scripts\python.exe -m hermes doctor
-.\hub_env\Scripts\python.exe -m hermes doctor --profile demo
-.\hub_env\Scripts\python.exe scripts\acceptance_check.py
-.\hub_env\Scripts\python.exe -m pytest tests -q
-```
+## Roadmap 邊界
 
-`main.py` 保留給 production orchestration；公開 first-run 路徑請使用 `python -m hermes demo`。
+已完成：local SQLite repository、Proposal Trust Layer、canonical Events／Insights、Dashboard／API、Obsidian projection、zero-secret demo、optional configured publishers 與 Hermes compatibility。
 
-## 可選整合
+尚未完成：PostgreSQL、authentication、multi-user SaaS、Kubernetes、causal graph reasoning、完整 WorldState、多 Agent 辯論或公開可寫的 hosted demo。
 
-- **Cloud LLM**：設定 `HERMES_CLOUD_*`、`HERMES_FAST_MODEL`、`HERMES_PRO_MODEL`、`HERMES_SYNTHESIS_MODE`。
-- **GitHub live fetching**：設定 `GITHUB_TOKEN` 或 `GH_TOKEN` 以提高 API limit。
-- **Notion**：設定 `NOTION_*`，用於 production review workspace。
-- **Telegram**：設定 `TELEGRAM_*`，用於 production notifications。
-- **Obsidian**：設定 `OBSIDIAN_ENABLED` 與 `OBSIDIAN_VAULT_PATH`，輸出到本機 vault。
+詳見 [docs/ROADMAP.md](docs/ROADMAP.md) 與 [docs/IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md)。
 
-完整設定請看 [docs/CONFIGURATION.md](docs/CONFIGURATION.md)。
+## 安全與隱私
 
-## 文件索引
+- Demo data 是合成且 fixture-based。
+- Secrets 只能放在已忽略的 `.env`，demo mode 完全不需要 secrets。
+- SQLite demo paths 與 generated Vault 皆由 Git 忽略。
+- Reset 僅能操作受管理的 `data/demo/`，且要求明確確認。
+- UI 錯誤頁不會直接傾印完整 proposal payload 或 traceback。
 
-建議先看：
+安全問題請參閱 [.github/SECURITY.md](.github/SECURITY.md)。
 
-- [Architecture](docs/ARCHITECTURE.md)
-- [Configuration](docs/CONFIGURATION.md)
-- [Runbook](docs/RUNBOOK.md)
-- [Roadmap](docs/ROADMAP.md)
-- [Implementation Status](docs/IMPLEMENTATION_STATUS.md)
+## License
 
-支援文件：
+本專案使用 MIT License，詳見 [LICENSE](LICENSE)。
 
-- [Troubleshooting](docs/TROUBLESHOOTING.md)
-- [Release Checklist](docs/RELEASE.md)
-
-完整文件索引在 [docs/README.md](docs/README.md)。
-
-## 目前邊界
-
-Phase 3 的重點是 release readiness：乾淨的 first-run demo、公開文件、CI coverage、sample output、發布安全檢查。
-
-以下項目目前刻意延後，不屬於 Phase 3：
-
-- Native dashboard UI
-- Vector DB / semantic entity linking
-- Semantic interest filtering
-- Finance、cybersecurity、Apple、NVIDIA、startup 等專用 live APIs
-
-## 貢獻
-
-貢獻時請維持 zero-secret fixture demo 和 deterministic fallback path 可用。詳見 [CONTRIBUTING.md](CONTRIBUTING.md)。
-
-## 授權與致謝
-
-Hermes Intelligence Platform 使用 MIT License。詳見 [LICENSE](LICENSE)。
-
-概念設計參考：
-
-- [AI-News-Briefing](https://github.com/hoangsonww/AI-News-Briefing)：multi-model fallback、quality evaluation、Obsidian-oriented brief output。
-- [ArxivDigest](https://github.com/AutoLLM/ArxivDigest)：research-interest filtering、scheduled research digest。
+[English](README.md)

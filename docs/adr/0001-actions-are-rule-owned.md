@@ -10,7 +10,7 @@ Phase 2 improves rationale quality with AI synthesis, but the decision action it
 
 ## Decision
 
-Hermes keeps action selection and action ranking in `DecisionEngine`. AI may generate structured rationale for selected top decisions, but that rationale must pass validation and does not override the action.
+Intelligence Hub keeps action selection and action ranking in `DecisionEngine`. AI may generate structured rationale for selected top decisions, but that rationale must pass validation and does not override the action.
 
 ## Consequences
 

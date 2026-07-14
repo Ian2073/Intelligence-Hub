@@ -1,6 +1,6 @@
 # Runbook
 
-Commands below assume the repository root. The public first-run path is `python -m hermes demo`; `main.py` remains a production orchestration entrypoint.
+Commands below assume the repository root. The public first-run path is the installable `intelligence-hub` CLI; `main.py` and `python -m hermes` remain compatibility entrypoints.
 
 Windows PowerShell virtualenv path:
 
@@ -17,27 +17,27 @@ Windows PowerShell:
 ```powershell
 python -m venv hub_env
 .\hub_env\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python -m hermes demo --date 2026-07-10 --output examples/output/obsidian
+python -m pip install -e .
+.\hub_env\Scripts\intelligence-hub.exe seed-demo
 ```
 
 Linux/macOS shell:
 
 ```bash
-python3 -m venv hub_env
+python3.11 -m venv hub_env
 source hub_env/bin/activate
-pip install -r requirements.txt
-python -m hermes demo --date 2026-07-10 --output examples/output/obsidian
+python -m pip install -e .
+intelligence-hub seed-demo
 ```
 
-`python -m hermes demo` uses fixtures and Markdown/Obsidian output, requires no API key, and writes generated files under `examples/output/`.
+`intelligence-hub seed-demo` uses fixtures, writes the managed demo database under `data/demo/`, and rebuilds the Obsidian Vault without API keys.
 
 ## Local Commands
 
 Install dependencies:
 
 ```powershell
-python -m pip install -r requirements.txt
+python -m pip install -e .
 ```
 
 Run production orchestration directly:
@@ -52,7 +52,7 @@ Run offline smoke validation:
 python scripts/smoke_test.py
 ```
 
-Use the unified Phase 2 CLI:
+Legacy Hermes compatibility commands:
 
 ```powershell
 .\hub_env\Scripts\python.exe -m hermes doctor
@@ -63,7 +63,7 @@ Use the unified Phase 2 CLI:
 .\hub_env\Scripts\python.exe -m hermes run ai_intelligence --date 2026-07-10 --publish-obsidian
 ```
 
-Use `python -m hermes demo` for first-run validation. Use `main.py` only for the production orchestration path.
+Use `intelligence-hub` for public operation. Use legacy commands only for existing automation that has not migrated.
 
 Run local end-to-end acceptance with fixtures and fake publishers:
 
@@ -102,7 +102,7 @@ Check local readiness without calling external APIs:
 
 The demo profile checks only zero-secret demo prerequisites. The default doctor profile also reports optional production integrations as skipped when they are not configured.
 
-Show the current Hermes operating status from local memory and `.env`:
+Show the current Intelligence Hub operating status from local memory and `.env`:
 
 ```powershell
 .\hub_env\Scripts\python.exe scripts\hermes_status.py
@@ -148,9 +148,9 @@ HERMES_SYNTHESIS_MODE=hybrid
 HERMES_PRO_CALL_LIMIT=8
 ```
 
-Use `HERMES_FAST_MODEL` for cheap classification and cleanup work. Use `HERMES_PRO_MODEL` for decision-heavy synthesis such as research briefs, weekly/monthly reports, dashboards, and decision reviews. Production go-live requires these two values to be different so Hermes can control token cost instead of routing every task to the strongest model. Set `HERMES_MODEL_PROVIDER=ollama` only for local fallback or offline experiments.
+Use `HERMES_FAST_MODEL` for cheap classification and cleanup work. Use `HERMES_PRO_MODEL` for decision-heavy synthesis such as research briefs, weekly/monthly reports, dashboards, and decision reviews. These legacy variable names remain supported; production go-live requires the two values to differ so Intelligence Hub can control token cost. Set `HERMES_MODEL_PROVIDER=ollama` only for local fallback or offline experiments.
 
-For migration from older local experiments, Hermes also accepts these legacy cloud variables when the `HERMES_*` values are absent:
+For migration from older local experiments, Intelligence Hub also accepts these legacy cloud variables when the `HERMES_*` values are absent:
 
 ```powershell
 DEEPSEEK_BASE_URL=
@@ -158,7 +158,7 @@ DEEPSEEK_API_KEY=
 API_MODEL_NAME=
 ```
 
-`HERMES_CLOUD_*`, `HERMES_FAST_MODEL`, and `HERMES_PRO_MODEL` always take precedence. If only `API_MODEL_NAME` is set, Hermes uses it for both fast and pro tiers during migration, but `go_live_check.py` will keep failing until you split them.
+`HERMES_CLOUD_*`, `HERMES_FAST_MODEL`, and `HERMES_PRO_MODEL` always take precedence. If only `API_MODEL_NAME` is set, Intelligence Hub uses it for both fast and pro tiers during migration, but `go_live_check.py` will keep failing until you split them.
 
 Daily, weekly, monthly, and dashboard pipelines do not call the model by default. Enable model-assisted executive synthesis explicitly:
 
@@ -172,7 +172,7 @@ Daily, weekly, monthly, and dashboard pipelines do not call the model by default
 
 `-ModelSynthesis` uses the pro tier because it affects the final decision surface. Leave it off for low-cost fixture and connector validation runs. `HERMES_SYNTHESIS_MODE=hybrid` is the default production posture: high-value synthesis can use pro tier up to `HERMES_PRO_CALL_LIMIT`, then the run downgrades to deterministic output.
 
-If the configured model call fails during executive synthesis, Hermes logs the failure and keeps the pipeline moving with the deterministic fallback summary. This protects scheduled runs from transient cloud model failures while preserving the brief record.
+If the configured model call fails during executive synthesis, Intelligence Hub logs the failure and keeps the pipeline moving with the deterministic fallback summary. This protects scheduled runs from transient cloud model failures while preserving the brief record.
 
 Run daily intelligence dry-run with fixture data:
 
@@ -219,7 +219,7 @@ Run daily intelligence with live GitHub after `GITHUB_TOKEN` is added to `.env`:
 
 Public GitHub repositories can be fetched without `GITHUB_TOKEN` for development and live doctor checks, but production go-live still requires `GITHUB_TOKEN` to avoid low anonymous rate limits.
 
-Hermes also accepts `GH_TOKEN` as a fallback if `GITHUB_TOKEN` is absent.
+Intelligence Hub also accepts `GH_TOKEN` as a fallback if `GITHUB_TOKEN` is absent.
 
 Check GitHub token setup and the first configured watchlist repository:
 
@@ -240,7 +240,7 @@ Run daily intelligence with live Papers with Code paper search:
 .\scripts\run_daily_intelligence.ps1 -LivePapersWithCode
 ```
 
-Papers with Code currently redirects to Hugging Face Papers. Hermes handles this by parsing Hugging Face Papers and preserving GitHub repository links when present.
+Papers with Code currently redirects to Hugging Face Papers. The paper connector handles this by parsing Hugging Face Papers and preserving GitHub repository links when present.
 
 Run daily intelligence with live domain RSS sources:
 
@@ -254,7 +254,7 @@ Publish to Notion and send Telegram after the required `.env` values are added:
 .\scripts\run_daily_intelligence.ps1 -LiveGitHub -LivePapers -LiveDomainRss -PublishNotion -SendTelegram
 ```
 
-For Telegram, prefer `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`. Hermes also accepts `TELEGRAM_TOKEN` or `TG_BOT_TOKEN`, and `TG_CHAT_ID`, as migration aliases.
+For Telegram, prefer `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`. Intelligence Hub also accepts `TELEGRAM_TOKEN` or `TG_BOT_TOKEN`, and `TG_CHAT_ID`, as migration aliases.
 
 Configure the remaining go-live credentials without printing secrets:
 
@@ -290,7 +290,7 @@ python scripts/telegram_check.py --send-test --notion-url https://notion.so/herm
 .\scripts\telegram_check.ps1 -SendTest -NotionUrl https://notion.so/hermes-telegram-check
 ```
 
-If Notion publishing succeeded while Telegram was missing or unavailable, Hermes queues the notification in a local outbox. After Telegram credentials are configured, flush pending notifications:
+If Notion publishing succeeded while Telegram was missing or unavailable, Intelligence Hub queues the notification in a local outbox. After Telegram credentials are configured, flush pending notifications:
 
 ```powershell
 python scripts/telegram_flush_outbox.py
@@ -299,7 +299,7 @@ python scripts/telegram_flush_outbox.py
 
 The outbox sends only notifications that already have a real Notion URL. Failed sends remain pending with an incremented attempt count and last error.
 
-Pipeline failure alerts are separate from normal brief notifications. When a production-facing `run_*.py` command crashes after opening memory, Hermes records a failed `runtime_runs` row and sends a Telegram alert when credentials are configured. Alerts are rate-limited per pipeline for one hour to avoid repeated notifications from the same failing scheduled task.
+Pipeline failure alerts are separate from normal brief notifications. When a production-facing `run_*.py` command crashes after opening memory, Intelligence Hub records a failed `runtime_runs` row and sends a Telegram alert when credentials are configured. Alerts are rate-limited per pipeline for one hour to avoid repeated notifications from the same failing scheduled task.
 
 Preview Notion workspace database provisioning payloads:
 
@@ -322,7 +322,7 @@ Create the databases and write the returned ids back to `.env`:
 .\scripts\provision_notion_workspace.ps1 -Apply -UpdateEnv
 ```
 
-This command is safe to rerun. Databases that already have ids in `.env` are reported as `existing`; Hermes only creates the missing databases and writes their returned ids.
+This command is safe to rerun. Databases that already have ids in `.env` are reported as `existing`; Intelligence Hub only creates the missing databases and writes their returned ids.
 
 If you do not use `-UpdateEnv`, copy the created database ids into `.env` manually:
 
@@ -336,7 +336,7 @@ NOTION_RADAR_SNAPSHOTS_DATABASE_ID=
 NOTION_RADAR_ENTITIES_DATABASE_ID=
 ```
 
-When these structured database ids are configured, daily publishing writes the daily brief plus GitHub repository, paper, and ecosystem records. If a structured database id is missing, Hermes reports that specific structured publish path as skipped while still publishing the brief when possible.
+When these structured database ids are configured, daily publishing writes the daily brief plus GitHub repository, paper, and ecosystem records. If a structured database id is missing, Intelligence Hub reports that specific structured publish path as skipped while still publishing the brief when possible.
 
 Build the weekly report from accumulated memory:
 
@@ -409,7 +409,7 @@ Publish the Radar Snapshot to Notion and notify Telegram:
 
 When `NOTION_RADAR_SNAPSHOTS_DATABASE_ID` is configured, Radar Snapshot publishing writes a structured database record. When `NOTION_RADAR_ENTITIES_DATABASE_ID` is configured, the Radar run also writes durable entity records for technologies, companies, repositories, papers, and other tracked entities. When `NOTION_DECISIONS_DATABASE_ID` is configured, the Radar run also writes the current top decisions into the Decisions database.
 
-Export Hermes runtime memory to JSONL and Markdown for backup, review, or versioning:
+Export Intelligence Hub runtime memory to JSONL and Markdown for backup, review, or versioning:
 
 ```powershell
 python scripts/export_memory.py --as-of 2026-07-31
@@ -439,10 +439,10 @@ Logs are written to `logs/hermes-YYYYMMDD-HHMMSS.log`.
 Create a daily Windows scheduled task:
 
 ```powershell
-schtasks /Create /TN "Hermes Intelligence OS" /SC DAILY /ST 08:00 /TR "powershell.exe -NoProfile -ExecutionPolicy Bypass -File %CD%\scripts\run_hermes_orchestration.ps1" /F
+schtasks /Create /TN "Intelligence Hub Daily" /SC DAILY /ST 08:00 /TR "powershell.exe -NoProfile -ExecutionPolicy Bypass -File %CD%\scripts\run_hermes_orchestration.ps1" /F
 ```
 
-Or install Hermes scheduled tasks through the repo script:
+Or install Intelligence Hub scheduled tasks through the repository script:
 
 ```powershell
 .\scripts\install_scheduled_tasks.ps1 -LiveGitHub -LivePapers -LiveDomainRss -PublishNotion -SendTelegram -IncludeWeekly -IncludeMonthly -IncludeDashboard -IncludeRadar
@@ -488,7 +488,7 @@ python scripts/audit_scheduled_tasks.py
 
 The audit compares installed task names, commands, schedule types, and start times against the production schedule plan. For offline review, export `schtasks /Query /FO CSV /V` and pass it through `--from-csv` / `-FromCsv`.
 
-Remove installed Hermes scheduled tasks:
+Remove installed Intelligence Hub scheduled tasks:
 
 ```powershell
 .\scripts\install_scheduled_tasks.ps1 -Action Remove -IncludeWeekly -IncludeMonthly -IncludeDashboard -IncludeRadar -IncludeDecisionReview
@@ -503,7 +503,7 @@ Preview task removal without changing Windows Task Scheduler:
 Create a weekly Windows scheduled task:
 
 ```powershell
-schtasks /Create /TN "Hermes Weekly Intelligence" /SC WEEKLY /D MON /ST 08:15 /TR "powershell.exe -NoProfile -ExecutionPolicy Bypass -File %CD%\scripts\run_weekly_intelligence.ps1" /F
+schtasks /Create /TN "Intelligence Hub Weekly" /SC WEEKLY /D MON /ST 08:15 /TR "powershell.exe -NoProfile -ExecutionPolicy Bypass -File %CD%\scripts\run_weekly_intelligence.ps1" /F
 ```
 
 Linux cron example:
@@ -517,25 +517,25 @@ For fixture dry-runs on any platform, set `HERMES_MEMORY_DB` to an isolated path
 Create a monthly Windows scheduled task:
 
 ```powershell
-schtasks /Create /TN "Hermes Monthly Intelligence" /SC MONTHLY /D 1 /ST 08:30 /TR "powershell.exe -NoProfile -ExecutionPolicy Bypass -File %CD%\scripts\run_monthly_intelligence.ps1" /F
+schtasks /Create /TN "Intelligence Hub Monthly" /SC MONTHLY /D 1 /ST 08:30 /TR "powershell.exe -NoProfile -ExecutionPolicy Bypass -File %CD%\scripts\run_monthly_intelligence.ps1" /F
 ```
 
 Create a daily Executive Dashboard scheduled task:
 
 ```powershell
-schtasks /Create /TN "Hermes Executive Dashboard" /SC DAILY /ST 08:45 /TR "powershell.exe -NoProfile -ExecutionPolicy Bypass -File %CD%\scripts\run_executive_dashboard.ps1" /F
+schtasks /Create /TN "Intelligence Hub Dashboard" /SC DAILY /ST 08:45 /TR "powershell.exe -NoProfile -ExecutionPolicy Bypass -File %CD%\scripts\run_executive_dashboard.ps1" /F
 ```
 
 Run the scheduled task manually:
 
 ```powershell
-schtasks /Run /TN "Hermes Daily Intelligence"
+schtasks /Run /TN "Intelligence Hub Daily"
 ```
 
 Delete the scheduled task:
 
 ```powershell
-schtasks /Delete /TN "Hermes Daily Intelligence" /F
+schtasks /Delete /TN "Intelligence Hub Daily" /F
 ```
 
 Archive and optimize database memory (remove observations and decisions older than specified retention days and vacuum):

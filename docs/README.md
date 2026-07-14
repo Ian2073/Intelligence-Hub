@@ -10,6 +10,7 @@ Start here:
 - `docs/CONFIGURATION.md` for demo and configured mode settings
 - `docs/IMPLEMENTATION_STATUS.md` for implemented capability status
 - `docs/ROADMAP.md` for completed milestones and deferred work
-- `docs/CONTRIBUTING.md` for validation expectations
+- `docs/proposal-trust-layer.md` for an evidence-to-canonical-knowledge walkthrough
+- `CONTRIBUTING.md` for contributor setup and validation expectations
 
 The public release-candidate path is local-first: fixture data, SQLite, FastAPI Dashboard, proposal review, and generated Obsidian Vault.

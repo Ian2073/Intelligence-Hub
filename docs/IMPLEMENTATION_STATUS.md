@@ -6,7 +6,7 @@
 
 - Platform-neutral FastAPI app exposes health, readiness, briefs, insights, entities, events, decisions, proposals, runtime runs, and runtime status.
 - Static local dashboard covers overview, insights, knowledge, proposal review, briefs, and operations without external CDN dependencies.
-- `scripts/intelligence_hub.py` provides platform-neutral demo, seed, daily fixture, serve, status, proposal review, Obsidian export, and safe demo reset commands.
+- The installable `intelligence-hub` CLI provides demo, seed, daily fixture, serve, status, proposal review, Obsidian export, and safe demo reset commands.
 - Zero-secret demo seed writes repeatable data to `data/demo/`, including accepted insights, events, decisions, briefs, proposal review records, runtime metrics, and an Obsidian vault.
 - README and release docs now describe Intelligence Hub as the platform and Hermes as an optional integration / compatibility layer.
 - CI includes pytest, compileall, smoke checks, fixture demo, release demo seed, API health smoke, and first-run validation.
@@ -301,7 +301,7 @@ These adapters have code paths but were not live-called during tests:
 
 Live verification requires valid external credentials and network access.
 
-Papers with Code currently redirects to Hugging Face Papers. The Hermes adapter handles that redirect and was live-verified through `--live-papers-with-code`.
+Papers with Code currently redirects to Hugging Face Papers. The paper connector handles that redirect and was live-verified through `--live-papers-with-code`.
 
 ## Not Yet Implemented
 

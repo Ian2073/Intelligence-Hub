@@ -40,6 +40,17 @@ def test_platform_cli_help_uses_installable_command_name(capsys) -> None:
     assert "export-obsidian" in help_text
 
 
+def test_proposal_trust_walkthrough_uses_real_demo_records() -> None:
+    walkthrough = Path("docs/proposal-trust-layer.md").read_text(encoding="utf-8")
+
+    assert "Unsupported demo claim should be rejected." in walkthrough
+    assert "Local-first AI operations" in walkthrough
+    assert "missing evidence_refs" in walkthrough
+    assert "intelligence-hub proposals --status rejected" in walkthrough
+    assert "POST /api/proposals/{id}/revalidate" in walkthrough
+    assert "not a universal fact-checking system" in walkthrough
+
+
 def test_zero_secret_demo_seed_is_idempotent_and_exports_obsidian(tmp_path: Path) -> None:
     db_path = tmp_path / "demo.sqlite"
     vault_path = tmp_path / "vault"

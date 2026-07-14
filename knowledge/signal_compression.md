@@ -1,6 +1,6 @@
 # Signal Compression
 
-Signal Compression is the core behavior of HIP.
+Signal Compression is a core Intelligence Hub behavior.
 
 The platform may process:
 
@@ -53,4 +53,4 @@ Confidence: 72%, because adoption is visible but still early.
 
 ## Rule
 
-If Hermes cannot explain why an item matters or what action it supports, the item should usually be ignored or watched rather than promoted.
+If the platform cannot explain why an item matters or what action it supports, the item should usually be ignored or watched rather than promoted.

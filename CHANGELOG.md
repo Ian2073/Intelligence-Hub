@@ -1,8 +1,18 @@
 # Changelog
 
-## v0.1.0 - 2026-07-12
+## v0.1.0-rc.3 - 2026-07-14
 
-Initial public release readiness for Hermes Intelligence Platform.
+### Changed
+
+- Unified public product identity under Intelligence Hub.
+- Added the installable `intelligence-hub` CLI and aligned package/API versions.
+- Removed internal plans and duplicate contributor documentation from the public repository.
+- Added progressive ruff validation and expanded release hygiene checks.
+- Added a reproducible Proposal Trust Layer walkthrough and real Dashboard evidence.
+
+## v0.1.0-rc.1 - 2026-07-12
+
+Initial public release readiness for Intelligence Hub.
 
 ### Added
 
@@ -17,7 +27,7 @@ Initial public release readiness for Hermes Intelligence Platform.
 
 ### Deferred
 
-- Native dashboard UI.
+- Hosted multi-user dashboard deployment.
 - Vector DB and semantic entity linking.
 - Semantic interest filtering from `HERMES_INTEREST_PROFILE` / `HERMES_RELEVANCE_THRESHOLD`.
 - Specialized live APIs for Finance, Cybersecurity, Apple, NVIDIA, and Startup intelligence.

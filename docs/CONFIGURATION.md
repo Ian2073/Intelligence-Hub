@@ -8,8 +8,8 @@ Demo mode requires no API keys and no external services.
 
 ```powershell
 Copy-Item .env.example .env
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py seed-demo
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py serve --seed-demo
+.\hub_env\Scripts\intelligence-hub.exe seed-demo
+.\hub_env\Scripts\intelligence-hub.exe serve --seed-demo
 ```
 
 Default demo paths:

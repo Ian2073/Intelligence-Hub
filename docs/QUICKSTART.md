@@ -1,30 +1,30 @@
 # Quickstart
 
-## Zero-Secret Demo
+Supported version: **Python 3.11**.
 
-Supported Python version: **Python 3.11**. This is the version exercised by CI.
+## Windows PowerShell
 
 ```powershell
 python -m venv hub_env
-.\hub_env\Scripts\python.exe -m pip install -r requirements.txt
+.\hub_env\Scripts\python.exe -m pip install -e .
 Copy-Item .env.example .env
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py seed-demo
-.\hub_env\Scripts\python.exe scripts\intelligence_hub.py serve --seed-demo
+.\hub_env\Scripts\intelligence-hub.exe seed-demo
+.\hub_env\Scripts\intelligence-hub.exe serve --seed-demo
 ```
 
-Open:
+## Linux/macOS
 
-- Dashboard: `http://127.0.0.1:8000/`
-- OpenAPI docs: `http://127.0.0.1:8000/docs`
-- Obsidian vault: `data/demo/obsidian_vault/`
-
-## Compatibility Demo
-
-Legacy Hermes entrypoints remain available:
-
-```powershell
-.\hub_env\Scripts\python.exe -m hermes demo --date 2026-07-10 --output examples/output/obsidian
-.\hub_env\Scripts\python.exe -m hermes status
+```bash
+python3.11 -m venv hub_env
+source hub_env/bin/activate
+python -m pip install -e .
+cp .env.example .env
+intelligence-hub seed-demo
+intelligence-hub serve --seed-demo
 ```
 
-Hermes is an optional integration and compatibility layer, not the platform runtime owner.
+Open the Dashboard at <http://127.0.0.1:8000/>, OpenAPI at <http://127.0.0.1:8000/docs>, and the generated Vault at `data/demo/obsidian_vault/`.
+
+## Compatibility
+
+`scripts/intelligence_hub.py` calls the same platform CLI implementation. Legacy `python -m hermes` commands remain available for existing automation, but Hermes is not the platform runtime owner.
