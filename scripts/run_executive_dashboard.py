@@ -21,7 +21,7 @@ from core.model_router import ModelRouter
 
 def parse_args() -> argparse.Namespace:
     today = date.today()
-    parser = argparse.ArgumentParser(description="Build Hermes executive dashboard from memory.")
+    parser = argparse.ArgumentParser(description="Build the Intelligence Hub executive dashboard from memory.")
     parser.add_argument("--as-of", default=today.isoformat(), help="Dashboard date in YYYY-MM-DD format.")
     parser.add_argument(
         "--window-start",

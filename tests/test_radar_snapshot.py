@@ -89,7 +89,7 @@ def test_build_radar_snapshot_uses_memory_entities_and_decisions(tmp_path) -> No
 
         snapshot = build_radar_snapshot(store, as_of="2026-07-09", since="2026-07-01")
 
-        assert snapshot.title == "Hermes Radar Snapshot - 2026-07-09"
+        assert snapshot.title == "Intelligence Hub Radar Snapshot - 2026-07-09"
         assert snapshot.entries[0].name == "All-Hands-AI/OpenHands"
         assert snapshot.entries[0].recent_metrics == ("stars: 24000 -> 25500",)
         assert snapshot.top_actions[0].startswith("Prototype: All-Hands-AI/OpenHands")

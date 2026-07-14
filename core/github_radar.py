@@ -372,7 +372,7 @@ def _is_major_release(value: str) -> bool:
 
 def _expected_payoff(action: str) -> str:
     if action == "Prototype":
-        return "Validate whether the repository contains implementation patterns Hermes should adopt or track closely."
+        return "Validate whether the repository contains implementation patterns Intelligence Hub should adopt or track closely."
     if action == "Read":
         return "Understand the repository direction before deciding whether to prototype."
     if action == "Watch":

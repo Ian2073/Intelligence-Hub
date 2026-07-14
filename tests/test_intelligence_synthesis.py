@@ -26,7 +26,7 @@ def test_synthesize_daily_summary_uses_pro_tier_when_router_is_provided() -> Non
     router = FakeRouter()
 
     summary = synthesize_daily_summary(
-        title="Hermes Daily Intelligence - 2026-07-02",
+        title="Intelligence Hub Daily Brief - 2026-07-02",
         fallback_summary="Fallback summary.",
         decisions=("Prototype: Important signal.",),
         router=router,
@@ -78,7 +78,7 @@ def test_synthesize_period_and_dashboard_use_pro_tier() -> None:
 
 def test_synthesize_daily_summary_falls_back_when_router_fails(caplog) -> None:
     summary = synthesize_daily_summary(
-        title="Hermes Daily Intelligence - 2026-07-09",
+        title="Intelligence Hub Daily Brief - 2026-07-09",
         fallback_summary="Fallback summary.",
         decisions=("Prototype: Important signal.",),
         router=FailingRouter(),

@@ -22,7 +22,7 @@ from core.weekly_pipeline import run_weekly_pipeline
 def parse_args() -> argparse.Namespace:
     default_end = date.today()
     default_start = default_end - timedelta(days=6)
-    parser = argparse.ArgumentParser(description="Build Hermes weekly intelligence report from memory.")
+    parser = argparse.ArgumentParser(description="Build the Intelligence Hub weekly intelligence report from memory.")
     parser.add_argument("--start", default=default_start.isoformat(), help="Period start in YYYY-MM-DD format.")
     parser.add_argument("--end", default=default_end.isoformat(), help="Period end in YYYY-MM-DD format.")
     parser.add_argument("--publish-notion", action="store_true", help="Publish structured weekly brief to Notion.")

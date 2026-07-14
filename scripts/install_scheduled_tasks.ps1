@@ -144,7 +144,7 @@ if ($ModelSynthesis) { $synthesisPublishFlags += "-ModelSynthesis" }
 
 $tasks = @(
     @{
-        Name = "Hermes Intelligence OS Daily"
+        Name = "Intelligence Hub Daily"
         Schedule = "DAILY"
         Time = $DailyTime
         Command = New-TaskCommand -ScriptPath $OrchestrationScript -Flags ($liveFlags + @("-NoDashboard"))
@@ -154,7 +154,7 @@ $tasks = @(
 
 if ($IncludeWeekly) {
     $tasks += @{
-        Name = "Hermes Intelligence OS Weekly"
+        Name = "Intelligence Hub Weekly"
         Schedule = "WEEKLY"
         Time = $WeeklyTime
         Command = New-TaskCommand -ScriptPath $WeeklyScript -Flags $synthesisPublishFlags
@@ -164,7 +164,7 @@ if ($IncludeWeekly) {
 
 if ($IncludeMonthly) {
     $tasks += @{
-        Name = "Hermes Intelligence OS Monthly"
+        Name = "Intelligence Hub Monthly"
         Schedule = "MONTHLY"
         Time = $MonthlyTime
         Command = New-TaskCommand -ScriptPath $MonthlyScript -Flags $synthesisPublishFlags
@@ -174,7 +174,7 @@ if ($IncludeMonthly) {
 
 if ($IncludeDashboard) {
     $tasks += @{
-        Name = "Hermes Intelligence OS Dashboard"
+        Name = "Intelligence Hub Dashboard"
         Schedule = "DAILY"
         Time = $DashboardTime
         Command = New-TaskCommand -ScriptPath $DashboardScript -Flags $synthesisPublishFlags
@@ -184,7 +184,7 @@ if ($IncludeDashboard) {
 
 if ($IncludeRadar) {
     $tasks += @{
-        Name = "Hermes Intelligence OS Radar"
+        Name = "Intelligence Hub Radar"
         Schedule = "DAILY"
         Time = $RadarTime
         Command = New-TaskCommand -ScriptPath $RadarScript -Flags $publishFlags
@@ -194,7 +194,7 @@ if ($IncludeRadar) {
 
 if ($IncludeDecisionReview) {
     $tasks += @{
-        Name = "Hermes Intelligence OS Decision Review"
+        Name = "Intelligence Hub Decision Review"
         Schedule = "WEEKLY"
         Time = $DecisionReviewTime
         Command = New-TaskCommand -ScriptPath $DecisionReviewScript -Flags $publishFlags

@@ -6,9 +6,9 @@ from workflows.executive_dashboard import build_executive_dashboard
 
 def _seed_dashboard_memory(store: MemoryStore) -> None:
     for brief_type, title, end in (
-        ("daily", "Hermes Daily Intelligence - 2026-07-08", "2026-07-08"),
-        ("weekly", "Hermes Weekly Intelligence - 2026-07-01 to 2026-07-07", "2026-07-07"),
-        ("monthly", "Hermes Monthly Intelligence - 2026-07-01 to 2026-07-31", "2026-07-31"),
+        ("daily", "Intelligence Hub Daily Brief - 2026-07-08", "2026-07-08"),
+        ("weekly", "Intelligence Hub Weekly Brief - 2026-07-01 to 2026-07-07", "2026-07-07"),
+        ("monthly", "Intelligence Hub Monthly Brief - 2026-07-01 to 2026-07-31", "2026-07-31"),
     ):
         store.record_brief(
             brief_type=brief_type,
@@ -36,7 +36,7 @@ def test_build_executive_dashboard_uses_latest_briefs_and_deduplicates_actions(t
             window_start="2026-07-01",
         )
 
-        assert dashboard.title == "Hermes Executive Dashboard - 2026-07-31"
+        assert dashboard.title == "Intelligence Hub Executive Dashboard - 2026-07-31"
         assert len(dashboard.latest_items) == 3
         assert [item.label for item in dashboard.latest_items] == ["Daily", "Weekly", "Monthly"]
         assert dashboard.top_actions == (
@@ -60,7 +60,7 @@ def test_build_executive_dashboard_prefers_published_brief_for_same_period(tmp_p
             domain="AI Intelligence",
             period_start="2026-07-08",
             period_end="2026-07-08",
-            title="Hermes Daily Intelligence - dry run",
+            title="Intelligence Hub Daily Brief - dry run",
             executive_summary="Dry run summary.",
             top_actions=("Watch: dry run action.",),
             notion_status="dry-run",
@@ -73,7 +73,7 @@ def test_build_executive_dashboard_prefers_published_brief_for_same_period(tmp_p
             domain="AI Intelligence",
             period_start="2026-07-08",
             period_end="2026-07-08",
-            title="Hermes Daily Intelligence - published",
+            title="Intelligence Hub Daily Brief - published",
             executive_summary="Published summary.",
             top_actions=("Prototype: published action.",),
             notion_status="published",
@@ -88,7 +88,7 @@ def test_build_executive_dashboard_prefers_published_brief_for_same_period(tmp_p
             window_start="2026-07-01",
         )
 
-        assert dashboard.latest_items[0].title == "Hermes Daily Intelligence - published"
+        assert dashboard.latest_items[0].title == "Intelligence Hub Daily Brief - published"
         assert dashboard.latest_items[0].status == "Notion=published, Telegram=dry-run"
         assert dashboard.top_actions == ("Prototype: published action.",)
     finally:

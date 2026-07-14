@@ -53,13 +53,13 @@ def run_daily_intelligence(
     decisions = unique_actions(tuple(result.brief_line for result in top_results), limit=7)
     top_action = _top_action(top_results)
     notification = TelegramNotification(
-        title=f"Intelligence Hub Daily Intelligence - {run_date}",
+        title=f"Intelligence Hub Daily Brief - {run_date}",
         decisions=decisions,
         top_action=top_action,
         notion_url=notion_url,
     )
     return DailyIntelligenceRun(
-        title=f"Intelligence Hub Daily Intelligence - {run_date}",
+        title=f"Intelligence Hub Daily Brief - {run_date}",
         repository_results=repository_results,
         paper_results=paper_results,
         domain_results=domain_results,

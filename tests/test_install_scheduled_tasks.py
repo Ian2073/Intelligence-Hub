@@ -35,5 +35,5 @@ def test_install_scheduled_tasks_dry_run_uses_custom_radar_time() -> None:
     )
 
     assert result.returncode == 0
-    assert "Hermes Intelligence OS Radar" in result.stdout
+    assert "Intelligence Hub Radar" in result.stdout
     assert "/ST 09:10" in result.stdout

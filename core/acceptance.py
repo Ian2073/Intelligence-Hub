@@ -153,7 +153,7 @@ def run_acceptance_check(settings: Settings, *, run_date: str = "2026-07-02") ->
 
 
 def render_acceptance_report(report: AcceptanceReport) -> str:
-    lines = ["# Hermes Acceptance Check", ""]
+    lines = ["# Intelligence Hub Acceptance Check", ""]
     lines.append(f"Result: {'passed' if report.ok else 'failed'}")
     lines.append(
         f"Memory: {report.entity_count} entities, {report.observation_count} observations, "

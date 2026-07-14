@@ -67,9 +67,9 @@ def test_send_pipeline_alert_sends_telegram_and_records_failed_run(tmp_path) -> 
         assert result.telegram.status == "sent"
         assert result.run.status == "failed"
         assert result.run.telegram_status == "sent"
-        assert telegram.notifications[0].title.startswith("Hermes Alert: daily failed at")
+        assert telegram.notifications[0].title.startswith("Intelligence Hub Alert: daily failed at")
         assert telegram.notifications[0].decisions == ("RuntimeError: fixture blew up",)
-        assert store.list_runs(stage="daily")[0].title == "Hermes Alert: daily failed"
+        assert store.list_runs(stage="daily")[0].title == "Intelligence Hub Alert: daily failed"
     finally:
         store.close()
 

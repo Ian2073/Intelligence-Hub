@@ -48,7 +48,7 @@ def send_pipeline_alert(
     run = store.record_run(
         run_date=occurred.date().isoformat(),
         stage=pipeline,
-        title=f"Hermes Alert: {pipeline} failed",
+        title=f"Intelligence Hub Alert: {pipeline} failed",
         period_start=occurred.date().isoformat(),
         period_end=occurred.date().isoformat(),
         status="failed",
@@ -69,7 +69,7 @@ def _send_alert(
     occurred_at: datetime,
 ) -> DeliveryStatus:
     notification = TelegramNotification(
-        title=f"Hermes Alert: {pipeline} failed at {occurred_at.isoformat()}",
+        title=f"Intelligence Hub Alert: {pipeline} failed at {occurred_at.isoformat()}",
         decisions=(error_summary,),
         top_action="Investigate",
         notion_url="local://hermes/pipeline-alert",

@@ -27,7 +27,7 @@ from core.scheduled_task_audit import (
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run the Hermes Intelligence OS final readiness audit.")
+    parser = argparse.ArgumentParser(description="Run the Intelligence Hub final readiness audit.")
     parser.add_argument("--as-of", default=date.today().isoformat(), help="Only consider runtime briefs at or before this date.")
     parser.add_argument("--include-future", action="store_true", help="Include runtime briefs dated after --as-of.")
     parser.add_argument("--live", action="store_true", help="Include read-only live API checks in the go-live gate.")

@@ -33,7 +33,7 @@ def test_parse_schtasks_csv_and_audit_matching_production_plan() -> None:
     assert report.ok is True
     assert report.failures == ()
     assert "Result: passed" in rendered
-    assert "Hermes Intelligence OS Radar: OK" in rendered
+    assert "Intelligence Hub Radar: OK" in rendered
 
 
 def test_audit_scheduled_tasks_reports_missing_command_and_time_mismatch() -> None:
@@ -51,12 +51,12 @@ def test_audit_scheduled_tasks_reports_missing_command_and_time_mismatch() -> No
         (
             '"TaskName","Task To Run","Schedule Type","Start Time"',
             (
-                '"\\Hermes Intelligence OS Daily",'
+                '"\\Intelligence Hub Daily",'
                 f'"{_task_command("run_hermes_orchestration.ps1", "-NoDashboard")}",'
                 '"Daily","08:00"'
             ),
             (
-                '"\\Hermes Intelligence OS Radar",'
+                '"\\Intelligence Hub Radar",'
                 f'"{_task_command("run_radar_snapshot.ps1", "-PublishNotion -SendTelegram")}",'
                 '"Daily","09:10"'
             ),
@@ -67,9 +67,9 @@ def test_audit_scheduled_tasks_reports_missing_command_and_time_mismatch() -> No
     failures = {item.name: item.detail for item in report.failures}
 
     assert report.ok is False
-    assert "command mismatch" in failures["Hermes Intelligence OS Daily"]
-    assert failures["Hermes Intelligence OS Weekly"] == "Task is not installed."
-    assert "start time mismatch" in failures["Hermes Intelligence OS Radar"]
+    assert "command mismatch" in failures["Intelligence Hub Daily"]
+    assert failures["Intelligence Hub Weekly"] == "Task is not installed."
+    assert "start time mismatch" in failures["Intelligence Hub Radar"]
 
 
 def test_audit_scheduled_tasks_cli_accepts_csv_fixture(tmp_path) -> None:

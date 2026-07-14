@@ -19,7 +19,7 @@ from core.radar_pipeline import run_radar_pipeline
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build Hermes Radar Snapshot from memory.")
+    parser = argparse.ArgumentParser(description="Build the Intelligence Hub Radar Snapshot from memory.")
     parser.add_argument("--as-of", default=date.today().isoformat(), help="Snapshot date in YYYY-MM-DD format.")
     parser.add_argument("--since", help="Optional lower bound for observations and decisions.")
     parser.add_argument("--publish-notion", action="store_true", help="Publish Radar Snapshot to Notion.")

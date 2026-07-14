@@ -68,7 +68,7 @@ def test_build_weekly_report_turns_daily_results_into_trends(tmp_path) -> None:
             paper_results=(paper_result,),
         )
 
-        assert report.title == "Hermes Weekly Intelligence - 2026-07-01 to 2026-07-07"
+        assert report.title == "Intelligence Hub Weekly Brief - 2026-07-01 to 2026-07-07"
         assert "Open-source AI engineering" in [trend.name for trend in report.trends]
         assert report.trends[0].direction == "Up"
         assert report.top_actions[0].startswith("Prototype:")
@@ -100,7 +100,7 @@ def test_build_weekly_report_from_memory_uses_daily_briefs_and_observations(tmp_
             domain="AI Intelligence",
             period_start="2026-07-02",
             period_end="2026-07-02",
-            title="Hermes Daily Intelligence - 2026-07-02",
+            title="Intelligence Hub Daily Brief - 2026-07-02",
             executive_summary="Open-source AI engineering moved.",
             top_actions=("Prototype: OpenHands has strong momentum.",),
             notion_status="dry-run",

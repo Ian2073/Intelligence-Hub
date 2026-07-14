@@ -48,7 +48,7 @@ def build_executive_dashboard(
         + f" Operational health: {operational_health[0].removeprefix('Pipeline runs: ')}"
     )
     return ExecutiveDashboard(
-        title=f"Hermes Executive Dashboard - {as_of}",
+        title=f"Intelligence Hub Executive Dashboard - {as_of}",
         executive_summary=executive_summary,
         latest_items=latest_items,
         top_actions=top_actions,

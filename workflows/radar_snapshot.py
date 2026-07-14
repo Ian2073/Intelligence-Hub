@@ -57,7 +57,7 @@ def build_radar_snapshot(
         f"最高優先行動是 {top_actions[0] if top_actions else 'Watch: 維持觀察'}。"
     )
     return RadarSnapshot(
-        title=f"Hermes Radar Snapshot - {as_of}",
+        title=f"Intelligence Hub Radar Snapshot - {as_of}",
         executive_summary=summary,
         entries=entries,
         top_actions=top_actions,

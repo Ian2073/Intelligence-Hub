@@ -14,7 +14,7 @@ from core.doctor import DoctorCheck, run_go_live_check
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Check Hermes Intelligence OS production go-live readiness.")
+    parser = argparse.ArgumentParser(description="Check Intelligence Hub production go-live readiness.")
     parser.add_argument("--live", action="store_true", help="Verify external APIs in addition to required configuration.")
     return parser.parse_args()
 
@@ -32,9 +32,9 @@ def main() -> int:
     for check in report.checks:
         print(_format_check(check))
     if report.ok:
-        print("Hermes go-live check passed.")
+        print("Intelligence Hub go-live check passed.")
         return 0
-    print(f"Hermes go-live check found {len(report.failures)} failed check(s).")
+    print(f"Intelligence Hub go-live check found {len(report.failures)} failed check(s).")
     return 1
 
 

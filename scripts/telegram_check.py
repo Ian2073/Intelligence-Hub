@@ -14,7 +14,7 @@ from core.config import load_settings
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Check Hermes Telegram notification setup.")
+    parser = argparse.ArgumentParser(description="Check Intelligence Hub Telegram notification setup.")
     parser.add_argument("--send-test", action="store_true", help="Send a real Telegram test notification.")
     parser.add_argument(
         "--notion-url",
@@ -63,7 +63,7 @@ def main() -> int:
     try:
         result = client.send_notification(
             TelegramNotification(
-                title="Hermes Telegram Check",
+                title="Intelligence Hub Telegram Check",
                 decisions=("Watch: Telegram delivery is configured.",),
                 top_action="Watch",
                 notion_url=args.notion_url,

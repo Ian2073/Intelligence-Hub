@@ -80,7 +80,7 @@ ENV_SECRET_RE = re.compile(
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Scan publishable Hermes files for likely secrets.")
+    parser = argparse.ArgumentParser(description="Scan tracked Intelligence Hub release files for likely secrets.")
     parser.add_argument(
         "--verbose",
         action="store_true",

@@ -16,7 +16,7 @@ from core.notification_outbox import flush_pending_notifications
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Send pending Hermes Telegram notifications from the local outbox.")
+    parser = argparse.ArgumentParser(description="Send pending Intelligence Hub Telegram notifications from the local outbox.")
     parser.add_argument("--limit", type=int, help="Maximum pending notifications to send.")
     return parser.parse_args()
 

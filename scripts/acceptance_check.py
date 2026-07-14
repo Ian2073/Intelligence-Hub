@@ -14,7 +14,7 @@ from core.config import load_settings
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run Hermes local end-to-end acceptance check with fixtures.")
+    parser = argparse.ArgumentParser(description="Run the Intelligence Hub local end-to-end acceptance check with fixtures.")
     parser.add_argument("--date", default="2026-07-02", help="Fixture acceptance run date in YYYY-MM-DD format.")
     return parser.parse_args()
 

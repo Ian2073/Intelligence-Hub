@@ -111,7 +111,7 @@ def _summary_prompt(
     period: str,
 ) -> str:
     decision_lines = "\n".join(f"- {line}" for line in decisions[:10])
-    return f"""You are Hermes Intelligence OS.
+    return f"""You are the Intelligence Hub synthesis engine.
 
 Task: write one concise executive summary for {period}.
 

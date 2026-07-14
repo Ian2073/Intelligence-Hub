@@ -24,7 +24,7 @@ def parse_args() -> argparse.Namespace:
     today = date.today()
     default_start = today.replace(day=1)
     default_end = today.replace(day=calendar.monthrange(today.year, today.month)[1])
-    parser = argparse.ArgumentParser(description="Build Hermes monthly intelligence report from memory.")
+    parser = argparse.ArgumentParser(description="Build the Intelligence Hub monthly intelligence report from memory.")
     parser.add_argument("--start", default=default_start.isoformat(), help="Period start in YYYY-MM-DD format.")
     parser.add_argument("--end", default=default_end.isoformat(), help="Period end in YYYY-MM-DD format.")
     parser.add_argument("--publish-notion", action="store_true", help="Publish structured monthly brief to Notion.")

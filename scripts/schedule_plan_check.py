@@ -13,7 +13,7 @@ from core.schedule_plan import build_schedule_plan, render_schedule_plan, valida
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Preview and validate Hermes Windows scheduled task plan.")
+    parser = argparse.ArgumentParser(description="Preview and validate the Intelligence Hub Windows scheduled task plan.")
     parser.add_argument("--validate-production", action="store_true", help="Require full production schedule coverage.")
     parser.add_argument("--minimal", action="store_true", help="Preview only the default daily dry-run task.")
     return parser.parse_args()
@@ -50,10 +50,10 @@ def main() -> int:
     failures = validate_production_schedule(plan)
     if not failures:
         print("")
-        print("Hermes production schedule plan passed.")
+        print("Intelligence Hub production schedule plan passed.")
         return 0
     print("")
-    print(f"Hermes production schedule plan failed with {len(failures)} issue(s):")
+    print(f"Intelligence Hub production schedule plan failed with {len(failures)} issue(s):")
     for failure in failures:
         print(f"- {failure}")
     return 1

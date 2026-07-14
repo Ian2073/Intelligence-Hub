@@ -15,7 +15,7 @@ from core.scheduled_task_audit import audit_scheduled_tasks, parse_schtasks_csv,
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Audit installed Hermes Windows scheduled tasks.")
+    parser = argparse.ArgumentParser(description="Audit installed Intelligence Hub Windows scheduled tasks.")
     parser.add_argument("--from-csv", help="Read schtasks CSV output from a file instead of calling schtasks.exe.")
     parser.add_argument("--minimal", action="store_true", help="Audit only the default daily dry-run task.")
     return parser.parse_args()
@@ -49,14 +49,14 @@ def main() -> int:
     try:
         csv_text = Path(args.from_csv).read_text(encoding="utf-8-sig") if args.from_csv else _query_schtasks()
     except OSError as exc:
-        print("# Hermes Scheduled Task Audit")
+        print("# Intelligence Hub Scheduled Task Audit")
         print("")
         print("Result: failed")
         print("")
         print(f"Could not read scheduled task data: {exc}")
         return 1
     except RuntimeError as exc:
-        print("# Hermes Scheduled Task Audit")
+        print("# Intelligence Hub Scheduled Task Audit")
         print("")
         print("Result: failed")
         print("")

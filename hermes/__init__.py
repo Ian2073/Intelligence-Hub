@@ -1,2 +1,2 @@
-"""Hermes Intelligence Platform runtime package."""
+"""Legacy Hermes compatibility package for Intelligence Hub."""
 

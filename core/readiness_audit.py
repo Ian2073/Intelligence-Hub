@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from core.acceptance import AcceptanceReport
 from core.doctor import DoctorReport
-from core.operational_status import BRIEF_TYPES, HermesOperationalStatus, LatestBriefStatus
+from core.operational_status import BRIEF_TYPES, LatestBriefStatus, OperationalStatus
 from core.scheduled_task_audit import ScheduledTaskAuditReport
 
 
@@ -31,7 +31,7 @@ class ReadinessAuditReport:
 def build_readiness_audit(
     *,
     as_of: str,
-    operational_status: HermesOperationalStatus,
+    operational_status: OperationalStatus,
     acceptance_report: AcceptanceReport | None,
     go_live_report: DoctorReport,
     schedule_failures: tuple[str, ...],
@@ -58,7 +58,7 @@ def build_readiness_audit(
 
 
 def render_readiness_audit(report: ReadinessAuditReport) -> str:
-    lines = ["# Hermes Readiness Audit", ""]
+    lines = ["# Intelligence Hub Readiness Audit", ""]
     lines.append(f"As of: {report.as_of}")
     lines.append(f"Result: {'ready' if report.ready else 'not ready'}")
     lines.append("")
@@ -96,7 +96,7 @@ def render_readiness_audit(report: ReadinessAuditReport) -> str:
     return "\n".join(lines)
 
 
-def _memory_requirement(status: HermesOperationalStatus) -> ReadinessRequirement:
+def _memory_requirement(status: OperationalStatus) -> ReadinessRequirement:
     missing = []
     if status.entity_count <= 0:
         missing.append("entities")
@@ -113,7 +113,7 @@ def _memory_requirement(status: HermesOperationalStatus) -> ReadinessRequirement
     )
 
 
-def _latest_briefs_requirement(status: HermesOperationalStatus) -> ReadinessRequirement:
+def _latest_briefs_requirement(status: OperationalStatus) -> ReadinessRequirement:
     by_type = {brief.brief_type: brief for brief in status.latest_briefs}
     missing = [brief_type for brief_type in BRIEF_TYPES if brief_type not in by_type]
     unpublished = [
@@ -178,7 +178,7 @@ def _go_live_requirement(report: DoctorReport) -> ReadinessRequirement:
     return ReadinessRequirement("Go-live gate", "ok", "Required production configuration passed.")
 
 
-def _pending_notifications_requirement(status: HermesOperationalStatus) -> ReadinessRequirement:
+def _pending_notifications_requirement(status: OperationalStatus) -> ReadinessRequirement:
     if status.pending_notification_count:
         return ReadinessRequirement(
             "Telegram outbox",
@@ -188,13 +188,13 @@ def _pending_notifications_requirement(status: HermesOperationalStatus) -> Readi
     return ReadinessRequirement("Telegram outbox", "ok", "No pending notifications.")
 
 
-def _github_credentials_requirement(status: HermesOperationalStatus) -> ReadinessRequirement:
+def _github_credentials_requirement(status: OperationalStatus) -> ReadinessRequirement:
     if any(gap.name == "GITHUB_TOKEN" for gap in status.credential_gaps):
         return ReadinessRequirement("GitHub credentials", "failed", "GITHUB_TOKEN is missing.")
     return ReadinessRequirement("GitHub credentials", "ok", "GitHub token is configured.")
 
 
-def _telegram_credentials_requirement(status: HermesOperationalStatus) -> ReadinessRequirement:
+def _telegram_credentials_requirement(status: OperationalStatus) -> ReadinessRequirement:
     missing = [gap.name for gap in status.credential_gaps if gap.name.startswith("TELEGRAM_")]
     if missing:
         return ReadinessRequirement("Telegram credentials", "failed", f"Missing {', '.join(missing)}.")

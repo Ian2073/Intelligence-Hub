@@ -66,7 +66,7 @@ def build_schedule_plan(
 
     tasks: list[ScheduledTaskSpec] = [
         ScheduledTaskSpec(
-            name="Hermes Intelligence OS Daily",
+            name="Intelligence Hub Daily",
             schedule="DAILY",
             time=daily_time,
             script="scripts/run_hermes_orchestration.ps1",
@@ -76,7 +76,7 @@ def build_schedule_plan(
     if include_weekly:
         tasks.append(
             ScheduledTaskSpec(
-                name="Hermes Intelligence OS Weekly",
+                name="Intelligence Hub Weekly",
                 schedule="WEEKLY",
                 time=weekly_time,
                 script="scripts/run_weekly_intelligence.ps1",
@@ -87,7 +87,7 @@ def build_schedule_plan(
     if include_monthly:
         tasks.append(
             ScheduledTaskSpec(
-                name="Hermes Intelligence OS Monthly",
+                name="Intelligence Hub Monthly",
                 schedule="MONTHLY",
                 time=monthly_time,
                 script="scripts/run_monthly_intelligence.ps1",
@@ -98,7 +98,7 @@ def build_schedule_plan(
     if include_dashboard:
         tasks.append(
             ScheduledTaskSpec(
-                name="Hermes Intelligence OS Dashboard",
+                name="Intelligence Hub Dashboard",
                 schedule="DAILY",
                 time=dashboard_time,
                 script="scripts/run_executive_dashboard.ps1",
@@ -108,7 +108,7 @@ def build_schedule_plan(
     if include_radar:
         tasks.append(
             ScheduledTaskSpec(
-                name="Hermes Intelligence OS Radar",
+                name="Intelligence Hub Radar",
                 schedule="DAILY",
                 time=radar_time,
                 script="scripts/run_radar_snapshot.ps1",
@@ -118,7 +118,7 @@ def build_schedule_plan(
     if include_decision_review:
         tasks.append(
             ScheduledTaskSpec(
-                name="Hermes Intelligence OS Decision Review",
+                name="Intelligence Hub Decision Review",
                 schedule="WEEKLY",
                 time=decision_review_time,
                 script="scripts/run_decision_review.ps1",
@@ -133,18 +133,18 @@ def validate_production_schedule(plan: SchedulePlan) -> tuple[str, ...]:
     failures: list[str] = []
     by_name = {task.name: task for task in plan.tasks}
     required = (
-        "Hermes Intelligence OS Daily",
-        "Hermes Intelligence OS Weekly",
-        "Hermes Intelligence OS Monthly",
-        "Hermes Intelligence OS Dashboard",
-        "Hermes Intelligence OS Radar",
-        "Hermes Intelligence OS Decision Review",
+        "Intelligence Hub Daily",
+        "Intelligence Hub Weekly",
+        "Intelligence Hub Monthly",
+        "Intelligence Hub Dashboard",
+        "Intelligence Hub Radar",
+        "Intelligence Hub Decision Review",
     )
     for name in required:
         if name not in by_name:
             failures.append(f"Missing task: {name}")
 
-    daily = by_name.get("Hermes Intelligence OS Daily")
+    daily = by_name.get("Intelligence Hub Daily")
     if daily is not None:
         for flag in ("-LiveGitHub", "-LivePapersWithCode", "-LiveDomainRss", "-PublishNotion", "-SendTelegram", "-ModelSynthesis"):
             if flag not in daily.flags:
@@ -152,7 +152,7 @@ def validate_production_schedule(plan: SchedulePlan) -> tuple[str, ...]:
         if "-NoDashboard" not in daily.flags:
             failures.append("Daily task must include -NoDashboard when dashboard is scheduled separately.")
 
-    for name in ("Hermes Intelligence OS Weekly", "Hermes Intelligence OS Monthly", "Hermes Intelligence OS Dashboard"):
+    for name in ("Intelligence Hub Weekly", "Intelligence Hub Monthly", "Intelligence Hub Dashboard"):
         task = by_name.get(name)
         if task is None:
             continue
@@ -160,7 +160,7 @@ def validate_production_schedule(plan: SchedulePlan) -> tuple[str, ...]:
             if flag not in task.flags:
                 failures.append(f"{name} missing {flag}.")
 
-    for name in ("Hermes Intelligence OS Radar", "Hermes Intelligence OS Decision Review"):
+    for name in ("Intelligence Hub Radar", "Intelligence Hub Decision Review"):
         task = by_name.get(name)
         if task is None:
             continue
@@ -171,7 +171,7 @@ def validate_production_schedule(plan: SchedulePlan) -> tuple[str, ...]:
 
 
 def render_schedule_plan(plan: SchedulePlan, *, project_root: Path) -> str:
-    lines = ["# Hermes Schedule Plan", ""]
+    lines = ["# Intelligence Hub Schedule Plan", ""]
     for task in plan.tasks:
         lines.append(f"- {task.name}: {task.schedule} at {task.time}")
         lines.append(f"  command: {task.command(project_root)}")

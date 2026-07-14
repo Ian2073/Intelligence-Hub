@@ -26,7 +26,7 @@ from core.watchlist import load_domain_watchlist, load_github_watchlist, load_pa
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run Hermes Intelligence OS orchestration.")
+    parser = argparse.ArgumentParser(description="Run legacy Hermes orchestration through Intelligence Hub services.")
     parser.add_argument("--date", default=date.today().isoformat(), help="Run date in YYYY-MM-DD format.")
     parser.add_argument("--live-github", action="store_true", help="Fetch GitHub live instead of fixture data.")
     parser.add_argument("--live-papers", action="store_true", help="Fetch papers from arXiv instead of fixture data.")

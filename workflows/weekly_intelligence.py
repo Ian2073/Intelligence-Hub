@@ -37,7 +37,7 @@ def build_weekly_intelligence_report(
     top_actions = _top_actions(repository_results, paper_results)
     executive_summary = _summary(repository_results, paper_results, trends)
     return WeeklyIntelligenceReport(
-        title=f"Hermes Weekly Intelligence - {period_start} to {period_end}",
+        title=f"Intelligence Hub Weekly Brief - {period_start} to {period_end}",
         executive_summary=executive_summary,
         trends=trends,
         top_actions=top_actions,
@@ -69,7 +69,7 @@ def build_weekly_report_from_memory(
         decision_review_count=len(decision_review.items),
     )
     return WeeklyIntelligenceReport(
-        title=f"Hermes Weekly Intelligence - {period_start} to {period_end}",
+        title=f"Intelligence Hub Weekly Brief - {period_start} to {period_end}",
         executive_summary=executive_summary,
         trends=trends,
         top_actions=top_actions,

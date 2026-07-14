@@ -28,7 +28,7 @@ ENV_BY_DATABASE_KEY = {
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Provision Hermes Notion workspace databases.")
+    parser = argparse.ArgumentParser(description="Provision Intelligence Hub Notion workspace databases.")
     parser.add_argument("--apply", action="store_true", help="Create databases in Notion. Default is dry-run.")
     parser.add_argument("--update-env", action="store_true", help="Write created database ids back to .env. Requires --apply.")
     parser.add_argument("--print-payloads", action="store_true", help="Print database creation payloads.")

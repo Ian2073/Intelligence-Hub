@@ -100,7 +100,7 @@ def test_operational_status_reports_latest_briefs_and_go_live_gaps(tmp_path) -> 
             domain="AI Intelligence",
             period_start="2026-07-02",
             period_end="2026-07-02",
-            title="Hermes Daily Intelligence - 2026-07-02",
+            title="Intelligence Hub Daily Brief - 2026-07-02",
             executive_summary="Latest summary",
             top_actions=("Prototype: OpenHands",),
             notion_status="published",
@@ -135,13 +135,13 @@ def test_operational_status_reports_latest_briefs_and_go_live_gaps(tmp_path) -> 
         assert status.observation_count == 1
         assert status.decision_count == 1
         assert status.pending_notification_count == 0
-        assert status.latest_briefs[0].title == "Hermes Daily Intelligence - 2026-07-02"
+        assert status.latest_briefs[0].title == "Intelligence Hub Daily Brief - 2026-07-02"
         assert "Notion=published Telegram=dry-run URL=https://notion.so/hermes-daily source=brief" in rendered
         assert "scripts\\github_check.py" in rendered
         assert "scripts\\telegram_check.py" in rendered
 
         future_status = build_operational_status(_settings(tmp_path), store, as_of="2026-07-02", include_future=True)
-        assert future_status.latest_briefs[0].title == "Hermes Daily Intelligence - 2026-07-02"
+        assert future_status.latest_briefs[0].title == "Intelligence Hub Daily Brief - 2026-07-02"
         metrics = get_health_metrics(store, since="2026-07-01", until="2026-07-03")
         assert metrics.table_counts["entities"] == 1
         assert metrics.table_counts["briefs"] == 4
@@ -168,7 +168,7 @@ def test_operational_status_prefers_latest_run_ledger_over_brief_fallback(tmp_pa
         store.record_run(
             run_date="2026-07-03",
             stage="weekly",
-            title="Hermes Weekly Intelligence - 2026-06-29 to 2026-07-05",
+            title="Intelligence Hub Weekly Brief - 2026-06-29 to 2026-07-05",
             period_start="2026-06-29",
             period_end="2026-07-05",
             status="completed",
@@ -182,7 +182,7 @@ def test_operational_status_prefers_latest_run_ledger_over_brief_fallback(tmp_pa
         status = build_operational_status(_settings(tmp_path), store, as_of="2026-07-03")
         rendered = render_operational_status(status)
 
-        assert status.latest_briefs[0].title == "Hermes Weekly Intelligence - 2026-06-29 to 2026-07-05"
+        assert status.latest_briefs[0].title == "Intelligence Hub Weekly Brief - 2026-06-29 to 2026-07-05"
         assert "URL=https://notion.so/latest-run-weekly source=run" in rendered
     finally:
         store.close()

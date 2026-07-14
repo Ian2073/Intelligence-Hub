@@ -32,7 +32,7 @@ class LatestBriefStatus:
 
 
 @dataclass(frozen=True)
-class HermesOperationalStatus:
+class OperationalStatus:
     go_live_ready: bool
     credential_gaps: tuple[CredentialGap, ...]
     latest_briefs: tuple[LatestBriefStatus, ...]
@@ -87,7 +87,7 @@ def build_operational_status(
     *,
     as_of: str | None = None,
     include_future: bool = False,
-) -> HermesOperationalStatus:
+) -> OperationalStatus:
     gaps = _credential_gaps(settings)
     memory_engine = MemoryEngine(store)
     memory_stats = memory_engine.stats()
@@ -95,7 +95,7 @@ def build_operational_status(
     proposal_metrics = SQLiteProposalStore.from_memory_store(store).latest_metrics()
     latest_briefs = tuple(_latest_status(store, brief_type, as_of=as_of, include_future=include_future) for brief_type in BRIEF_TYPES)
     latest_briefs = tuple(status for status in latest_briefs if status is not None)
-    return HermesOperationalStatus(
+    return OperationalStatus(
         go_live_ready=not gaps,
         credential_gaps=tuple(gaps),
         latest_briefs=latest_briefs,
@@ -113,8 +113,8 @@ def build_operational_status(
     )
 
 
-def render_operational_status(status: HermesOperationalStatus) -> str:
-    lines = ["# Hermes Operational Status", ""]
+def render_operational_status(status: OperationalStatus) -> str:
+    lines = ["# Intelligence Hub Operational Status", ""]
     readiness = "ready" if status.go_live_ready else "not ready"
     lines.append(f"Go-live: {readiness}")
     lines.append(
@@ -161,6 +161,9 @@ def render_operational_status(status: HermesOperationalStatus) -> str:
     for command in status.next_commands:
         lines.append(f"- `{command}`")
     return "\n".join(lines)
+
+
+HermesOperationalStatus = OperationalStatus
 
 
 def _credential_gaps(settings: Settings) -> list[CredentialGap]:
