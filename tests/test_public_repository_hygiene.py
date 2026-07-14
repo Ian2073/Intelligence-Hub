@@ -26,6 +26,7 @@ def test_removed_internal_and_duplicate_documents_are_not_referenced() -> None:
         path.read_text(encoding="utf-8", errors="ignore")
         for path in _tracked_files()
         if path.suffix.lower() in {".md", ".py", ".toml", ".yml", ".yaml"}
+        and path.resolve() != Path(__file__).resolve()
     )
 
     for relative in removed:

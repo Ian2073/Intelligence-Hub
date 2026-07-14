@@ -17,6 +17,10 @@ Information → Evidence → Proposal → Validated Knowledge → Insight → De
 
 It is not a news summarizer, a generic RAG demo, or an autonomous agent loop.
 
+![Intelligence Hub Dashboard overview](docs/assets/dashboard-overview.png)
+
+_Zero-secret Dashboard overview generated from the deterministic fixture repository._
+
 ## Why It Is Different
 
 - **Proposal Trust Layer** prevents unvalidated AI output from directly contaminating canonical knowledge.
@@ -98,6 +102,14 @@ The local single-user Dashboard includes:
 - **Proposal Review**: accepted, rejected, and needs-review proposals with validation reasons and review actions.
 - **Briefs**: daily, weekly, and monthly intelligence records.
 - **Operations**: runtime runs, collector/delivery status, readiness warnings, and Obsidian export health.
+
+![Evidence-backed insights in the Dashboard](docs/assets/dashboard-insights.png)
+
+_Accepted insights retain confidence, evidence references, related knowledge, possible actions, and provenance._
+
+![Proposal Review in the Dashboard](docs/assets/proposal-review.png)
+
+_Proposal Review exposes validation status, evidence, provenance, reasons, and explicit review actions._
 
 ## Obsidian Knowledge Workspace
 

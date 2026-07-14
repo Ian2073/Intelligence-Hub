@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+import struct
 import tomllib
 from pathlib import Path
 
@@ -45,6 +47,29 @@ def test_dashboard_supports_stable_documentation_views() -> None:
 
     assert 'new URLSearchParams(window.location.search).get("view")' in script
     assert 'documentablePages.has(requestedPage)' in script
+
+
+def test_dashboard_screenshots_are_verified_and_referenced() -> None:
+    screenshot_names = (
+        "dashboard-overview.png",
+        "dashboard-insights.png",
+        "proposal-review.png",
+    )
+    digests = set()
+
+    for name in screenshot_names:
+        path = Path("docs/assets") / name
+        content = path.read_bytes()
+        assert len(content) > 50_000
+        assert content[:8] == b"\x89PNG\r\n\x1a\n"
+        width, height = struct.unpack(">II", content[16:24])
+        assert (width, height) == (1440, 1100)
+        digests.add(hashlib.sha256(content).hexdigest())
+
+        assert f"docs/assets/{name}" in Path("README.md").read_text(encoding="utf-8")
+        assert f"docs/assets/{name}" in Path("README.zh-TW.md").read_text(encoding="utf-8")
+
+    assert len(digests) == len(screenshot_names)
 
 
 def test_proposal_trust_walkthrough_uses_real_demo_records() -> None:

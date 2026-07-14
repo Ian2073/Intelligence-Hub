@@ -17,6 +17,10 @@ Information → Evidence → Proposal → Validated Knowledge → Insight → De
 
 它不是新聞摘要器、一般 RAG demo，也不是讓 Agent 自行無限迴圈執行的框架。
 
+![Intelligence Hub Dashboard Overview](docs/assets/dashboard-overview.png)
+
+_由 deterministic fixture repository 產生的 zero-secret Dashboard Overview。_
+
 ## 核心差異
 
 - **Proposal Trust Layer**：未驗證的 AI 輸出不得直接污染正式知識。
@@ -98,6 +102,14 @@ intelligence-hub export-obsidian
 - **Proposal Review**：accepted、rejected、needs-review proposal、驗證原因與 review actions。
 - **Briefs**：Daily、Weekly 與 Monthly intelligence records。
 - **Operations**：runtime runs、collector／delivery 狀態、readiness warning 與 Obsidian export 健康度。
+
+![Dashboard 中具證據的 Insights](docs/assets/dashboard-insights.png)
+
+_Accepted Insights 保留 confidence、evidence references、相關知識、可能行動與 provenance。_
+
+![Dashboard Proposal Review](docs/assets/proposal-review.png)
+
+_Proposal Review 呈現 validation status、evidence、provenance、原因與明確 review actions。_
 
 ## Obsidian Knowledge Workspace
 
