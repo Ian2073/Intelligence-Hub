@@ -24,7 +24,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: python -m pip install -r requirements.txt
+        run: python -m pip install -e ".[test]"
+
+      - name: Run ruff
+        run: ruff check .
 
       - name: Run tests
         run: python -m pytest tests -q
@@ -49,3 +52,6 @@ jobs:
 
       - name: Run first-run check
         run: python scripts/first_run_check.py
+
+      - name: Run pre-publish audit
+        run: python scripts/pre_publish_audit.py
