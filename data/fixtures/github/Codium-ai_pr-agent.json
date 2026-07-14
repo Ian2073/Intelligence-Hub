@@ -1,0 +1,36 @@
+{
+  "repo": {
+    "owner": {"login": "Codium-ai"},
+    "name": "pr-agent",
+    "full_name": "Codium-ai/pr-agent",
+    "html_url": "https://github.com/Codium-ai/pr-agent",
+    "description": "AI-powered pull request analysis, review, and improvement suggestions.",
+    "language": "Python",
+    "stargazers_count": 9000,
+    "open_issues_count": 250,
+    "topics": ["code-review", "developer-tools", "llm", "github"],
+    "pushed_at": "2026-07-08T00:00:00Z",
+    "updated_at": "2026-07-08T00:00:00Z",
+    "default_branch": "main"
+  },
+  "latest_release": {
+    "tag_name": "v0.30.0",
+    "html_url": "https://github.com/Codium-ai/pr-agent/releases/tag/v0.30.0",
+    "published_at": "2026-07-03T00:00:00Z"
+  },
+  "latest_pull_requests": [
+    {
+      "title": "Improve review prompt context packing",
+      "html_url": "https://github.com/Codium-ai/pr-agent/pull/2100",
+      "updated_at": "2026-07-08T01:00:00Z"
+    }
+  ],
+  "latest_issues": [
+    {
+      "title": "GitHub App mode should report skipped file reasons",
+      "html_url": "https://github.com/Codium-ai/pr-agent/issues/2101",
+      "updated_at": "2026-07-08T02:00:00Z"
+    }
+  ],
+  "contributors_count": 100
+}

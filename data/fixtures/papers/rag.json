@@ -1,0 +1,11 @@
+{
+  "title": "Reliability Patterns for Retrieval Augmented Generation",
+  "url": "https://arxiv.org/abs/2607.01002",
+  "published_at": "2026-07-06",
+  "authors": ["L. Patel", "J. Rivera"],
+  "abstract": "The paper compares query routing, hybrid retrieval, citation checking, and failure-mode detection for production RAG systems.",
+  "categories": ["cs.IR", "cs.AI"],
+  "technologies": ["RAG", "Dense retrieval", "Hybrid retrieval"],
+  "repositories": ["langchain-ai/langchain", "run-llama/llama_index"],
+  "companies": []
+}

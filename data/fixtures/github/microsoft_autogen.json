@@ -1,0 +1,36 @@
+{
+  "repo": {
+    "owner": {"login": "microsoft"},
+    "name": "autogen",
+    "full_name": "microsoft/autogen",
+    "html_url": "https://github.com/microsoft/autogen",
+    "description": "A programming framework for agentic AI.",
+    "language": "Python",
+    "stargazers_count": 50000,
+    "open_issues_count": 900,
+    "topics": ["multi-agent", "llm", "agent-framework"],
+    "pushed_at": "2026-07-08T00:00:00Z",
+    "updated_at": "2026-07-08T00:00:00Z",
+    "default_branch": "main"
+  },
+  "latest_release": {
+    "tag_name": "v0.6.4",
+    "html_url": "https://github.com/microsoft/autogen/releases/tag/v0.6.4",
+    "published_at": "2026-07-05T00:00:00Z"
+  },
+  "latest_pull_requests": [
+    {
+      "title": "Add agent runtime telemetry hooks",
+      "html_url": "https://github.com/microsoft/autogen/pull/6100",
+      "updated_at": "2026-07-08T01:00:00Z"
+    }
+  ],
+  "latest_issues": [
+    {
+      "title": "Document migration path for group chat orchestration",
+      "html_url": "https://github.com/microsoft/autogen/issues/6101",
+      "updated_at": "2026-07-08T02:00:00Z"
+    }
+  ],
+  "contributors_count": 100
+}

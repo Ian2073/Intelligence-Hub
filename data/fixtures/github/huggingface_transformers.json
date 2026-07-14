@@ -1,0 +1,36 @@
+{
+  "repo": {
+    "owner": {"login": "huggingface"},
+    "name": "transformers",
+    "full_name": "huggingface/transformers",
+    "html_url": "https://github.com/huggingface/transformers",
+    "description": "State-of-the-art machine learning for PyTorch, TensorFlow, and JAX.",
+    "language": "Python",
+    "stargazers_count": 150000,
+    "open_issues_count": 1300,
+    "topics": ["transformers", "multimodal", "llm", "machine-learning"],
+    "pushed_at": "2026-07-08T00:00:00Z",
+    "updated_at": "2026-07-08T00:00:00Z",
+    "default_branch": "main"
+  },
+  "latest_release": {
+    "tag_name": "v4.53.1",
+    "html_url": "https://github.com/huggingface/transformers/releases/tag/v4.53.1",
+    "published_at": "2026-07-07T00:00:00Z"
+  },
+  "latest_pull_requests": [
+    {
+      "title": "Add multimodal processor compatibility updates",
+      "html_url": "https://github.com/huggingface/transformers/pull/38500",
+      "updated_at": "2026-07-08T01:00:00Z"
+    }
+  ],
+  "latest_issues": [
+    {
+      "title": "Vision-language generation config regression",
+      "html_url": "https://github.com/huggingface/transformers/issues/38501",
+      "updated_at": "2026-07-08T02:00:00Z"
+    }
+  ],
+  "contributors_count": 100
+}

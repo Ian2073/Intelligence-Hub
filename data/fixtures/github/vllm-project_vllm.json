@@ -1,0 +1,36 @@
+{
+  "repo": {
+    "owner": {"login": "vllm-project"},
+    "name": "vllm",
+    "full_name": "vllm-project/vllm",
+    "html_url": "https://github.com/vllm-project/vllm",
+    "description": "A high-throughput and memory-efficient inference and serving engine for LLMs.",
+    "language": "Python",
+    "stargazers_count": 47000,
+    "open_issues_count": 1800,
+    "topics": ["inference", "serving", "llm", "cuda"],
+    "pushed_at": "2026-07-08T00:00:00Z",
+    "updated_at": "2026-07-08T00:00:00Z",
+    "default_branch": "main"
+  },
+  "latest_release": {
+    "tag_name": "v0.9.2",
+    "html_url": "https://github.com/vllm-project/vllm/releases/tag/v0.9.2",
+    "published_at": "2026-07-06T00:00:00Z"
+  },
+  "latest_pull_requests": [
+    {
+      "title": "Optimize prefix cache eviction for long context serving",
+      "html_url": "https://github.com/vllm-project/vllm/pull/19001",
+      "updated_at": "2026-07-08T01:00:00Z"
+    }
+  ],
+  "latest_issues": [
+    {
+      "title": "Throughput regression on mixed expert workloads",
+      "html_url": "https://github.com/vllm-project/vllm/issues/19002",
+      "updated_at": "2026-07-08T02:00:00Z"
+    }
+  ],
+  "contributors_count": 100
+}

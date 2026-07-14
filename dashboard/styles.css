@@ -1,0 +1,44 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --ink: #182033;
+  --muted: #667085;
+  --border: #d9deea;
+  --accent: #335cff;
+  --ok: #087443;
+  --warn: #a15c00;
+  --bad: #b42318;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: var(--bg); }
+header {
+  display: flex; justify-content: space-between; gap: 1rem; align-items: center;
+  padding: 2rem clamp(1rem, 4vw, 4rem); background: #101828; color: white;
+}
+h1 { margin: 0.1rem 0; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.04em; }
+h2 { margin: 0 0 1rem; }
+h3 { margin: 0 0 0.5rem; }
+p { line-height: 1.5; }
+.eyebrow { margin: 0; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.75rem; color: #b7c4ff; }
+.status-pill { border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; padding: 0.5rem 0.9rem; white-space: nowrap; }
+nav { display: flex; gap: 0.5rem; flex-wrap: wrap; padding: 1rem clamp(1rem, 4vw, 4rem); background: var(--panel); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+button { border: 1px solid var(--border); background: white; color: var(--ink); border-radius: 999px; padding: 0.55rem 0.9rem; cursor: pointer; font-weight: 650; }
+button.active, button:hover { border-color: var(--accent); color: var(--accent); }
+main { padding: 1.5rem clamp(1rem, 4vw, 4rem) 4rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 1rem; box-shadow: 0 8px 24px rgba(16, 24, 40, 0.05); }
+.metric { font-size: 2rem; font-weight: 800; letter-spacing: -0.04em; }
+.muted { color: var(--muted); }
+.list { display: grid; gap: 0.75rem; }
+.item { border-top: 1px solid var(--border); padding-top: 0.75rem; }
+.badge { display: inline-flex; align-items: center; gap: 0.25rem; border-radius: 999px; padding: 0.2rem 0.55rem; font-size: 0.75rem; font-weight: 700; background: #eef2ff; color: var(--accent); }
+.accepted { background: #ecfdf3; color: var(--ok); }
+.rejected { background: #fef3f2; color: var(--bad); }
+.needs_review { background: #fffaeb; color: var(--warn); }
+pre { white-space: pre-wrap; background: #0b1220; color: #e6edf7; border-radius: 12px; padding: 1rem; overflow: auto; }
+.state { background: var(--panel); border: 1px dashed var(--border); border-radius: 18px; padding: 2rem; color: var(--muted); }
+.actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
+input { border: 1px solid var(--border); border-radius: 10px; padding: 0.55rem; min-width: 14rem; }

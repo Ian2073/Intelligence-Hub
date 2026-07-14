@@ -1,0 +1,11 @@
+{
+  "title": "Evaluation of Vision-Language Models for Agentic Interfaces",
+  "url": "https://arxiv.org/abs/2607.01004",
+  "published_at": "2026-07-04",
+  "authors": ["R. Kumar", "E. Wang"],
+  "abstract": "The paper evaluates VLMs on screen understanding, visual grounding, and browser-based action selection for agentic workflows.",
+  "categories": ["cs.CV", "cs.AI"],
+  "technologies": ["Vision-language models", "Multimodal", "AI agents"],
+  "repositories": ["huggingface/transformers", "browser-use/browser-use"],
+  "companies": ["Hugging Face"]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Local inference optimization is becoming a deployment constraint",
+    "kind": "internal_seed",
+    "url": "local://seed/local-inference-optimization",
+    "published_at": "2026-07-01",
+    "summary": "Local-first AI workflows increasingly depend on inference cost, quantization quality, and repeatable deployment on developer-owned hardware.",
+    "evidence": "Seed item used to test Hermes source-grounded brief generation before live GitHub, arXiv, or RSS connectors are implemented.",
+    "tags": ["ai_infra", "local_first", "inference"],
+    "scores": {
+      "importance": 82,
+      "impact": 78,
+      "momentum": 64,
+      "engineering_value": 88,
+      "adoption": 55,
+      "longevity": 80,
+      "novelty": 48
+    }
+  },
+  {
+    "title": "Notion publishing needs structured database output",
+    "kind": "internal_seed",
+    "url": "local://seed/notion-structured-output",
+    "published_at": "2026-07-01",
+    "summary": "A useful intelligence workspace requires structured fields such as score, confidence, action, and relations rather than a single pasted page.",
+    "evidence": "Derived from HIP v1 product direction: Notion is the presentation workspace, Hermes performs automated processing.",
+    "tags": ["notion", "publisher", "automation"],
+    "scores": {
+      "importance": 76,
+      "impact": 74,
+      "momentum": 58,
+      "engineering_value": 84,
+      "adoption": 62,
+      "longevity": 78,
+      "novelty": 35
+    }
+  }
+]

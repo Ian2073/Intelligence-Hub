@@ -1,0 +1,19 @@
+[project]
+name = "intelligence-hub"
+version = "0.4.0"
+description = "Local-first decision intelligence platform."
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "python-dotenv>=1.0.1",
+  "httpx>=0.27.0",
+  "fastapi>=0.110.0",
+  "uvicorn>=0.27.0",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+tmp_path_retention_policy = "none"

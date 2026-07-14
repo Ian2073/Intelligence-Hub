@@ -1,0 +1,17 @@
+{
+  "domain": "NVIDIA Intelligence",
+  "title": "Inference software stack is becoming as important as accelerator supply",
+  "entity_name": "NVIDIA inference platform",
+  "entity_kind": "company_strategy",
+  "source_url": "local://signals/nvidia/inference-platform-moat",
+  "published_at": "2026-07-01",
+  "summary": "NVIDIA should be tracked not only as a chip supplier but as an inference platform with software, networking, and deployment leverage.",
+  "evidence": "The strategic signal is a shift from training scarcity toward inference throughput, serving cost, and platform lock-in.",
+  "impact_score": 86,
+  "confidence": "medium",
+  "tags": ["nvidia", "inference", "platform"],
+  "technologies": ["Inference", "GPU infrastructure"],
+  "companies": ["NVIDIA"],
+  "repositories": [],
+  "recommended_action": "Read"
+}

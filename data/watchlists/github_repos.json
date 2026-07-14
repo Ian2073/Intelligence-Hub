@@ -1,0 +1,14 @@
+[
+  {"repo": "All-Hands-AI/OpenHands", "fixture": "github/All-Hands-AI_OpenHands.json"},
+  {"repo": "langchain-ai/langchain", "fixture": "github/langchain-ai_langchain.json"},
+  {"repo": "microsoft/autogen", "fixture": "github/microsoft_autogen.json"},
+  {"repo": "vllm-project/vllm", "fixture": "github/vllm-project_vllm.json"},
+  {"repo": "ggml-org/llama.cpp", "fixture": "github/ggml-org_llama.cpp.json"},
+  {"repo": "run-llama/llama_index", "fixture": "github/run-llama_llama_index.json"},
+  {"repo": "huggingface/transformers", "fixture": "github/huggingface_transformers.json"},
+  {"repo": "ollama/ollama", "fixture": "github/ollama_ollama.json"},
+  {"repo": "Codium-ai/pr-agent", "fixture": "github/Codium-ai_pr-agent.json"},
+  {"repo": "continuedev/continue", "fixture": "github/continuedev_continue.json"},
+  {"repo": "openai/openai-agents-python", "fixture": "github/openai_openai-agents-python.json"},
+  {"repo": "browser-use/browser-use", "fixture": "github/browser-use_browser-use.json"}
+]

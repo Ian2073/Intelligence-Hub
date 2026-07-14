@@ -1,0 +1,36 @@
+{
+  "repo": {
+    "owner": {"login": "openai"},
+    "name": "openai-agents-python",
+    "full_name": "openai/openai-agents-python",
+    "html_url": "https://github.com/openai/openai-agents-python",
+    "description": "A lightweight Python framework for building multi-agent workflows.",
+    "language": "Python",
+    "stargazers_count": 17000,
+    "open_issues_count": 220,
+    "topics": ["agents", "python", "openai", "tool-use"],
+    "pushed_at": "2026-07-08T00:00:00Z",
+    "updated_at": "2026-07-08T00:00:00Z",
+    "default_branch": "main"
+  },
+  "latest_release": {
+    "tag_name": "v0.2.7",
+    "html_url": "https://github.com/openai/openai-agents-python/releases/tag/v0.2.7",
+    "published_at": "2026-07-07T00:00:00Z"
+  },
+  "latest_pull_requests": [
+    {
+      "title": "Expose structured handoff tracing",
+      "html_url": "https://github.com/openai/openai-agents-python/pull/900",
+      "updated_at": "2026-07-08T01:00:00Z"
+    }
+  ],
+  "latest_issues": [
+    {
+      "title": "Tool guardrail examples need streaming coverage",
+      "html_url": "https://github.com/openai/openai-agents-python/issues/901",
+      "updated_at": "2026-07-08T02:00:00Z"
+    }
+  ],
+  "contributors_count": 100
+}

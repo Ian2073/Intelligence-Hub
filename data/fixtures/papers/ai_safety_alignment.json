@@ -1,0 +1,11 @@
+{
+  "title": "Red Teaming Tool-Using Agents",
+  "url": "https://arxiv.org/abs/2607.01005",
+  "published_at": "2026-07-03",
+  "authors": ["N. Alvarez", "T. Brooks"],
+  "abstract": "A safety evaluation suite for tool-using agents, covering prompt injection, permission escalation, data exfiltration, and human-in-the-loop mitigations.",
+  "categories": ["cs.AI", "cs.CR"],
+  "technologies": ["AI safety", "Red teaming", "Tool use"],
+  "repositories": ["All-Hands-AI/OpenHands", "openai/openai-agents-python"],
+  "companies": ["OpenAI"]
+}

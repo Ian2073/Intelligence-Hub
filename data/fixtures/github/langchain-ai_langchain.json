@@ -1,0 +1,36 @@
+{
+  "repo": {
+    "owner": {"login": "langchain-ai"},
+    "name": "langchain",
+    "full_name": "langchain-ai/langchain",
+    "html_url": "https://github.com/langchain-ai/langchain",
+    "description": "Build context-aware reasoning applications with LangChain.",
+    "language": "Python",
+    "stargazers_count": 120000,
+    "open_issues_count": 2100,
+    "topics": ["llm", "agents", "rag", "orchestration"],
+    "pushed_at": "2026-07-08T00:00:00Z",
+    "updated_at": "2026-07-08T00:00:00Z",
+    "default_branch": "master"
+  },
+  "latest_release": {
+    "tag_name": "v0.3.27",
+    "html_url": "https://github.com/langchain-ai/langchain/releases/tag/v0.3.27",
+    "published_at": "2026-07-07T00:00:00Z"
+  },
+  "latest_pull_requests": [
+    {
+      "title": "Improve structured tool calling traces",
+      "html_url": "https://github.com/langchain-ai/langchain/pull/32001",
+      "updated_at": "2026-07-08T01:00:00Z"
+    }
+  ],
+  "latest_issues": [
+    {
+      "title": "Runnable graph debugging should expose tool retry state",
+      "html_url": "https://github.com/langchain-ai/langchain/issues/32002",
+      "updated_at": "2026-07-08T02:00:00Z"
+    }
+  ],
+  "contributors_count": 100
+}

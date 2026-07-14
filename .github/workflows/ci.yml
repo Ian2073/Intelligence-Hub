@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python-version: ["3.11"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run tests
+        run: python -m pytest tests -q
+
+      - name: Compile Python modules
+        run: python -m compileall contracts core connectors hermes workflows scripts main.py
+
+      - name: Run smoke test
+        run: python scripts/smoke_test.py
+
+      - name: Run acceptance check
+        run: python scripts/acceptance_check.py
+
+      - name: Run fixture demo
+        run: python -m hermes demo --date 2026-07-10 --output examples/output/obsidian
+
+      - name: Run zero-secret release demo seed
+        run: python scripts/intelligence_hub.py --db .pytest_tmp/ci-demo.sqlite --vault .pytest_tmp/ci-vault seed-demo
+
+      - name: Run API health smoke
+        run: python -c "from pathlib import Path; from fastapi.testclient import TestClient; from core.api import create_app; c=TestClient(create_app(db_path=Path('.pytest_tmp/ci-demo.sqlite'), vault_path=Path('.pytest_tmp/ci-vault'))); assert c.get('/health').json()['status']=='ok'; assert c.get('/ready').json()['ready'] is True; assert c.get('/api/runtime/status').json()['obsidian']['broken_link_count']==0"
+
+      - name: Run first-run check
+        run: python scripts/first_run_check.py

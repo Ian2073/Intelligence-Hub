@@ -1,0 +1,11 @@
+{
+  "title": "Tool Learning with Foundation Agents",
+  "url": "https://arxiv.org/abs/2607.01001",
+  "published_at": "2026-07-07",
+  "authors": ["M. Chen", "A. Singh"],
+  "abstract": "A survey and benchmark for how foundation-model agents select tools, recover from tool failures, and plan multi-step workflows with structured function calling.",
+  "categories": ["cs.AI", "cs.CL"],
+  "technologies": ["AI agents", "Tool use", "Function calling"],
+  "repositories": ["openai/openai-agents-python", "microsoft/autogen"],
+  "companies": ["OpenAI", "Microsoft"]
+}

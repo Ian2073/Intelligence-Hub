@@ -1,0 +1,17 @@
+{
+  "domain": "Cybersecurity Intelligence",
+  "title": "Agentic systems need evaluation for tool abuse and prompt injection",
+  "entity_name": "Agentic security evaluation",
+  "entity_kind": "technology",
+  "source_url": "local://signals/cybersecurity/agentic-security-evaluation",
+  "published_at": "2026-07-01",
+  "summary": "AI agents that execute tools, browse, and write code expand the attack surface beyond static model behavior.",
+  "evidence": "Security value is concentrated in evals that test tool permission boundaries, retrieval poisoning, and data exfiltration paths.",
+  "impact_score": 88,
+  "confidence": "high",
+  "tags": ["cybersecurity", "agent-security", "evals"],
+  "technologies": ["AI agents", "Prompt injection", "Security evals"],
+  "companies": ["OpenAI", "Anthropic"],
+  "repositories": [],
+  "recommended_action": "Prototype"
+}

@@ -1,0 +1,36 @@
+{
+  "repo": {
+    "owner": {"login": "browser-use"},
+    "name": "browser-use",
+    "full_name": "browser-use/browser-use",
+    "html_url": "https://github.com/browser-use/browser-use",
+    "description": "Make websites accessible for AI agents.",
+    "language": "Python",
+    "stargazers_count": 65000,
+    "open_issues_count": 500,
+    "topics": ["browser-automation", "ai-agent", "web", "tool-use"],
+    "pushed_at": "2026-07-08T00:00:00Z",
+    "updated_at": "2026-07-08T00:00:00Z",
+    "default_branch": "main"
+  },
+  "latest_release": {
+    "tag_name": "v0.3.0",
+    "html_url": "https://github.com/browser-use/browser-use/releases/tag/v0.3.0",
+    "published_at": "2026-07-04T00:00:00Z"
+  },
+  "latest_pull_requests": [
+    {
+      "title": "Improve DOM extraction for agent navigation",
+      "html_url": "https://github.com/browser-use/browser-use/pull/3600",
+      "updated_at": "2026-07-08T01:00:00Z"
+    }
+  ],
+  "latest_issues": [
+    {
+      "title": "Browser context reuse can leak stale page state",
+      "html_url": "https://github.com/browser-use/browser-use/issues/3601",
+      "updated_at": "2026-07-08T02:00:00Z"
+    }
+  ],
+  "contributors_count": 100
+}

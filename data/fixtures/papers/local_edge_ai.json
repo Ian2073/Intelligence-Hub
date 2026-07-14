@@ -1,0 +1,11 @@
+{
+  "title": "Practical Quantization for Edge Language Models",
+  "url": "https://arxiv.org/abs/2607.01003",
+  "published_at": "2026-07-05",
+  "authors": ["S. Huang", "P. Novak"],
+  "abstract": "A study of quantization and runtime tradeoffs for running language models on local and edge devices under memory pressure.",
+  "categories": ["cs.LG", "cs.AR"],
+  "technologies": ["Quantization", "Edge AI", "Local inference"],
+  "repositories": ["ggml-org/llama.cpp", "ollama/ollama"],
+  "companies": []
+}

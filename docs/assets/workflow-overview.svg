@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="360" viewBox="0 0 1120 360" role="img" aria-labelledby="title desc">
+  <title id="title">Hermes Workflow Overview</title>
+  <desc id="desc">Watchlists lead to collected signals, ranked decisions, brief creation, publishing, and review.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/>
+    </marker>
+    <filter id="shadow" x="-15%" y="-20%" width="130%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#020617" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect width="1120" height="360" rx="24" fill="#0f172a"/>
+  <rect x="28" y="28" width="1064" height="304" rx="20" fill="#0b1120" stroke="#1e293b"/>
+
+  <text x="72" y="75" fill="#f8fafc" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Workflow</text>
+  <text x="72" y="105" fill="#94a3b8" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15">Daily intelligence loop optimized for local review and decision tracking</text>
+
+  <g font-family="Inter, Segoe UI, Arial, sans-serif" filter="url(#shadow)">
+    <rect x="72" y="156" width="138" height="74" rx="14" fill="#111827" stroke="#475569"/>
+    <text x="141" y="185" fill="#f8fafc" font-size="15" font-weight="700" text-anchor="middle">Watchlists</text>
+    <text x="141" y="208" fill="#94a3b8" font-size="12" text-anchor="middle">topics and repos</text>
+
+    <rect x="252" y="156" width="138" height="74" rx="14" fill="#082f49" stroke="#0284c7"/>
+    <text x="321" y="185" fill="#f8fafc" font-size="15" font-weight="700" text-anchor="middle">Collect</text>
+    <text x="321" y="208" fill="#bae6fd" font-size="12" text-anchor="middle">signals</text>
+
+    <rect x="432" y="156" width="138" height="74" rx="14" fill="#122016" stroke="#22c55e"/>
+    <text x="501" y="185" fill="#f8fafc" font-size="15" font-weight="700" text-anchor="middle">Rank</text>
+    <text x="501" y="208" fill="#bbf7d0" font-size="12" text-anchor="middle">decisions</text>
+
+    <rect x="612" y="156" width="138" height="74" rx="14" fill="#2a1f0f" stroke="#f59e0b"/>
+    <text x="681" y="185" fill="#f8fafc" font-size="15" font-weight="700" text-anchor="middle">Build Brief</text>
+    <text x="681" y="208" fill="#fde68a" font-size="12" text-anchor="middle">daily surface</text>
+
+    <rect x="792" y="156" width="138" height="74" rx="14" fill="#1e1b4b" stroke="#818cf8"/>
+    <text x="861" y="185" fill="#f8fafc" font-size="15" font-weight="700" text-anchor="middle">Publish</text>
+    <text x="861" y="208" fill="#c7d2fe" font-size="12" text-anchor="middle">markdown / notion</text>
+
+    <rect x="972" y="156" width="76" height="74" rx="14" fill="#3b1d2a" stroke="#fb7185"/>
+    <text x="1010" y="185" fill="#f8fafc" font-size="15" font-weight="700" text-anchor="middle">Review</text>
+    <text x="1010" y="208" fill="#fecdd3" font-size="12" text-anchor="middle">act</text>
+  </g>
+
+  <g fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow)">
+    <path d="M210 193 H242"/>
+    <path d="M390 193 H422"/>
+    <path d="M570 193 H602"/>
+    <path d="M750 193 H782"/>
+    <path d="M930 193 H962"/>
+    <path d="M1010 230 C1010 285 141 285 141 240"/>
+  </g>
+
+  <text x="576" y="286" fill="#64748b" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" text-anchor="middle">review feedback updates future watchlists and decision memory</text>
+</svg>

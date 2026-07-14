@@ -1,0 +1,17 @@
+{
+  "domain": "Startup Intelligence",
+  "title": "AI developer tools are consolidating around workflow ownership",
+  "entity_name": "AI developer tool consolidation",
+  "entity_kind": "trend",
+  "source_url": "local://signals/startup/ai-developer-tool-consolidation",
+  "published_at": "2026-07-01",
+  "summary": "Developer AI startups should be evaluated by whether they own an end-to-end workflow rather than a narrow completion feature.",
+  "evidence": "Value migrates toward systems that combine planning, code editing, testing, review, deployment, and memory.",
+  "impact_score": 80,
+  "confidence": "medium",
+  "tags": ["startup", "developer-tools", "workflow"],
+  "technologies": ["AI agents", "Software engineering agents"],
+  "companies": [],
+  "repositories": ["All-Hands-AI/OpenHands"],
+  "recommended_action": "Read"
+}

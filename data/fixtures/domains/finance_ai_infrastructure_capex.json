@@ -1,0 +1,17 @@
+{
+  "domain": "Finance Intelligence",
+  "title": "AI infrastructure capex is becoming a board-level capital allocation signal",
+  "entity_name": "AI infrastructure capex",
+  "entity_kind": "trend",
+  "source_url": "local://signals/finance/ai-infrastructure-capex",
+  "published_at": "2026-07-01",
+  "summary": "Hyperscaler and GPU infrastructure spending should be tracked as a leading indicator for AI platform demand and valuation pressure.",
+  "evidence": "Capex intensity links NVIDIA demand, cloud platform margins, and startup compute access.",
+  "impact_score": 82,
+  "confidence": "medium",
+  "tags": ["finance", "infrastructure", "capital-allocation"],
+  "technologies": ["AI infrastructure", "Inference"],
+  "companies": ["NVIDIA", "Microsoft", "Google", "Amazon"],
+  "repositories": [],
+  "recommended_action": "Read"
+}

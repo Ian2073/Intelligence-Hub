@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.pytest_tmp/
+hub_env/
+logs/
+exports/
+examples/output/
+data/obsidian_vault/
+data/demo/
+data/*.sqlite
+data/*.sqlite-*
+.env
+tests/.capability*/
+tests/.simulation/
+tests/.tmp*/

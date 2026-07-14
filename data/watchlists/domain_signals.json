@@ -1,0 +1,37 @@
+[
+  {
+    "domain": "Finance Intelligence",
+    "name": "AI infrastructure capex",
+    "fixture": "domains/finance_ai_infrastructure_capex.json",
+    "rss_url": "https://www.semianalysis.com/feed",
+    "max_results": 2
+  },
+  {
+    "domain": "Cybersecurity Intelligence",
+    "name": "Agentic security evaluation",
+    "fixture": "domains/cybersecurity_agentic_security_evaluation.json",
+    "rss_url": "https://www.schneier.com/feed/atom/",
+    "max_results": 2
+  },
+  {
+    "domain": "Apple Intelligence",
+    "name": "On-device AI strategy",
+    "fixture": "domains/apple_on_device_ai_strategy.json",
+    "rss_url": "https://developer.apple.com/news/rss/news.rss",
+    "max_results": 2
+  },
+  {
+    "domain": "NVIDIA Intelligence",
+    "name": "Inference platform moat",
+    "fixture": "domains/nvidia_inference_platform_moat.json",
+    "rss_url": "https://blogs.nvidia.com/feed/",
+    "max_results": 2
+  },
+  {
+    "domain": "Startup Intelligence",
+    "name": "AI developer tool consolidation",
+    "fixture": "domains/startup_ai_developer_tool_consolidation.json",
+    "rss_url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+    "max_results": 2
+  }
+]

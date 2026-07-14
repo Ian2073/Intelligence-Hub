@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="560" viewBox="0 0 1120 560" role="img" aria-labelledby="title desc">
+  <title id="title">Hermes Architecture Overview</title>
+  <desc id="desc">Sources flow through connectors, runtime core, and delivery channels.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/>
+    </marker>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101827"/>
+      <stop offset="1" stop-color="#0b1120"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#020617" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+
+  <rect width="1120" height="560" rx="24" fill="#0f172a"/>
+  <rect x="28" y="28" width="1064" height="504" rx="20" fill="url(#panel)" stroke="#1e293b"/>
+
+  <text x="72" y="74" fill="#f8fafc" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Architecture</text>
+  <text x="72" y="104" fill="#94a3b8" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15">Local-first intelligence runtime from source signals to review surfaces</text>
+
+  <g font-family="Inter, Segoe UI, Arial, sans-serif">
+    <g filter="url(#shadow)">
+      <rect x="72" y="142" width="210" height="300" rx="16" fill="#111827" stroke="#334155"/>
+      <text x="96" y="180" fill="#e2e8f0" font-size="18" font-weight="700">Sources</text>
+      <rect x="96" y="206" width="162" height="44" rx="10" fill="#1e293b" stroke="#475569"/>
+      <text x="177" y="234" fill="#f8fafc" font-size="15" text-anchor="middle">GitHub</text>
+      <rect x="96" y="266" width="162" height="44" rx="10" fill="#1e293b" stroke="#475569"/>
+      <text x="177" y="294" fill="#f8fafc" font-size="15" text-anchor="middle">Papers / arXiv</text>
+      <rect x="96" y="326" width="162" height="44" rx="10" fill="#1e293b" stroke="#475569"/>
+      <text x="177" y="354" fill="#f8fafc" font-size="15" text-anchor="middle">Domain RSS</text>
+      <rect x="96" y="386" width="162" height="44" rx="10" fill="#1e293b" stroke="#475569"/>
+      <text x="177" y="414" fill="#f8fafc" font-size="15" text-anchor="middle">Fixtures</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="340" y="205" width="170" height="174" rx="16" fill="#082f49" stroke="#0369a1"/>
+      <text x="425" y="244" fill="#e0f2fe" font-size="18" font-weight="700" text-anchor="middle">Connectors</text>
+      <rect x="368" y="272" width="114" height="54" rx="12" fill="#0c4a6e" stroke="#38bdf8"/>
+      <text x="425" y="294" fill="#f8fafc" font-size="14" text-anchor="middle">Fetch</text>
+      <text x="425" y="314" fill="#bae6fd" font-size="14" text-anchor="middle">Parse / Retry</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="568" y="142" width="248" height="300" rx="16" fill="#122016" stroke="#2f5f3d"/>
+      <text x="592" y="180" fill="#dcfce7" font-size="18" font-weight="700">Runtime Core</text>
+      <rect x="592" y="206" width="200" height="44" rx="10" fill="#17381f" stroke="#4ade80"/>
+      <text x="692" y="234" fill="#f8fafc" font-size="15" text-anchor="middle">Pipelines x 6</text>
+      <rect x="592" y="266" width="200" height="44" rx="10" fill="#17381f" stroke="#4ade80"/>
+      <text x="692" y="294" fill="#f8fafc" font-size="15" text-anchor="middle">SQLite Memory</text>
+      <rect x="592" y="326" width="200" height="44" rx="10" fill="#17381f" stroke="#4ade80"/>
+      <text x="692" y="354" fill="#f8fafc" font-size="15" text-anchor="middle">Decision Engines</text>
+      <rect x="592" y="386" width="200" height="44" rx="10" fill="#17381f" stroke="#4ade80"/>
+      <text x="692" y="414" fill="#f8fafc" font-size="15" text-anchor="middle">IntelligenceBrief</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="874" y="178" width="174" height="228" rx="16" fill="#2a1f0f" stroke="#854d0e"/>
+      <text x="961" y="216" fill="#fef3c7" font-size="18" font-weight="700" text-anchor="middle">Delivery</text>
+      <rect x="900" y="242" width="122" height="42" rx="10" fill="#422006" stroke="#f59e0b"/>
+      <text x="961" y="269" fill="#f8fafc" font-size="14" text-anchor="middle">Markdown</text>
+      <rect x="900" y="300" width="122" height="42" rx="10" fill="#422006" stroke="#f59e0b"/>
+      <text x="961" y="327" fill="#f8fafc" font-size="14" text-anchor="middle">Notion</text>
+      <rect x="900" y="358" width="122" height="42" rx="10" fill="#422006" stroke="#f59e0b"/>
+      <text x="961" y="385" fill="#f8fafc" font-size="14" text-anchor="middle">Telegram</text>
+    </g>
+
+    <path d="M282 292 H330" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M510 292 H558" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M816 292 H864" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <text x="306" y="276" fill="#7dd3fc" font-size="13" text-anchor="middle">signals</text>
+    <text x="534" y="276" fill="#7dd3fc" font-size="13" text-anchor="middle">normalized</text>
+    <text x="840" y="276" fill="#7dd3fc" font-size="13" text-anchor="middle">briefs</text>
+  </g>
+</svg>

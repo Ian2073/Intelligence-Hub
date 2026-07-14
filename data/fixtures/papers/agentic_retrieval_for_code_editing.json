@@ -1,0 +1,11 @@
+{
+  "title": "Agentic Retrieval for Code Editing",
+  "url": "https://arxiv.org/abs/2607.00001",
+  "published_at": "2026-07-01",
+  "authors": ["A. Researcher"],
+  "abstract": "A paper about agentic retrieval for code editing.",
+  "categories": ["cs.AI"],
+  "technologies": ["AI agents", "RAG"],
+  "repositories": ["All-Hands-AI/OpenHands"],
+  "companies": ["Anthropic"]
+}

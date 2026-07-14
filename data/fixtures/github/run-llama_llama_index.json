@@ -1,0 +1,36 @@
+{
+  "repo": {
+    "owner": {"login": "run-llama"},
+    "name": "llama_index",
+    "full_name": "run-llama/llama_index",
+    "html_url": "https://github.com/run-llama/llama_index",
+    "description": "Data framework for building LLM applications over private and external data.",
+    "language": "Python",
+    "stargazers_count": 41000,
+    "open_issues_count": 850,
+    "topics": ["rag", "agents", "data", "llm"],
+    "pushed_at": "2026-07-08T00:00:00Z",
+    "updated_at": "2026-07-08T00:00:00Z",
+    "default_branch": "main"
+  },
+  "latest_release": {
+    "tag_name": "v0.12.52",
+    "html_url": "https://github.com/run-llama/llama_index/releases/tag/v0.12.52",
+    "published_at": "2026-07-07T00:00:00Z"
+  },
+  "latest_pull_requests": [
+    {
+      "title": "Improve agentic retrieval node postprocessors",
+      "html_url": "https://github.com/run-llama/llama_index/pull/18500",
+      "updated_at": "2026-07-08T01:00:00Z"
+    }
+  ],
+  "latest_issues": [
+    {
+      "title": "Document hybrid retrieval defaults for code corpora",
+      "html_url": "https://github.com/run-llama/llama_index/issues/18501",
+      "updated_at": "2026-07-08T02:00:00Z"
+    }
+  ],
+  "contributors_count": 100
+}

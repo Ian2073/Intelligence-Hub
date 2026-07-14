@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Intelligence Hub</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <p class="eyebrow">Local-first release candidate</p>
+        <h1>Intelligence Hub</h1>
+        <p>Information → Evidence → Proposal → Validated Knowledge → Insight → Decision → Brief</p>
+      </div>
+      <div class="status-pill" id="health">Loading</div>
+    </header>
+    <nav>
+      <button data-page="overview" class="active">Overview</button>
+      <button data-page="insights">Insights</button>
+      <button data-page="knowledge">Knowledge</button>
+      <button data-page="proposals">Proposal Review</button>
+      <button data-page="briefs">Briefs</button>
+      <button data-page="operations">Operations</button>
+    </nav>
+    <main id="app">
+      <section class="state">Loading dashboard…</section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

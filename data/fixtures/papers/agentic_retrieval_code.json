@@ -1,0 +1,11 @@
+{
+  "title": "Agentic Retrieval for Code Editing",
+  "url": "https://arxiv.org/abs/2607.00001",
+  "published_at": "2026-07-01",
+  "authors": ["A. Researcher"],
+  "abstract": "A paper about agentic retrieval for code editing, combining repository indexing, edit planning, and feedback-driven retrieval loops.",
+  "categories": ["cs.AI", "cs.SE"],
+  "technologies": ["AI agents", "RAG", "Code editing"],
+  "repositories": ["All-Hands-AI/OpenHands", "continuedev/continue"],
+  "companies": ["Anthropic"]
+}

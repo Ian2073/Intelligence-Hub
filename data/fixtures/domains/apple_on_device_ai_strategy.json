@@ -1,0 +1,17 @@
+{
+  "domain": "Apple Intelligence",
+  "title": "On-device AI strategy raises the value of small efficient models",
+  "entity_name": "On-device AI",
+  "entity_kind": "technology",
+  "source_url": "local://signals/apple/on-device-ai-strategy",
+  "published_at": "2026-07-01",
+  "summary": "Apple-facing AI opportunities should be tracked through latency, privacy, local context, and developer distribution constraints.",
+  "evidence": "Personal devices make local inference and private context more important than raw benchmark leadership.",
+  "impact_score": 74,
+  "confidence": "medium",
+  "tags": ["apple", "on-device", "privacy"],
+  "technologies": ["Local inference", "Small language models"],
+  "companies": ["Apple"],
+  "repositories": [],
+  "recommended_action": "Watch"
+}

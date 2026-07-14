@@ -1,0 +1,38 @@
+[
+  {
+    "title": "AI Agents and Tool Use",
+    "query": "all:\"AI agent\" OR all:\"tool use\" OR all:\"agent workflow\" OR all:\"function calling\"",
+    "fixture": "papers/ai_agents_tool_use.json",
+    "max_results": 5
+  },
+  {
+    "title": "Retrieval Augmented Generation",
+    "query": "all:\"retrieval augmented\" OR all:\"RAG\" OR all:\"dense retrieval\"",
+    "fixture": "papers/rag.json",
+    "max_results": 3
+  },
+  {
+    "title": "Agentic Retrieval for Code Editing",
+    "query": "all:\"agentic retrieval\" OR all:\"code editing\" OR all:\"code generation\"",
+    "fixture": "papers/agentic_retrieval_code.json",
+    "max_results": 3
+  },
+  {
+    "title": "Local and Edge AI",
+    "query": "all:\"on-device\" OR all:\"edge inference\" OR all:\"model compression\" OR all:\"quantization\"",
+    "fixture": "papers/local_edge_ai.json",
+    "max_results": 3
+  },
+  {
+    "title": "Multimodal and Vision-Language Models",
+    "query": "all:\"multimodal\" OR all:\"vision language\" OR all:\"VLM\" OR all:\"image understanding\"",
+    "fixture": "papers/multimodal_vlm.json",
+    "max_results": 3
+  },
+  {
+    "title": "AI Safety and Alignment",
+    "query": "all:\"alignment\" OR all:\"RLHF\" OR all:\"red teaming\" OR all:\"AI safety\"",
+    "fixture": "papers/ai_safety_alignment.json",
+    "max_results": 3
+  }
+]
