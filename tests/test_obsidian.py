@@ -33,8 +33,8 @@ def test_sanitize_filename(tmp_path: Path) -> None:
 
 def test_directory_creation(tmp_path: Path) -> None:
     vault = tmp_path / "obsidian_vault"
-    client = ObsidianClient(vault)
-    
+    ObsidianClient(vault)
+
     assert (vault / "DailyBriefs").is_dir()
     assert (vault / "Repositories").is_dir()
     assert (vault / "Papers").is_dir()

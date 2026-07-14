@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from connectors.notion import NotionBriefRecord, NotionClient
-from connectors.telegram import TelegramClient, TelegramNotification, TelegramResult
+from connectors.telegram import TelegramClient, TelegramNotification
 from core.delivery import (
     BriefDeliveryCoordinator,
     DeliveryStatus,

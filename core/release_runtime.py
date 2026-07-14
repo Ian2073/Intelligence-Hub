@@ -143,7 +143,6 @@ def export_obsidian(
 
 
 def reset_demo_data(project_root: Path, *, yes: bool = False) -> Path:
-    paths = demo_paths(project_root)
     demo_root = (project_root.resolve() / DEMO_DIR).resolve()
     if not yes:
         raise ValueError("reset requires explicit confirmation with --yes")

@@ -9,7 +9,7 @@ from fastapi.testclient import TestClient
 from core.api import create_app
 from core.cli import main as platform_cli
 from core.obsidian_publisher import diagnose_vault_wikilinks
-from core.release_runtime import export_obsidian, reset_demo_data, seed_demo
+from core.release_runtime import reset_demo_data, seed_demo
 from core.version import __version__
 
 
@@ -38,6 +38,13 @@ def test_platform_cli_help_uses_installable_command_name(capsys) -> None:
     assert "usage: intelligence-hub" in help_text
     assert "seed-demo" in help_text
     assert "export-obsidian" in help_text
+
+
+def test_dashboard_supports_stable_documentation_views() -> None:
+    script = Path("dashboard/app.js").read_text(encoding="utf-8")
+
+    assert 'new URLSearchParams(window.location.search).get("view")' in script
+    assert 'documentablePages.has(requestedPage)' in script
 
 
 def test_proposal_trust_walkthrough_uses_real_demo_records() -> None:

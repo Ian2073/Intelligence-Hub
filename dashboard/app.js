@@ -1,5 +1,8 @@
+const documentablePages = new Set(["overview", "insights", "knowledge", "proposals", "briefs", "operations"]);
+const requestedPage = new URLSearchParams(window.location.search).get("view");
+
 const state = {
-  page: "overview",
+  page: documentablePages.has(requestedPage) ? requestedPage : "overview",
   data: {},
 };
 
@@ -15,6 +18,7 @@ const endpoints = {
 };
 
 document.querySelectorAll("nav button").forEach((button) => {
+  button.classList.toggle("active", button.dataset.page === state.page);
   button.addEventListener("click", () => {
     state.page = button.dataset.page;
     document.querySelectorAll("nav button").forEach((item) => item.classList.toggle("active", item === button));
