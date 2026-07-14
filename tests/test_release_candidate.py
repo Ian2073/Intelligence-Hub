@@ -1,13 +1,43 @@
 from __future__ import annotations
 
+import tomllib
 from pathlib import Path
 
+import pytest
 from fastapi.testclient import TestClient
 
 from core.api import create_app
+from core.cli import main as platform_cli
 from core.obsidian_publisher import diagnose_vault_wikilinks
 from core.release_runtime import export_obsidian, reset_demo_data, seed_demo
-from scripts.intelligence_hub import main as platform_cli
+from core.version import __version__
+
+
+def test_package_api_and_cli_versions_are_aligned(capsys) -> None:
+    metadata = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))
+
+    assert metadata["project"]["version"] == "0.1.0rc3"
+    assert metadata["project"]["scripts"]["intelligence-hub"] == "core.cli:main"
+    assert __version__ == metadata["project"]["version"]
+
+    with pytest.raises(SystemExit) as version_exit:
+        platform_cli(["--version"])
+    assert version_exit.value.code == 0
+    assert capsys.readouterr().out.strip() == "intelligence-hub 0.1.0rc3"
+
+    app = create_app()
+    assert app.version == __version__
+
+
+def test_platform_cli_help_uses_installable_command_name(capsys) -> None:
+    with pytest.raises(SystemExit) as help_exit:
+        platform_cli(["--help"])
+
+    assert help_exit.value.code == 0
+    help_text = capsys.readouterr().out
+    assert "usage: intelligence-hub" in help_text
+    assert "seed-demo" in help_text
+    assert "export-obsidian" in help_text
 
 
 def test_zero_secret_demo_seed_is_idempotent_and_exports_obsidian(tmp_path: Path) -> None:

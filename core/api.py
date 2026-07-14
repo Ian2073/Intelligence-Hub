@@ -20,6 +20,7 @@ from core.proposal_store import SQLiteProposalStore
 from core.proposals import ValidationStatus, payload_to_dict
 from core.release_runtime import DEMO_DB, DEMO_VAULT, demo_paths, seed_demo
 from core.repository import SQLiteRepository
+from core.version import __version__
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -52,7 +53,7 @@ def create_app(
 
     app = FastAPI(
         title="Intelligence Hub API",
-        version="0.4.0",
+        version=__version__,
         description="Local-first Intelligence Hub release candidate API.",
     )
     app.state.project_root = root
