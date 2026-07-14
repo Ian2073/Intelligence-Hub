@@ -4,6 +4,8 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+import pytest
+
 from connectors.notion import (
     NotionBriefRecord,
     NotionEcosystemRecord,
@@ -11,9 +13,6 @@ from connectors.notion import (
     NotionPaperRecord,
 )
 from connectors.obsidian import ObsidianClient
-
-
-DEMO_VAULT = Path("examples/output/obsidian")
 
 
 @dataclass(frozen=True)
@@ -102,15 +101,111 @@ def _paper_record(title: str, *, summary: str = "Paper summary") -> NotionPaperR
     )
 
 
-def test_checked_in_daily_demo_current_folder_structure_and_note_types() -> None:
-    assert DEMO_VAULT.is_dir()
+def _ecosystem_record(name: str) -> NotionEcosystemRecord:
+    return NotionEcosystemRecord(
+        name=name,
+        type="Technology Signal",
+        company_or_maintainer="Fixture Maintainer",
+        category=("AI", "Infrastructure"),
+        summary=f"{name} summary",
+        why_it_matters="Fixture evidence for legacy exporter characterization.",
+        impact="high",
+        momentum="rising",
+    )
 
-    folders = {path.name for path in DEMO_VAULT.iterdir() if path.is_dir()}
+
+@pytest.fixture
+def legacy_demo_vault(tmp_path: Path) -> Path:
+    vault = tmp_path / "legacy-obsidian-vault"
+    client = ObsidianClient(vault)
+
+    repository_names = (
+        "openai/openai-agents-python",
+        "owner/repo-01",
+        "owner/repo-02",
+        "owner/repo-03",
+        "owner/repo-04",
+        "owner/repo-05",
+        "owner/repo-06",
+        "owner/repo-07",
+        "owner/repo-08",
+        "owner/repo-09",
+        "owner/repo-10",
+        "owner/repo-11",
+    )
+    paper_titles = (
+        "Tool Learning with Foundation Agents",
+        "Deterministic Paper 02",
+        "Deterministic Paper 03",
+        "Deterministic Paper 04",
+        "Deterministic Paper 05",
+        "Deterministic Paper 06",
+    )
+    ecosystem_names = (
+        "Agentic security evaluation",
+        "Deterministic Ecosystem 02",
+        "Deterministic Ecosystem 03",
+        "Deterministic Ecosystem 04",
+        "Deterministic Ecosystem 05",
+    )
+
+    for name in repository_names:
+        client.upsert_repository(_repo_record(name))
+    for title in paper_titles:
+        client.upsert_paper(_paper_record(title))
+    for name in ecosystem_names:
+        client.upsert_ecosystem(_ecosystem_record(name))
+
+    linked_repositories = repository_names[:5]
+    linked_papers = paper_titles[:4]
+    linked_ecosystem = ecosystem_names[:4]
+    body = "\n".join(
+        (
+            "## GitHub Repositories",
+            *(f"- [{name}](https://github.com/{name})" for name in linked_repositories),
+            "## Research Papers",
+            *(
+                f"- [{title}](https://example.com/papers/{index})"
+                for index, title in enumerate(linked_papers, 1)
+            ),
+            "## Domain Signals",
+            *(f"- {name}" for name in linked_ecosystem),
+            "## Top Decisions",
+            "- Prototype the strongest converging signal.",
+        )
+    )
+    client.create_daily_brief(
+        "2026-07-10",
+        NotionBriefRecord(
+            title="Platform Runtime Daily Intelligence - 2026-07-10",
+            date="2026-07-10",
+            executive_summary="Deterministic characterization fixture.",
+            recommended_actions=("Prototype",),
+            intelligence_score=82,
+            confidence="high",
+            status="Published",
+            tags=("AI Intelligence",),
+            body=body,
+        ),
+        repository_results=tuple(MockResult(MockEntity(name)) for name in linked_repositories),
+        paper_results=tuple(MockResult(MockEntity(title)) for title in linked_papers),
+        domain_results=tuple(MockResult(MockEntity(name)) for name in linked_ecosystem),
+    )
+
+    return vault
+
+
+def test_generated_daily_demo_current_folder_structure_and_note_types(
+    legacy_demo_vault: Path,
+) -> None:
+    assert legacy_demo_vault.is_dir()
+
+    folders = {path.name for path in legacy_demo_vault.iterdir() if path.is_dir()}
     assert folders == {"DailyBriefs", "Repositories", "Papers", "Ecosystem"}
 
     files_by_folder = {
         folder.name: sorted(path.name for path in folder.glob("*.md"))
-        for folder in sorted(path for path in DEMO_VAULT.iterdir() if path.is_dir())
+        for folder in sorted(path for path in legacy_demo_vault.iterdir() if path.is_dir())
     }
     assert len(files_by_folder["DailyBriefs"]) == 1
     assert len(files_by_folder["Repositories"]) == 12
@@ -118,18 +213,18 @@ def test_checked_in_daily_demo_current_folder_structure_and_note_types() -> None
     assert len(files_by_folder["Ecosystem"]) == 5
 
     types = {
-        path.relative_to(DEMO_VAULT).as_posix(): _frontmatter(path).get("type")
-        for path in _markdown_files(DEMO_VAULT)
+        path.relative_to(legacy_demo_vault).as_posix(): _frontmatter(path).get("type")
+        for path in _markdown_files(legacy_demo_vault)
     }
     assert set(types.values()) == {"daily-brief", "github-repo", "paper", "ecosystem-signal"}
 
 
-def test_current_frontmatter_keys_by_note_type_are_characterized() -> None:
+def test_current_frontmatter_keys_by_note_type_are_characterized(legacy_demo_vault: Path) -> None:
     examples = {
-        "daily": DEMO_VAULT / "DailyBriefs" / "Daily Brief - 2026-07-10.md",
-        "repository": DEMO_VAULT / "Repositories" / "openai-openai-agents-python.md",
-        "paper": DEMO_VAULT / "Papers" / "Tool Learning with Foundation Agents.md",
-        "ecosystem": DEMO_VAULT / "Ecosystem" / "Agentic security evaluation.md",
+        "daily": legacy_demo_vault / "DailyBriefs" / "Daily Brief - 2026-07-10.md",
+        "repository": legacy_demo_vault / "Repositories" / "openai-openai-agents-python.md",
+        "paper": legacy_demo_vault / "Papers" / "Tool Learning with Foundation Agents.md",
+        "ecosystem": legacy_demo_vault / "Ecosystem" / "Agentic security evaluation.md",
     }
 
     assert set(_frontmatter(examples["daily"])) == {
@@ -184,8 +279,10 @@ def test_current_frontmatter_keys_by_note_type_are_characterized() -> None:
     }
 
 
-def test_current_main_body_sections_by_note_type_are_characterized() -> None:
-    daily_headings = _headings(DEMO_VAULT / "DailyBriefs" / "Daily Brief - 2026-07-10.md")
+def test_current_main_body_sections_by_note_type_are_characterized(
+    legacy_demo_vault: Path,
+) -> None:
+    daily_headings = _headings(legacy_demo_vault / "DailyBriefs" / "Daily Brief - 2026-07-10.md")
     assert any("GitHub Repositories" in heading for heading in daily_headings)
     assert any("Research Papers" in heading for heading in daily_headings)
     assert any("Domain Signals" in heading for heading in daily_headings)
@@ -194,9 +291,9 @@ def test_current_main_body_sections_by_note_type_are_characterized() -> None:
     assert any("User Notes" in heading for heading in daily_headings)
 
     for note_path in (
-        DEMO_VAULT / "Repositories" / "openai-openai-agents-python.md",
-        DEMO_VAULT / "Papers" / "Tool Learning with Foundation Agents.md",
-        DEMO_VAULT / "Ecosystem" / "Agentic security evaluation.md",
+        legacy_demo_vault / "Repositories" / "openai-openai-agents-python.md",
+        legacy_demo_vault / "Papers" / "Tool Learning with Foundation Agents.md",
+        legacy_demo_vault / "Ecosystem" / "Agentic security evaluation.md",
     ):
         headings = _headings(note_path)
         assert headings == [
@@ -248,13 +345,15 @@ def test_current_markdown_link_conversion_to_wikilinks_is_regex_based(tmp_path: 
     assert "[[Ecosystem/OpenAI|OpenAI]] appears again as plain text." in converted
 
 
-def test_current_repository_paper_and_ecosystem_notes_have_no_outbound_wikilinks() -> None:
+def test_legacy_obsidian_client_entity_notes_have_no_outbound_wikilinks(
+    legacy_demo_vault: Path,
+) -> None:
     diagnostics: dict[str, int] = {}
     for folder in ("Repositories", "Papers", "Ecosystem"):
-        total = sum(len(_wikilinks(path)) for path in (DEMO_VAULT / folder).glob("*.md"))
+        total = sum(len(_wikilinks(path)) for path in (legacy_demo_vault / folder).glob("*.md"))
         diagnostics[folder] = total
 
-    # Characterizes the current graph-island defect; this is not a desired future invariant.
+    # Legacy ObsidianClient characterization only; the repository-driven projection has semantic links.
     assert diagnostics == {"Repositories": 0, "Papers": 0, "Ecosystem": 0}
 
 
@@ -274,7 +373,8 @@ def test_current_user_notes_section_is_preserved_on_rewrite(tmp_path: Path) -> N
     assert "Manual operator note." in content
 
 
-def test_current_duplicate_and_sanitized_collision_behavior_overwrites_existing_note(tmp_path: Path) -> None:
+def test_legacy_obsidian_client_collision_behavior_overwrites_existing_note(tmp_path: Path) -> None:
+    # Legacy ObsidianClient characterization only; the repository-driven projection uses stable IDs.
     client = ObsidianClient(tmp_path / "vault")
 
     first_path = client.upsert_paper(_paper_record("Same Title", summary="First version"))
@@ -294,29 +394,31 @@ def test_current_duplicate_and_sanitized_collision_behavior_overwrites_existing_
     assert "Slash title" not in collision_content
 
 
-def test_current_exporter_output_does_not_include_obsidian_starter_files() -> None:
+def test_current_exporter_output_does_not_include_obsidian_starter_files(legacy_demo_vault: Path) -> None:
     starter_phrases = ("歡迎", "建立連接", "Welcome", "Start here", "Create links")
     diagnostics = [
-        path.relative_to(DEMO_VAULT).as_posix()
-        for path in _markdown_files(DEMO_VAULT)
+        path.relative_to(legacy_demo_vault).as_posix()
+        for path in _markdown_files(legacy_demo_vault)
         if any(phrase in path.stem or phrase in path.read_text(encoding="utf-8") for phrase in starter_phrases)
     ]
 
     assert diagnostics == []
 
 
-def test_current_demo_output_wikilinks_resolve_with_diagnostics() -> None:
-    broken = _broken_wikilinks(DEMO_VAULT)
+def test_current_demo_output_wikilinks_resolve_with_diagnostics(legacy_demo_vault: Path) -> None:
+    broken = _broken_wikilinks(legacy_demo_vault)
 
     assert broken == [], f"Broken WikiLinks: {broken!r}"
 
 
-def test_current_daily_brief_contains_wikilinks_while_entity_notes_do_not() -> None:
-    daily_links = _wikilinks(DEMO_VAULT / "DailyBriefs" / "Daily Brief - 2026-07-10.md")
+def test_current_daily_brief_contains_wikilinks_while_legacy_entity_notes_do_not(
+    legacy_demo_vault: Path,
+) -> None:
+    daily_links = _wikilinks(legacy_demo_vault / "DailyBriefs" / "Daily Brief - 2026-07-10.md")
     entity_note_links = [
-        (path.relative_to(DEMO_VAULT).as_posix(), _wikilinks(path))
+        (path.relative_to(legacy_demo_vault).as_posix(), _wikilinks(path))
         for folder in ("Repositories", "Papers", "Ecosystem")
-        for path in (DEMO_VAULT / folder).glob("*.md")
+        for path in (legacy_demo_vault / folder).glob("*.md")
     ]
 
     assert len(daily_links) == 13
